@@ -3,7 +3,7 @@
 @section('title', 'ডিজিটাল লটারি ফলাফল ও মেধা তালিকা | Admission Lottery Results')
 
 @section('meta_description')
-বিয়াম ল্যাবরেটরি স্কুল এন্ড কলেজ, দুপচাঁচিয়া, বগুড়ায় ডিজিটাল লটারি ড্র ও মেধা তালিকা ফলাফল দেখুন।
+{{ $websiteSetting->school_name_bn ?? $websiteSetting->school_name ?? 'আমাদের বিদ্যালয়' }} এ ডিজিটাল লটারি ড্র ও মেধা তালিকা ফলাফল দেখুন।
 @endsection
 
 @section('content')

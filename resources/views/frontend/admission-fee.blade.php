@@ -1,6 +1,6 @@
 @extends('frontend.layouts.app')
 @section('title', 'ভর্তি ফি পরিশোধ | Admission Fee Payment')
-@section('meta_description', 'অনলাইন ভর্তি ফি পরিশোধ ও ট্রানজেকশন তথ্য জমাদান - বিয়াম ল্যাবরেটরি স্কুল এন্ড কলেজ, দুপচাঁচিয়া, বগুড়া।')
+@section('meta_description', 'অনলাইন ভর্তি ফি পরিশোধ ও ট্রানজেকশন তথ্য জমাদান - ' . ($websiteSetting->school_name_bn ?? $websiteSetting->school_name ?? 'বিদ্যালয়'))
 @section('content')
 
 {{-- HERO --}}
@@ -314,11 +314,11 @@
                         <div class="rounded-2xl border border-pink-200 bg-pink-50/40 p-4">
                             <div class="flex items-center justify-between">
                                 <span class="font-bold text-pink-900 text-sm">📱 বিকাশ (bKash)</span>
-                                <span class="font-mono font-bold text-xs bg-white px-2 py-1 rounded border border-pink-200 text-pink-700">01309-135255</span>
+                                <span class="font-mono font-bold text-xs bg-white px-2 py-1 rounded border border-pink-200 text-pink-700">{{ $websiteSetting->mobile ?? '০১৭১২-৩৪৫৬৭৮' }}</span>
                             </div>
                             <ol class="mt-2 text-xs text-slate-600 space-y-1 list-decimal list-inside leading-5">
                                 <li>bKash App বা *247# ডায়াল করে <strong>Send Money</strong> নির্বাচন করুন।</li>
-                                <li>নম্বর দিন: <strong>01309-135255</strong></li>
+                                <li>নম্বর দিন: <strong>{{ $websiteSetting->mobile ?? '০১৭১২-৩৪৫৬৭৮' }}</strong></li>
                                 <li>টাকার পরিমাণ: <strong>{{ number_format((float) $totalFee, 2) }}</strong></li>
                                 <li>রেফারেন্স: <strong>{{ $application->application_no }}</strong></li>
                                 <li>পেমেন্ট শেষে পাওয়া <strong>TrxID</strong> নিচের ফর্মে লিখুন।</li>
@@ -329,11 +329,11 @@
                         <div class="rounded-2xl border border-orange-200 bg-orange-50/40 p-4">
                             <div class="flex items-center justify-between">
                                 <span class="font-bold text-orange-900 text-sm">🟠 নগদ (Nagad)</span>
-                                <span class="font-mono font-bold text-xs bg-white px-2 py-1 rounded border border-orange-200 text-orange-700">01722-152023</span>
+                                <span class="font-mono font-bold text-xs bg-white px-2 py-1 rounded border border-orange-200 text-orange-700">{{ $websiteSetting->mobile ?? '০১৭১২-৩৪৫৬৭৮' }}</span>
                             </div>
                             <ol class="mt-2 text-xs text-slate-600 space-y-1 list-decimal list-inside leading-5">
                                 <li>নগদ App বা *167# দিয়ে <strong>Send Money</strong> করুন।</li>
-                                <li>নম্বর: <strong>01722-152023</strong></li>
+                                <li>নম্বর: <strong>{{ $websiteSetting->mobile ?? '০১৭১২-৩৪৫৬৭৮' }}</strong></li>
                                 <li>রেফারেন্স: <strong>{{ $application->application_no }}</strong></li>
                                 <li>পেমেন্ট শেষে <strong>TrxID</strong> ফর্মে লিখুন।</li>
                             </ol>
@@ -343,7 +343,7 @@
                         <div class="rounded-2xl border border-purple-200 bg-purple-50/40 p-4">
                             <div class="flex items-center justify-between">
                                 <span class="font-bold text-purple-900 text-sm">🚀 রকেট (Rocket)</span>
-                                <span class="font-mono font-bold text-xs bg-white px-2 py-1 rounded border border-purple-200 text-purple-700">01309-135255-7</span>
+                                <span class="font-mono font-bold text-xs bg-white px-2 py-1 rounded border border-purple-200 text-purple-700">{{ $websiteSetting->mobile ? ($websiteSetting->mobile . '-7') : '০১৭১২-৩৪৫৬৭৮-৭' }}</span>
                             </div>
                             <p class="mt-1 text-xs text-slate-600 leading-5">
                                 রকেটের মাধ্যমে টাকা পাঠিয়ে প্রাপ্ত Transaction ID ফর্মে লিখুন।

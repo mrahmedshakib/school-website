@@ -1,5 +1,4 @@
-<footer class="bg-slate-950 text-slate-300"
-        style="font-family: 'Noto Sans Bengali', sans-serif;">
+<footer class="bg-slate-950 text-slate-300">
 
     {{-- =========================================================
         MAIN FOOTER

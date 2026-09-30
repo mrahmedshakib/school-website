@@ -320,13 +320,13 @@
 
             <td style="text-align: {{ $logoPath ? 'left' : 'center' }};">
                 <div class="school-title-bn">
-                    {{ $websiteSetting->school_name_bn ?? 'বিয়াম ল্যাবরেটরি স্কুল এন্ড কলেজ, দুপচাঁচিয়া, বগুড়া' }}
+                    {{ $websiteSetting->school_name_bn ?? $websiteSetting->school_name ?? 'আমাদের বিদ্যালয়' }}
                 </div>
                 <div class="school-title-en">
-                    {{ $websiteSetting->school_name ?? 'BIAM Laboratory School & College, Dupchanchia, Bogura' }}
+                    {{ $websiteSetting->school_name ?? '' }}
                 </div>
                 <div class="school-meta">
-                    EIIN: 135255 | উপজেলা কমপ্লেক্স, দুপচাঁচিয়া, বগুড়া | ফোন: {{ $websiteSetting->mobile ?? '01309-135255' }} | ই-মেইল: {{ $websiteSetting->email ?? 'blsc.dupchanchia@gmail.com' }}
+                    {{ $websiteSetting->address ?? '' }} @if(!empty($websiteSetting->mobile)) | ফোন: {{ $websiteSetting->mobile }} @endif @if(!empty($websiteSetting->email)) | ই-মেইল: {{ $websiteSetting->email }} @endif
                 </div>
             </td>
         </tr>
@@ -496,7 +496,7 @@
 
     {{-- Page 1 Footer --}}
     <div class="page-footer">
-        {{ $websiteSetting->school_name_bn ?? 'বিয়াম ল্যাবরেটরি স্কুল এন্ড কলেজ, দুপচাঁচিয়া, বগুড়া' }} | Application No: {{ $application->application_no }} | পৃষ্ঠা ১/২ (অফিস কপি)
+        {{ $websiteSetting->school_name_bn ?? $websiteSetting->school_name ?? 'আমাদের বিদ্যালয়' }} | Application No: {{ $application->application_no }} | পৃষ্ঠা ১/২ (অফিস কপি)
     </div>
 
 
@@ -521,13 +521,13 @@
 
             <td style="text-align: {{ $logoPath ? 'left' : 'center' }};">
                 <div class="school-title-bn">
-                    {{ $websiteSetting->school_name_bn ?? 'বিয়াম ল্যাবরেটরি স্কুল এন্ড কলেজ, দুপচাঁচিয়া, বগুড়া' }}
+                    {{ $websiteSetting->school_name_bn ?? $websiteSetting->school_name ?? 'আমাদের বিদ্যালয়' }}
                 </div>
                 <div class="school-title-en">
-                    {{ $websiteSetting->school_name ?? 'BIAM Laboratory School & College, Dupchanchia, Bogura' }}
+                    {{ $websiteSetting->school_name ?? '' }}
                 </div>
                 <div class="school-meta">
-                    EIIN: 135255 | উপজেলা কমপ্লেক্স, দুপচাঁচিয়া, বগুড়া | ফোন: {{ $websiteSetting->mobile ?? '01309-135255' }} | ই-মেইল: {{ $websiteSetting->email ?? 'blsc.dupchanchia@gmail.com' }}
+                    {{ $websiteSetting->address ?? '' }} @if(!empty($websiteSetting->mobile)) | ফোন: {{ $websiteSetting->mobile }} @endif @if(!empty($websiteSetting->email)) | ই-মেইল: {{ $websiteSetting->email }} @endif
                 </div>
             </td>
         </tr>
@@ -603,7 +603,7 @@
         <tr>
             <td class="label-cell" style="width: 25%;">পরীক্ষা কেন্দ্র (Exam Venue)</td>
             <td class="value-cell" colspan="3" style="font-weight: bold;">
-                বিয়াম ল্যাবরেটরি স্কুল এন্ড কলেজ ক্যাম্পাস, উপজেলা চত্বর, দুপচাঁচিয়া, বগুড়া।
+                {{ $websiteSetting->school_name_bn ?? $websiteSetting->school_name ?? 'বিদ্যালয়' }} ক্যাম্পাস, {{ $websiteSetting->address ?? '' }}
             </td>
         </tr>
         <tr>
@@ -661,7 +661,7 @@
 
     {{-- Page 2 Footer --}}
     <div class="page-footer">
-        {{ $websiteSetting->school_name_bn ?? 'বিয়াম ল্যাবরেটরি স্কুল এন্ড কলেজ, দুপচাঁচিয়া, বগুড়া' }} | Helpline: {{ $websiteSetting->mobile ?? '01309-135255' }} | পৃষ্ঠা ২/২ (শিক্ষার্থী কপি ও প্রবেশপত্র)
+        {{ $websiteSetting->school_name_bn ?? $websiteSetting->school_name ?? 'আমাদের বিদ্যালয়' }} @if(!empty($websiteSetting->mobile)) | Helpline: {{ $websiteSetting->mobile }} @endif | পৃষ্ঠা ২/২ (শিক্ষার্থী কপি ও প্রবেশপত্র)
     </div>
 
 </body>

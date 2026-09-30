@@ -8,214 +8,7 @@
 {{-- =========================================================
     HERO SLIDER
 ========================================================= --}}
-<!-- 
-<section class="relative w-full overflow-hidden bg-slate-900">
 
-    <div
-        id="school-slider"
-        class="relative w-full h-[320px] sm:h-[420px] lg:h-[560px]"
-    >
-
-
-        {{-- ================= SLIDE 1 ================= --}}
-
-        <div
-            class="hero-slide absolute inset-0
-                   opacity-100 transition-opacity duration-700"
-        >
-
-            <img
-                src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1800&q=85"
-                alt="School Campus"
-                class="absolute inset-0 w-full h-full object-cover"
-            >
-
-            <div class="absolute inset-0 bg-black/45"></div>
-
-            <div class="relative z-10 h-full
-                        max-w-7xl mx-auto px-4 sm:px-6 lg:px-8
-                        flex items-center">
-
-                <div class="max-w-3xl text-white">
-
-                    <span
-                        class="inline-block mb-4 px-4 py-2
-                               rounded-full bg-white/15 backdrop-blur-sm
-                               border border-white/20
-                               text-sm sm:text-base"
-                    >
-                        স্বাগতম
-                    </span>
-
-                    <h1
-                        class="text-3xl sm:text-5xl lg:text-6xl
-                               font-extrabold leading-tight"
-                    >
-                        আমাদের বিদ্যালয়ে
-                        <br>
-                        আপনাকে স্বাগতম
-                    </h1>
-
-                    <p
-                        class="mt-5 text-base sm:text-lg lg:text-xl
-                               text-white/90 max-w-2xl"
-                    >
-                        জ্ঞান, নৈতিকতা ও মানবিক মূল্যবোধের সমন্বয়ে
-                        একটি সুন্দর ভবিষ্যৎ গড়ার প্রত্যয়ে আমরা কাজ করছি।
-                    </p>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        {{-- ================= SLIDE 2 ================= --}}
-
-        <div
-            class="hero-slide absolute inset-0
-                   opacity-0 transition-opacity duration-700"
-        >
-
-            <img
-                src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1800&q=85"
-                alt="Students"
-                class="absolute inset-0 w-full h-full object-cover"
-            >
-
-            <div class="absolute inset-0 bg-black/45"></div>
-
-            <div class="relative z-10 h-full
-                        max-w-7xl mx-auto px-4 sm:px-6 lg:px-8
-                        flex items-center">
-
-                <div class="max-w-3xl text-white">
-
-                    <span
-                        class="inline-block mb-4 px-4 py-2
-                               rounded-full bg-white/15 backdrop-blur-sm
-                               border border-white/20
-                               text-sm sm:text-base"
-                    >
-                        শিক্ষাই শক্তি
-                    </span>
-
-                    <h2
-                        class="text-3xl sm:text-5xl lg:text-6xl
-                               font-extrabold leading-tight"
-                    >
-                        জ্ঞান অর্জন
-                        <br>
-                        ভবিষ্যৎ নির্মাণ
-                    </h2>
-
-                    <p
-                        class="mt-5 text-base sm:text-lg lg:text-xl
-                               text-white/90 max-w-2xl"
-                    >
-                        শিক্ষার্থীদের মেধা, প্রতিভা ও সৃজনশীলতা বিকাশে
-                        আমরা প্রতিশ্রুতিবদ্ধ।
-                    </p>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        {{-- ================= SLIDE 3 ================= --}}
-
-        <div
-            class="hero-slide absolute inset-0
-                   opacity-0 transition-opacity duration-700"
-        >
-
-            <img
-                src="https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=1800&q=85"
-                alt="Education"
-                class="absolute inset-0 w-full h-full object-cover"
-            >
-
-            <div class="absolute inset-0 bg-black/45"></div>
-
-            <div class="relative z-10 h-full
-                        max-w-7xl mx-auto px-4 sm:px-6 lg:px-8
-                        flex items-center">
-
-                <div class="max-w-3xl text-white">
-
-                    <span
-                        class="inline-block mb-4 px-4 py-2
-                               rounded-full bg-white/15 backdrop-blur-sm
-                               border border-white/20
-                               text-sm sm:text-base"
-                    >
-                        আমাদের অঙ্গীকার
-                    </span>
-
-                    <h2
-                        class="text-3xl sm:text-5xl lg:text-6xl
-                               font-extrabold leading-tight"
-                    >
-                        সুন্দর আগামী
-                        <br>
-                        গড়ার প্রত্যয়ে
-                    </h2>
-
-                    <p
-                        class="mt-5 text-base sm:text-lg lg:text-xl
-                               text-white/90 max-w-2xl"
-                    >
-                        আধুনিক শিক্ষা ও মূল্যবোধের মাধ্যমে
-                        শিক্ষার্থীদের আলোকিত মানুষ হিসেবে গড়ে তোলা আমাদের লক্ষ্য।
-                    </p>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        {{-- ================= SLIDER DOTS ================= --}}
-
-        <div
-            class="absolute bottom-6 left-1/2 -translate-x-1/2
-                   z-30 flex items-center gap-2"
-        >
-
-            <button
-                type="button"
-                data-slide="0"
-                class="slider-dot h-2 rounded-full
-                       w-8 bg-white transition-all duration-300"
-                aria-label="Slide 1"
-            ></button>
-
-            <button
-                type="button"
-                data-slide="1"
-                class="slider-dot h-2 rounded-full
-                       w-2 bg-white/50 transition-all duration-300"
-                aria-label="Slide 2"
-            ></button>
-
-            <button
-                type="button"
-                data-slide="2"
-                class="slider-dot h-2 rounded-full
-                       w-2 bg-white/50 transition-all duration-300"
-                aria-label="Slide 3"
-            ></button>
-
-        </div>
-
-    </div>
-
-</section>
--->
 
 {{-- ============================================================
     HOME SLIDER
@@ -573,11 +366,11 @@
                            font-black
                            mb-4"
                 >
-                    Welcome to Our School
+                    {{ $websiteSetting->school_name_bn ?? $websiteSetting->school_name ?? 'আমাদের বিদ্যালয়' }}
                 </h1>
 
                 <p class="text-lg text-white/70">
-                    Quality education for a better future.
+                    {{ $websiteSetting->tagline ?? 'মানসম্মত ও আধুনিক শিক্ষার অনন্য ঠিকানা' }}
                 </p>
 
             </div>
@@ -989,8 +782,6 @@
 </section>
 @endif
 
-</section>
-
 {{-- =========================================================
     QUICK INFORMATION
 ========================================================= --}}
@@ -1001,14 +792,14 @@
         <div class="text-center">
 
             <span class="text-blue-700 font-semibold">
-                গুরুত্বপূর্ণ তথ্য
+                {{ app()->getLocale() === 'en' ? 'Quick Statistics' : 'গুরুত্বপূর্ণ তথ্য' }}
             </span>
 
             <h2
                 class="mt-3 text-3xl sm:text-4xl
                        font-extrabold text-slate-900"
             >
-                এক নজরে
+                {{ app()->getLocale() === 'en' ? 'At a Glance' : 'এক নজরে' }}
             </h2>
 
         </div>
@@ -1019,11 +810,11 @@
             <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 text-center">
 
                 <div class="text-3xl font-extrabold text-blue-700">
-                    {{ \App\Models\Teacher::where('type', 'teacher')->where('status', 1)->where('is_delete', 0)->count() }}+
+                    @bnDigit($totalTeachers)+
                 </div>
 
                 <p class="mt-2 text-slate-600 font-medium">
-                    অভিজ্ঞ শিক্ষকবৃন্দ
+                    {{ app()->getLocale() === 'en' ? 'Honorable Teachers' : 'অভিজ্ঞ শিক্ষকবৃন্দ' }}
                 </p>
 
             </div>
@@ -1032,11 +823,11 @@
             <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 text-center">
 
                 <div class="text-3xl font-extrabold text-blue-700">
-                    ৫০০+
+                    @bnDigit($totalStudents)+
                 </div>
 
                 <p class="mt-2 text-slate-600 font-medium">
-                    নিয়মিত শিক্ষার্থী
+                    {{ app()->getLocale() === 'en' ? 'Active Students' : 'নিয়মিত শিক্ষার্থী' }}
                 </p>
 
             </div>
@@ -1045,11 +836,11 @@
             <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 text-center">
 
                 <div class="text-3xl font-extrabold text-blue-700">
-                    {{ date('Y') - 2007 }}+
+                    @bnDigit($totalClasses)
                 </div>
 
                 <p class="mt-2 text-slate-600 font-medium">
-                    বছরের অভিজ্ঞতা (স্থাপিত ২০০৭)
+                    {{ app()->getLocale() === 'en' ? 'Academic Classes' : 'একাডেমিক শ্রেণি' }}
                 </p>
 
             </div>
@@ -1058,11 +849,11 @@
             <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 text-center">
 
                 <div class="text-3xl font-extrabold text-blue-700">
-                    {{ \App\Models\Teacher::where('type', 'staff')->where('status', 1)->where('is_delete', 0)->count() }}+
+                    @bnDigit($totalStaff)+
                 </div>
 
                 <p class="mt-2 text-slate-600 font-medium">
-                    কর্মকর্তা ও কর্মচারী
+                    {{ app()->getLocale() === 'en' ? 'Supporting Staff' : 'কর্মকর্তা ও কর্মচারী' }}
                 </p>
 
             </div>
@@ -1085,11 +876,11 @@
             <div class="text-center mb-10">
 
                 <h2 class="text-3xl md:text-4xl font-bold text-gray-900">
-                    Our Administration
+                    {{ app()->getLocale() === 'en' ? 'Our Administration' : 'আমাদের পরিচালনা পর্ষদ' }}
                 </h2>
 
                 <p class="mt-3 text-gray-600">
-                    Meet our dedicated administration team.
+                    {{ app()->getLocale() === 'en' ? 'Meet our dedicated administration and governing body.' : 'আমাদের নিবেদিতপ্রাণ পরিচালনা পর্ষদ ও প্রশাসনিক কর্মকর্তা।' }}
                 </p>
 
             </div>
@@ -1169,7 +960,7 @@
                            font-semibold
                            hover:bg-gray-800 transition"
                 >
-                    View All Administration
+                    {{ app()->getLocale() === 'en' ? 'View All Administration' : 'সকল পরিচালনা পর্ষদ' }}
                     →
                 </a>
 
@@ -1478,7 +1269,7 @@
                 </h3>
 
                 <p class="mt-2 text-slate-600 break-all">
-                    {{ $websiteSetting->email ?? 'info@example.com' }}
+                    {{ $websiteSetting->email ?? '' }}
                 </p>
 
             </div>
@@ -1490,144 +1281,3 @@
 </section>
 
 @endsection
-
-
-{{-- =========================================================
-    SLIDER SCRIPT
-========================================================= --}}
-@push('scripts')
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-
-        const slides = document.querySelectorAll('.hero-slide');
-        const dots = document.querySelectorAll('.slider-dot');
-
-        if (!slides.length) {
-            return;
-        }
-
-        let currentSlide = 0;
-        let autoSlide;
-
-
-        function showSlide(index) {
-
-            if (index >= slides.length) {
-                currentSlide = 0;
-            }
-            else if (index < 0) {
-                currentSlide = slides.length - 1;
-            }
-            else {
-                currentSlide = index;
-            }
-
-
-            slides.forEach(function (slide, i) {
-
-                if (i === currentSlide) {
-
-                    slide.classList.remove('opacity-0');
-                    slide.classList.add('opacity-100');
-
-                }
-                else {
-
-                    slide.classList.remove('opacity-100');
-                    slide.classList.add('opacity-0');
-
-                }
-
-            });
-
-
-            dots.forEach(function (dot, i) {
-
-                if (i === currentSlide) {
-
-                    dot.classList.remove(
-                        'w-2',
-                        'bg-white/50'
-                    );
-
-                    dot.classList.add(
-                        'w-8',
-                        'bg-white'
-                    );
-
-                }
-                else {
-
-                    dot.classList.remove(
-                        'w-8',
-                        'bg-white'
-                    );
-
-                    dot.classList.add(
-                        'w-2',
-                        'bg-white/50'
-                    );
-
-                }
-
-            });
-
-        }
-
-
-        function nextSlide() {
-
-            showSlide(currentSlide + 1);
-
-        }
-
-
-        function startAutoSlide() {
-
-            autoSlide = setInterval(function () {
-
-                nextSlide();
-
-            }, 5000);
-
-        }
-
-
-        function resetAutoSlide() {
-
-            clearInterval(autoSlide);
-
-            startAutoSlide();
-
-        }
-
-
-        /* Dot Click */
-
-        dots.forEach(function (dot) {
-
-            dot.addEventListener('click', function () {
-
-                const slideIndex =
-                    parseInt(this.dataset.slide);
-
-                showSlide(slideIndex);
-
-                resetAutoSlide();
-
-            });
-
-        });
-
-
-        /* Start */
-
-        showSlide(0);
-
-        startAutoSlide();
-
-    });
-</script>
-
-@endpush

@@ -197,7 +197,7 @@
             <td style="text-align: center;">
                 <div class="school-title-bn">{{ $websiteSetting->school_name_bn ?? 'বিয়াম ল্যাবরেটরি স্কুল এন্ড কলেজ' }}</div>
                 <div class="school-title-en">{{ $websiteSetting->school_name ?? 'BIAM LABORATORY SCHOOL & COLLEGE' }}</div>
-                <div class="school-meta">দুপচাঁচিয়া, বগুড়া • EIIN: {{ $websiteSetting->eiin_no ?? '136746' }} • স্থাপিত: ২০১০</div>
+                <div class="school-meta">{{ $websiteSetting->address ?? '' }} @if(!empty($websiteSetting->mobile)) • হেল্পলাইন: {{ $websiteSetting->mobile }} @endif</div>
             </td>
             <td style="width: 70px; text-align: right;">
                 <div style="font-size: 9px; color: #64748b; line-height: 1.2;">
@@ -253,7 +253,7 @@
                     </tr>
                     <tr>
                         <td class="label">পরীক্ষা/লটারির স্থান:</td>
-                        <td class="val">বিদ্যালয় ক্যাম্পাস, দুপচাঁচিয়া, বগুড়া</td>
+                        <td class="val">বিদ্যালয় ক্যাম্পাস, {{ $websiteSetting->address ?? '' }}</td>
                     </tr>
                 </table>
             </td>

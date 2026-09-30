@@ -12,7 +12,7 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                sans: ['Kalpurush', 'Noto Sans Bengali', 'Figtree', ...defaultTheme.fontFamily.sans],
             },
         },
     },

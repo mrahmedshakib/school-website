@@ -62,13 +62,15 @@
                     @endif
 
                     <h1 class="text-xl sm:text-2xl font-black tracking-tight">
-                        {{ $websiteSetting->school_name_bn ?? 'বিয়াম ল্যাবরেটরি স্কুল এন্ড কলেজ, দুপচাঁচিয়া, বগুড়া' }}
+                        {{ $websiteSetting->school_name_bn ?? $websiteSetting->school_name ?? 'আমাদের বিদ্যালয়' }}
                     </h1>
+                    @if(isset($websiteSetting) && $websiteSetting->school_name)
                     <p class="text-xs text-indigo-200 mt-0.5">
-                        {{ $websiteSetting->school_name ?? 'BIAM Laboratory School & College, Dupchanchia, Bogura' }}
+                        {{ $websiteSetting->school_name }}
                     </p>
+                    @endif
                     <p class="text-[11px] text-slate-400 mt-1">
-                        EIIN: 135255 | {{ $websiteSetting->address ?? 'উপজেলা কমপ্লেক্স, দুপচাঁচিয়া, বগুড়া' }} | ফোন: {{ $websiteSetting->mobile ?? '01309-135255' }}
+                        {{ $websiteSetting->address ?? '' }} @if(!empty($websiteSetting->mobile)) | ফোন: {{ $websiteSetting->mobile }} @endif
                     </p>
 
                     <div class="mt-4 inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur border border-white/20 text-xs font-bold uppercase tracking-wider text-emerald-300">

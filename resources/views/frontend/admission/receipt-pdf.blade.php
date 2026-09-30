@@ -150,7 +150,7 @@
             <td style="text-align: center;">
                 <div class="school-title-bn">{{ $websiteSetting->school_name_bn ?? 'বিয়াম ল্যাবরেটরি স্কুল এন্ড কলেজ' }}</div>
                 <div class="school-title-en">{{ $websiteSetting->school_name ?? 'BIAM LABORATORY SCHOOL & COLLEGE' }}</div>
-                <div class="school-meta">দুপচাঁচিয়া, বগুড়া • অনলাইন পেমেন্ট প্রত্যয়নপত্র (MONEY RECEIPT)</div>
+                <div class="school-meta">{{ $websiteSetting->address ?? '' }} • অনলাইন পেমেন্ট প্রত্যয়নপত্র (MONEY RECEIPT)</div>
             </td>
             <td style="width: 70px; text-align: right;">
                 <div style="font-size: 9px; color: #64748b; line-height: 1.2;">

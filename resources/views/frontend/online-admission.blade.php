@@ -3,7 +3,7 @@
 @section('title', 'অনলাইন ভর্তি আবেদন | Online Admission Application')
 
 @section('meta_description')
-বিয়াম ল্যাবরেটরি স্কুল এন্ড কলেজ, দুপচাঁচিয়া, বগুড়ায় অনলাইন ভর্তি আবেদন ফরম। প্রয়োজনীয় তথ্য দিয়ে সহজে আবেদন করুন।
+{{ $websiteSetting->school_name_bn ?? $websiteSetting->school_name ?? 'আমাদের বিদ্যালয়' }} এ অনলাইন ভর্তি আবেদন ফরম। প্রয়োজনীয় তথ্য দিয়ে সহজে আবেদন করুন।
 @endsection
 
 @section('content')

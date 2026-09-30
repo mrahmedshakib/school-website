@@ -5,6 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Admin Panel')</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <style>
+        @font-face {
+            font-family: 'Kalpurush';
+            src: url('{{ asset("fonts/Kalpurush/kalpurush.ttf") }}') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+        body, button, input, select, textarea {
+            font-family: 'Kalpurush', 'Figtree', sans-serif;
+        }
+    </style>
     @stack('styles')
 </head>
 <body class="bg-gray-100 text-gray-900">

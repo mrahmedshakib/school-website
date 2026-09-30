@@ -2,7 +2,7 @@
 
 @section('title', 'ভর্তি আবেদন নিশ্চিতকরণ | Application Confirmation - ' . $application->application_no)
 
-@section('meta_description', 'অনলাইন ভর্তি আবেদন নিশ্চিতকরণ বিবরণী - বিয়াম ল্যাবরেটরি স্কুল এন্ড কলেজ, দুপচাঁচিয়া, বগুড়া।')
+@section('meta_description', 'অনলাইন ভর্তি আবেদন নিশ্চিতকরণ বিবরণী - ' . ($websiteSetting->school_name_bn ?? $websiteSetting->school_name ?? 'বিদ্যালয়'))
 
 @section('content')
 
@@ -55,7 +55,7 @@
                 </h1>
 
                 <p class="mt-2 text-sm sm:text-base text-emerald-50 max-w-xl mx-auto">
-                    {{ $websiteSetting->school_name_bn ?? 'বিয়াম ল্যাবরেটরি স্কুল এন্ড কলেজ, দুপচাঁচিয়া, বগুড়া' }}-এ আপনার সন্তানের ভর্তি আবেদনটি সফলভাবে গৃহীত হয়েছে।
+                    {{ $websiteSetting->school_name_bn ?? $websiteSetting->school_name ?? 'আমাদের বিদ্যালয়' }}-এ আপনার সন্তানের ভর্তি আবেদনটি সফলভাবে গৃহীত হয়েছে।
                 </p>
             </div>
 

@@ -103,6 +103,14 @@ class FrontendController extends Controller
             ->take(1)
             ->get();
 
+        $totalTeachers = Teacher::where('type', 'teacher')->where('status', 1)->where('is_delete', 0)->count();
+        $totalStaff = Teacher::where('type', 'staff')->where('status', 1)->where('is_delete', 0)->count();
+        $totalStudents = Student::where('status', 1)->count();
+        $totalClasses = Student::select('class')->distinct()->count();
+        if ($totalClasses == 0) {
+            $totalClasses = AcademicSubject::select('class')->distinct()->count();
+        }
+
         return view(
             'frontend.home',
             compact(
@@ -115,7 +123,11 @@ class FrontendController extends Controller
                 'teachers',
                 'staff',
                 'galleries',
-                'admissions'
+                'admissions',
+                'totalTeachers',
+                'totalStaff',
+                'totalStudents',
+                'totalClasses'
             )
         );
     }
@@ -129,9 +141,38 @@ class FrontendController extends Controller
             ->latest()
             ->first();
 
+        $missionVision = MissionVision::where('status', 1)
+            ->where('is_delete', 0)
+            ->latest()
+            ->first();
+
+        $administrations = Administration::where('status', 1)
+            ->where('is_delete', 0)
+            ->orderBy('sort_order')
+            ->orderBy('id')
+            ->take(4)
+            ->get();
+
+        $totalTeachers = Teacher::where('type', 'teacher')->where('status', 1)->where('is_delete', 0)->count();
+        $totalStaff = Teacher::where('type', 'staff')->where('status', 1)->where('is_delete', 0)->count();
+        $totalStudents = Student::where('status', 1)->count();
+        $totalClasses = Student::select('class')->distinct()->count();
+        if ($totalClasses == 0) {
+            $totalClasses = AcademicSubject::select('class')->distinct()->count();
+        }
+
         return view(
             'frontend.about',
-            compact('websiteSetting', 'about')
+            compact(
+                'websiteSetting',
+                'about',
+                'missionVision',
+                'administrations',
+                'totalTeachers',
+                'totalStaff',
+                'totalStudents',
+                'totalClasses'
+            )
         );
     }
 
@@ -379,7 +420,14 @@ class FrontendController extends Controller
 
         if ($request->filled('roll_no') && $request->filled('class')) {
             $searched = true;
-            $query = StudentMark::where('roll_no', $request->roll_no)
+
+            $roll = trim($request->roll_no);
+            $bnDigits = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
+            $enDigits = ['0','1','2','3','4','5','6','7','8','9'];
+            $rollBn = str_replace($enDigits, $bnDigits, $roll);
+            $rollEn = str_replace($bnDigits, $enDigits, $roll);
+
+            $query = StudentMark::whereIn('roll_no', [$roll, $rollBn, $rollEn])
                 ->where('class', $request->class);
 
             if ($request->filled('academic_year')) {
@@ -479,11 +527,11 @@ class FrontendController extends Controller
         $websiteSetting = WebsiteSetting::first();
 
         $totalStudents = Student::where('status', 1)->count();
-        $boysCount = Student::where('status', 1)->where('gender', 'Male')->count();
-        $girlsCount = Student::where('status', 1)->where('gender', 'Female')->count();
+        $boysCount = Student::where('status', 1)->whereIn(DB::raw('LOWER(gender)'), ['male', 'ছাত্র'])->count();
+        $girlsCount = Student::where('status', 1)->whereIn(DB::raw('LOWER(gender)'), ['female', 'ছাত্রী'])->count();
 
         $classStats = Student::where('status', 1)
-            ->select('class', DB::raw('count(*) as total'), DB::raw('SUM(CASE WHEN gender="Male" THEN 1 ELSE 0 END) as boys'), DB::raw('SUM(CASE WHEN gender="Female" THEN 1 ELSE 0 END) as girls'))
+            ->select('class', DB::raw('count(*) as total'), DB::raw('SUM(CASE WHEN LOWER(gender) IN ("male","ছাত্র") THEN 1 ELSE 0 END) as boys'), DB::raw('SUM(CASE WHEN LOWER(gender) IN ("female","ছাত্রী") THEN 1 ELSE 0 END) as girls'))
             ->groupBy('class')
             ->orderBy('class')
             ->get();

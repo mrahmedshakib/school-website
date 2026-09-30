@@ -22,35 +22,26 @@
         >
     @endif
 
-    {{-- ================= GOOGLE FONT ================= --}}
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-
-    <link
-        rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin
-    >
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet"
-    >
-
-
-    {{-- ================= COMMON FRONTEND STYLE ================= --}}
-
+    {{-- ================= KALPURUSH BENGALI FONT ================= --}}
     <style>
+        @font-face {
+            font-family: 'Kalpurush';
+            src: url('{{ asset("fonts/Kalpurush/kalpurush.ttf") }}') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
 
         html,
-        body {
-            font-family: 'Noto Sans Bengali', sans-serif;
-        }
-
+        body,
+        button,
+        input,
+        select,
+        textarea,
+        p, span, h1, h2, h3, h4, h5, h6, a, label, table,
         .school-font {
-            font-family: 'Noto Sans Bengali', sans-serif;
+            font-family: 'Kalpurush', 'Noto Sans Bengali', sans-serif !important;
         }
-
     </style>
 
 
