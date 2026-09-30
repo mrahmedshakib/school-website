@@ -1,0 +1,16 @@
+{
+    "kalpurush": {
+        "normal": "E:\\laragon\\www\\school-website\\storage\\fonts\/kalpurush_normal_02af4fe6eeb9e125599c8f4b576796cf",
+        "bold": "kalpurush_bold_02af4fe6eeb9e125599c8f4b576796cf",
+        "500": "E:\\laragon\\www\\school-website\\storage\\fonts\/kalpurush_500_585047d779465573d803596e2c435303",
+        "600": "E:\\laragon\\www\\school-website\\storage\\fonts\/kalpurush_600_585047d779465573d803596e2c435303",
+        "800": "E:\\laragon\\www\\school-website\\storage\\fonts\/kalpurush_800_585047d779465573d803596e2c435303",
+        "900": "E:\\laragon\\www\\school-website\\storage\\fonts\/kalpurush_900_585047d779465573d803596e2c435303",
+        "italic": "E:\\laragon\\www\\school-website\\storage\\fonts\/kalpurush_italic_585047d779465573d803596e2c435303",
+        "bold_italic": "E:\\laragon\\www\\school-website\\storage\\fonts\/kalpurush_bold_italic_585047d779465573d803596e2c435303",
+        "500_italic": "E:\\laragon\\www\\school-website\\storage\\fonts\/kalpurush_500_italic_585047d779465573d803596e2c435303",
+        "600_italic": "E:\\laragon\\www\\school-website\\storage\\fonts\/kalpurush_600_italic_585047d779465573d803596e2c435303",
+        "800_italic": "E:\\laragon\\www\\school-website\\storage\\fonts\/kalpurush_800_italic_585047d779465573d803596e2c435303",
+        "900_italic": "E:\\laragon\\www\\school-website\\storage\\fonts\/kalpurush_900_italic_585047d779465573d803596e2c435303"
+    }
+}

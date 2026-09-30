@@ -1,0 +1,136 @@
+
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - APBPSC Administration System</title>
+    <link rel="icon" type="image/png" href="employee/img/School-logo.png">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .login-box {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            width: 380px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .login-box:hover {
+            transform: translateY(-5px);
+        }
+
+        .logo-container img {
+            width: 120px;
+            height: auto;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+        }
+
+        .system-title {
+            font-size: 20px;
+            font-weight: 800;
+            color: #1e3c72;
+            margin: 5px 0 25px 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            line-height: 1.3;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 15px;
+            margin: 8px 0;
+            border: 2px solid #eee;
+            border-radius: 8px;
+            box-sizing: border-box;
+            outline: none;
+            transition: 0.3s;
+            font-size: 15px;
+        }
+
+        input:focus {
+            border-color: #2a5298;
+            box-shadow: 0 0 8px rgba(42, 82, 152, 0.2);
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background: #e67e22;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            transition: 0.3s;
+            margin-top: 10px;
+            box-shadow: 0 4px 15px rgba(230, 126, 34, 0.3);
+        }
+
+        button:hover {
+            background: #d35400;
+            box-shadow: 0 6px 20px rgba(211, 84, 0, 0.4);
+        }
+
+        .error-msg {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            margin-bottom: 15px;
+            border: 1px solid #f5c6cb;
+        }
+
+        .footer-text {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #161616;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-box">
+        <div class="logo-container">
+            <img src="employee/img/logo_e.png" alt="APBPSC Logo">
+            <div class="system-title">
+                APBPSC<br>Administration System
+            </div>
+        </div>
+
+        
+        <form method="POST">
+            <div class="input-group">
+                <input type="text" name="username" placeholder="ইউজারনাম" required>
+            </div>
+            <div class="input-group">
+                <input type="password" name="password" placeholder="পাসওয়ার্ড" required>
+            </div>
+            <button type="submit">প্রবেশ করুন</button>
+        </form>
+
+        <div class="footer-text">
+            <b>&copy; 2026 APBPSC Admin. All Rights Reserved. </b> </br>
+            Designed & Developed by Md. Abdul Aual 
+        </div>
+    </div>
+</body>
+</html>

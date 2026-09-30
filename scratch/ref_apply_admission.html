@@ -1,0 +1,452 @@
+
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ভর্তি ফরম</title>
+    <style>
+        * { box-sizing: border-box; }
+        body { font-family: 'Hind Siliguri', sans-serif; background-color: #f0f2f5; margin: 0; padding: 20px 10px; color: #333; }
+        .main-card { max-width: 900px; margin: 0 auto; background: #ffffff; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.08); padding: 30px; position: relative; }
+        .header-branding { text-align: center; border-bottom: 2px solid #0d6efd; padding-bottom: 15px; margin-bottom: 25px; position: relative; }
+        .school-logo { height: 75px; width: auto; margin-bottom: 5px; }
+        .header-text h2 { margin: 0; color: #9d0dfd; font-size: 26px; font-weight: 700; }
+        .header-text h4 { margin: 4px 0 0 0; color: #555; font-weight: 600; font-size: 18px; }
+        
+        .btn-re-download-header { position: absolute; right: 0; top: 0; background-color: #0dcaf0; color: #212529; text-decoration: none; padding: 8px 15px; font-size: 14px; font-weight: 600; border-radius: 6px; }
+        .btn-re-download-header:hover { background-color: #31d2f2; }
+
+        .subtitle-bar { background-color: #e7f1ff; color: #0c63e4; text-align: center; padding: 12px; font-size: 20px; font-weight: 700; border-radius: 6px; margin-bottom: 25px; }
+        .section-title { color: #0d6efd; border-left: 4px solid #0d6efd; padding-left: 10px; margin: 25px 0 15px 0; font-size: 18px; font-weight: 700; }
+        
+        .row { display: flex; gap: 15px; margin-bottom: 15px; flex-wrap: wrap; }
+        .col { flex: 1; min-width: 200px; }
+        
+        label { display: block; margin-bottom: 6px; font-weight: 700; font-size: 16px; color: #212529; }
+        
+        /* input[type="tel"] যোগ করা হয়েছে */
+        input[type="text"], input[type="tel"], input[type="date"], input[type="number"], input[type="email"], input[type="file"], select, textarea { 
+            width: 100%; 
+            padding: 11px 14px; 
+            border: 1px solid #ced4da; 
+            border-radius: 6px; 
+            font-size: 16px; 
+            outline: none; 
+            background: #fff;
+            font-family: inherit;
+        }
+        
+        input:focus, select:focus, textarea:focus { border-color: #0d6efd; box-shadow: 0 0 0 3px rgba(13,110,253,0.15); }
+        input[readonly] { background-color: #e9ecef; }
+        
+        /* ছবি আপলোডের স্টাইল */
+        .photo-upload-box {
+            border: 2px dashed #0d6efd;
+            background: #f8faff;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .photo-preview {
+            width: 120px;
+            height: 140px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            object-fit: cover;
+            margin-top: 10px;
+            display: none;
+            background: #fff;
+        }
+
+        .captcha-box { background: #f8f9fa; border: 1px dashed #6c757d; padding: 15px; border-radius: 6px; margin-top: 20px; display: flex; align-items: center; gap: 15px; font-size: 16px; }
+        .btn-submit { width: 100%; background: #198754; color: white; border: none; padding: 14px; font-size: 18px; font-weight: 700; border-radius: 6px; cursor: pointer; margin-top: 20px; }
+        .btn-submit:hover { background: #157347; }
+        
+        @media (max-width: 600px) { .btn-re-download-header { position: static; display: block; margin: 0 auto 15px auto; text-align: center; } }
+    </style>
+</head>
+<body>
+
+<div class="main-card">
+    
+        <div class="header-branding">
+            <a href="download.php" class="btn-re-download-header">🔍 পুনরায় ডাউনলোড</a>
+            <img src="../employee/img/School-logo.png" alt="Logo" class="school-logo" onerror="this.style.display='none'">
+            <div class="header-text">
+                <h2>আর্মড পুলিশ ব্যাটালিয়ন পাবলিক স্কুল ও কলেজ</h2>
+                <h4>নিশিন্দারা, বগুড়া</h4>
+            </div>
+        </div>
+
+        <div class="subtitle-bar">ভর্তির অনলাইন আবেদন ফরম (শেষ তারিখ: ২৪ অক্টোবর ২০২৬)</div>
+
+        
+        <form method="POST" action="process_apply.php" enctype="multipart/form-data" autocomplete="off" onsubmit="return validateFormBeforeSubmit()">
+            <input type="hidden" name="form_token" value="85c2271bde3a9350f639ebf689a865de">
+
+            <div class="row">
+                <div class="col">
+                    <label>শিক্ষাবর্ষ (সাল বেছে নিন):</label>
+                    <select name="academic_year" required>
+                        <option value="" disabled selected>নির্বাচন করুন</option>                     
+                        <option value="2027" >2027</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label>ভর্তির শ্রেণি:</label>
+                    <select name="desired_class" id="desired_class" onchange="toggleGroupOption(); calculateAge();" required>
+                        <option value="" disabled selected>নির্বাচন করুন</option>    
+                        <option value="নার্সারি" >নার্সারি</option>
+                    </select>
+                </div>
+
+                <div class="col" id="group_wrapper" style="display: none;">
+                    <label>বিভাগ/গ্রুপ:</label>
+                    <select name="group_name" id="group_name">
+                        <option value="" disabled selected>বিভাগ নির্বাচন করুন</option>
+                        <option value="বিজ্ঞান" >বিজ্ঞান</option>
+                        <option value="মানবিক" >মানবিক</option>
+                        <option value="ব্যবসায় শিক্ষা" >ব্যবসায় শিক্ষা</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- ছবি আপলোড -->
+            <div class="row">
+                <div class="col photo-upload-box">
+                    <label style="color:#0d6efd;">শিক্ষার্থীর পাসপোর্ট সাইজ ছবি আপলোড করুন (সর্বোচ্চ ২ MB):</label>
+                    <input type="file" name="student_photo" id="student_photo" accept="image/jpeg, image/png, image/jpg" onchange="previewImage(event)" required>
+                    <center><img id="photo_preview" class="photo-preview" alt="Student Photo"></center>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <label>১। শিক্ষার্থীর নাম (বাংলায়):</label>
+                    <input type="text" name="student_name_bn" value="" required>
+                </div>
+                <div class="col">
+                    <label>In English:</label>
+                    <!-- শুধুমাত্র ইংরেজি বর্ণ, স্পেস ও ডট গ্রহণ করবে -->
+                    <input type="text" name="student_name_en" value="" oninput="this.value = this.value.replace(/[^a-zA-Z\s.]/g, '')" pattern="[a-zA-Z\s.]+" title="শুধুমাত্র ইংরেজিতে লিখুন" placeholder="Student Name in English" required>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <label>২। জন্ম তারিখ:</label>
+                    <input type="date" id="dob" name="dob" value="" onchange="calculateAge()" required>
+                    <small id="age_status_msg" style="display: block; font-weight: bold; margin-top: 5px;"></small>
+                </div>
+                <div class="col">
+                    <label>রক্তের গ্রুপ:</label>
+                    <select name="blood_group">
+                        <option value="" disabled selected>নির্বাচন করুন</option>
+                                                    <option value="A+" >A+</option>
+                                                    <option value="A-" >A-</option>
+                                                    <option value="B+" >B+</option>
+                                                    <option value="B-" >B-</option>
+                                                    <option value="O+" >O+</option>
+                                                    <option value="O-" >O-</option>
+                                                    <option value="AB+" >AB+</option>
+                                                    <option value="AB-" >AB-</option>
+                                            </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <label>৩। জন্ম নিবন্ধন নম্বর (১৭ ডিজিট):</label>
+                    <!-- শুধুমাত্র ইংরেজি সংখ্যা গ্রহণ করবে -->
+                    <input type="text" name="birth_reg_no" value="" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '')" pattern="[0-9]{17}" maxlength="17" title="১৭ ডিজিটের ইংরেজি সংখ্যা লিখুন" placeholder="20001234567......" required>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <label>৪। বয়স (01-01-2027 তারিখে):</label>
+                    <input type="number" id="age_years" name="age_years" value="" placeholder="বছর" readonly>
+                </div>
+                <div class="col">
+                    <label>মাস:</label>
+                    <input type="number" id="age_months" name="age_months" value="" placeholder="মাস" readonly>
+                </div>
+                <div class="col">
+                    <label>দিন:</label>
+                    <input type="number" id="age_days" name="age_days" value="" placeholder="দিন" readonly>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <label>৫। ধর্ম:</label>
+                    <select name="religion" required>
+                        <option value="" disabled selected>নির্বাচন করুন</option>
+                        <option value="ইসলাম" >ইসলাম</option>
+                        <option value="সনাতন" >সনাতন</option>
+                        <option value="খ্রিস্টান" >খ্রিস্টান</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label> ৫। শিক্ষার্থীর ধরণ:</label>
+                    <select name="gender" required>
+                        <option value="" disabled selected>নির্বাচন করুন</option>
+                        <option value="ছাত্র" >ছাত্র</option>
+                        <option value="ছাত্রী" >ছাত্রী</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label> ৬। জাতীয়তা:</label>
+                    <input type="text" name="nationality" value="বাংলাদেশী">
+                </div>
+            </div>
+
+            <div class="section-title">অভিভাবকের তথ্য</div>
+            <div class="row">
+                <div class="col"><label>৭। পিতার নাম (বাংলায়):</label><input type="text" name="father_name_bn" value="" required></div>
+                <div class="col">
+                    <label>In English:</label>
+                    <input type="text" name="father_name_en" value="" oninput="this.value = this.value.replace(/[^a-zA-Z\s.]/g, '')" pattern="[a-zA-Z\s.]+" title="শুধুমাত্র ইংরেজিতে লিখুন" placeholder="Father's Name in English" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label>পিতার NID No:</label>
+                    <input type="text" name="father_nid" value="" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '')" minlength="10" maxlength="17" placeholder="১০, ১৩ বা ১৭ ডিজিটের NID" required>
+                </div>
+                <div class="col">
+                    <label>শিক্ষাগত যোগ্যতা:</label>
+                    <!-- শুধুমাত্র ইংরেজি বর্ণ, স্পেস ও ডট গ্রহণ করবে -->
+                    <input type="text" name="father_edu" value="" oninput="this.value = this.value.replace(/[^a-zA-Z\s.]/g, '')" pattern="[a-zA-Z\s.]+" title="দয়া করে ইংরেজিতে লিখুন (যেমন: SSC)" placeholder="SSC" required>
+                </div>
+                <div class="col">
+                    <label>মোবাইল নং:</label>
+                    <input type="tel" name="father_mobile" value="" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '')" maxlength="11" pattern="01[0-9]{9}" title="১১ ডিজিটের সঠিক ইংরেজি মোবাইল নম্বর দিন (যেমন: 0171234....)" placeholder="0171234...." required>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col"><label>৮। মাতার নাম (বাংলায়):</label><input type="text" name="mother_name_bn" value="" required></div>
+                <div class="col">
+                    <label>In English:</label>
+                    <input type="text" name="mother_name_en" value="" oninput="this.value = this.value.replace(/[^a-zA-Z\s.]/g, '')" pattern="[a-zA-Z\s.]+" title="শুধুমাত্র ইংরেজিতে লিখুন" placeholder="Mother's Name in English" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label>মাতার NID No:</label>
+                    <input type="text" name="mother_nid" value="" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '')" minlength="10" maxlength="17" placeholder="১০, ১৩ বা ১৭ ডিজিটের NID" required>
+                </div>
+                <div class="col">
+                    <label>শিক্ষাগত যোগ্যতা:</label>
+                    <!-- শুধুমাত্র ইংরেজি বর্ণ, স্পেস ও ডট গ্রহণ করবে -->
+                    <input type="text" name="mother_edu" value="" oninput="this.value = this.value.replace(/[^a-zA-Z\s.]/g, '')" pattern="[a-zA-Z\s.]+" title="দয়া করে ইংরেজিতে লিখুন (যেমন: SSC)" placeholder="SSC" required>
+                </div>
+                <div class="col">
+                    <label>মোবাইল নং:</label>
+                    <input type="tel" name="mother_mobile" value="" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '')" maxlength="11" pattern="01[0-9]{9}" title="১১ ডিজিটের সঠিক ইংরেজি মোবাইল নম্বর দিন (যেমন: 0171234....)" placeholder="0171234...." required>
+                </div>
+            </div>
+
+            <div class="section-title">ঠিকানা ও অন্যান্য</div>
+            <div class="row" style="margin-bottom: 5px;">
+                <div class="col">
+                    <label style="font-weight: 600; cursor: pointer; color: #0d6efd;">
+                        <input type="checkbox" id="same_as_perm" onclick="copyAddress()"> বর্তমান ঠিকানা ও স্থায়ী ঠিকানা একই
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col"><label>৯। (ক) স্থায়ী ঠিকানা:</label><textarea id="perm_address" name="perm_address" placeholder="গ্রাম/ওয়ার্ড, ডাকঘর, জেলা ও উপজেলা (বিস্তারিত)" rows="3" oninput="syncAddress()" required></textarea></div>
+                <div class="col"><label>(খ) বর্তমান ঠিকানা:</label><textarea id="curr_address" name="curr_address" placeholder="গ্রাম/ওয়ার্ড, ডাকঘর, জেলা ও উপজেলা (বিস্তারিত)" rows="3" required></textarea></div>
+            </div>
+
+            <div class="row">
+                <div class="col"><label>১০। অভিভাবকের নাম ও ঠিকানা (পিতার অবর্তমানে):</label><input type="text" name="guardian_info" value="" placeholder="নাম, গ্রাম/ওয়ার্ড, ডাকঘর, জেলা ও উপজেলা (বিস্তারিত)" required></div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <label>১১। পেশা ও মাসিক আয়:</label>
+                    <textarea name="father_occupation_info" rows="3" placeholder="(ক) চাকুরীর ক্ষেত্রে পদবী, প্রতিষ্ঠানের নাম, ঠিকানা ও মাসিক আয়&#10;(খ) ব্যবসা বা অন্যান্য: পেশার নাম ও মাসিক আয় (বিস্তারিত)" required></textarea>
+                </div>
+                <div class="col">
+                    <label>১২। অধ্যয়নরত অন্যান্য সন্তানের বিবরণ:</label>
+                    <textarea name="other_children_info" rows="3" placeholder="প্রতিষ্ঠানের নাম, শ্রেণি, শাখা ও রোল নং"></textarea>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <label>১৩। যোগাযোগের নম্বর (হোয়াটস অ্যাপ যুক্ত):</label>
+                    <input type="tel" name="contact_mobile" value="" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '')" maxlength="11" pattern="01[0-9]{9}" title="১১ ডিজিটের সঠিক ইংরেজি মোবাইল নম্বর দিন (যেমন: 0171234....)" placeholder="0171234...." required>
+                </div>
+                <div class="col">
+                    <label>১৪। ইমেইল (যদি থাকে):</label>
+                    <!-- ইমেইলে বাংলা অক্ষর রিয়েল-টাইমে প্রতিরোধ করা হয়েছে -->
+                    <input type="email" name="email" value="" oninput="this.value = this.value.replace(/[^a-zA-Z0-9@._-]/g, '')" placeholder="example@mail.com">
+                </div>
+            </div>
+
+            <div class="captcha-box">
+                <label>নিরাপত্তা যাচাই: <strong>2 + 3 = ?</strong></label>
+                <input type="number" name="captcha_ans" placeholder="উত্তর দিন" required style="max-width: 150px;">
+            </div>
+
+            <button type="submit" name="submit_application" class="btn-submit">সাবমিট করুন</button>
+        </form>
+    </div>
+
+<script>
+    var isAgeValid = true;
+
+    window.onload = function() {
+        toggleGroupOption();
+        if(document.getElementById("dob").value) {
+            calculateAge();
+        }
+    };
+
+    function previewImage(event) {
+        var input = event.target;
+        var reader = new FileReader();
+        reader.onload = function(){
+            var dataURL = reader.result;
+            var output = document.getElementById('photo_preview');
+            output.src = dataURL;
+            output.style.display = 'block';
+        };
+        if(input.files[0]) {
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    // Modern Navigation History check
+    window.addEventListener("pageshow", function (event) {
+        var perfEntries = performance.getEntriesByType("navigation");
+        if (event.persisted || (perfEntries.length > 0 && perfEntries[0].type === "back_forward")) {
+            window.location.reload();
+        }
+    });
+
+    function toggleGroupOption() {
+        var classSelect = document.getElementById("desired_class").value;
+        var groupWrapper = document.getElementById("group_wrapper");
+        var groupSelect = document.getElementById("group_name");
+
+        if (classSelect === "একাদশ" || classSelect === "দ্বাদশ") {
+            groupWrapper.style.display = "block";
+            groupSelect.setAttribute("required", "required");
+        } else {
+            groupWrapper.style.display = "none";
+            groupSelect.removeAttribute("required");
+        }
+    }
+
+    function calculateAge() {
+        var dobInput = document.getElementById("dob").value;
+        var desiredClass = document.getElementById("desired_class").value;
+        var msgElem = document.getElementById("age_status_msg");
+
+        if (!dobInput) {
+            msgElem.innerHTML = "";
+            return;
+        }
+
+        var targetDateStr = "2027-01-01"; 
+        var dob = new Date(dobInput);
+        var targetDate = new Date(targetDateStr);
+
+        if (dob > targetDate) {
+            msgElem.style.color = "red";
+            msgElem.innerHTML = "❌ জন্ম তারিখ ১ জানুয়ারি ২০২৭ অপেক্ষা পরবর্তী হতে পারবে না।";
+            clearAgeFields();
+            isAgeValid = false;
+            return;
+        }
+
+        var years = targetDate.getFullYear() - dob.getFullYear();
+        var months = targetDate.getMonth() - dob.getMonth();
+        var days = targetDate.getDate() - dob.getDate();
+
+        if (days < 0) {
+            months--;
+            var prevMonthLastDay = new Date(targetDate.getFullYear(), targetDate.getMonth(), 0).getDate();
+            days += prevMonthLastDay;
+        }
+        if (months < 0) {
+            years--;
+            months += 12;
+        }
+
+        document.getElementById("age_years").value = years;
+        document.getElementById("age_months").value = months;
+        document.getElementById("age_days").value = days;
+
+        if (desiredClass === "নার্সারি") {
+            var isUnder4 = (years < 4);
+            var isOver5 = (years > 5 || (years === 5 && (months > 0 || days > 0)));
+
+            if (isUnder4) {
+                msgElem.style.color = "red";
+                msgElem.innerHTML = "❌ বয়স কম! ১ জানুয়ারি ২০২৭ তারিখে বয়স সর্বনিম্ন ৪ বছর হতে হবে।";
+                isAgeValid = false;
+            } else if (isOver5) {
+                msgElem.style.color = "red";
+                msgElem.innerHTML = "❌ বয়স বেশি! ১ জানুয়ারি ২০২৭ তারিখে বয়স সর্বোচ্চ ৫ বছর হতে পারবে।";
+                isAgeValid = false;
+            } else {
+                msgElem.style.color = "green";
+                msgElem.innerHTML = "✅ বয়স সঠিক রয়েছে।";
+                isAgeValid = true;
+            }
+        } else {
+            msgElem.style.color = "#0d6efd";
+            msgElem.innerHTML = "ℹ️ ১ জানুয়ারি ২০২৭ তারিখে হিসাবকৃত বয়স দেওয়া হলো।";
+            isAgeValid = true;
+        }
+    }
+
+    function clearAgeFields() {
+        document.getElementById("age_years").value = "";
+        document.getElementById("age_months").value = "";
+        document.getElementById("age_days").value = "";
+    }
+
+    function validateFormBeforeSubmit() {
+        if (!isAgeValid) {
+            alert("বয়সের সামঞ্জস্যতা ঠিক নেই! অনুগ্রহ করে সঠিক জন্ম তারিখ প্রদান করুন।");
+            return false;
+        }
+        return true;
+    }
+
+    // ঠিকানা কপি এবং সিঙ্ক করার ফাংশন
+    function copyAddress() {
+        var checkbox = document.getElementById('same_as_perm');
+        var permAddr = document.getElementById('perm_address');
+        var currAddr = document.getElementById('curr_address');
+
+        if (checkbox.checked) {
+            currAddr.value = permAddr.value;
+            currAddr.readOnly = true;
+        } else {
+            currAddr.value = '';
+            currAddr.readOnly = false;
+        }
+    }
+
+    function syncAddress() {
+        var checkbox = document.getElementById('same_as_perm');
+        var permAddr = document.getElementById('perm_address');
+        var currAddr = document.getElementById('curr_address');
+
+        if (checkbox.checked) {
+            currAddr.value = permAddr.value;
+        }
+    }
+</script>
+
+</body>
+</html>
