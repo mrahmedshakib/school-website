@@ -4,29 +4,27 @@
 
 {{-- HERO --}}
 
-<section class="relative overflow-hidden bg-slate-950">
-    <div class="absolute inset-0 bg-gradient-to-br from-indigo-950 via-slate-950 to-slate-900"></div>
-    <div class="absolute top-0 right-0 w-96 h-96 rounded-full bg-indigo-500/10 blur-3xl"></div>
+<section class="relative overflow-hidden bg-[#061d36] py-12 sm:py-16 text-white">
+    <div class="absolute inset-0 bg-gradient-to-br from-[#05172d] via-[#0c3c74] to-[#061d36]"></div>
+    <div class="absolute top-0 right-0 w-96 h-96 rounded-full bg-brand-400/10 blur-3xl"></div>
     <div class="absolute bottom-0 left-0 w-80 h-80 rounded-full bg-blue-500/10 blur-3xl"></div>
-    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-18 lg:py-20">
-        <div class="max-w-3xl">
-            <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-500/10 border border-indigo-400/20 text-indigo-200 text-sm font-semibold">
-                🎓 Admission Information
-            </span>
-            <h1 class="mt-5 text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white">
-                ভর্তি সংক্রান্ত তথ্য
-            </h1>
-            <p class="mt-4 max-w-2xl text-base sm:text-lg text-slate-300 leading-7">
-                ভর্তি বিজ্ঞপ্তি, আবেদনের সময়সূচি, প্রয়োজনীয় নির্দেশনা এবং অনলাইনে আবেদন সংক্রান্ত সকল গুরুত্বপূর্ণ তথ্য এখানে পাওয়া যাবে।
-            </p>
-            <div class="mt-6 flex flex-wrap gap-3">
-                <a href="{{ route('online-admission') }}" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-indigo-600 text-white font-semibold shadow-lg shadow-indigo-900/30 hover:bg-indigo-500 transition">
-                    📝 অনলাইনে আবেদন
-                </a>
-                <a href="#admission-notice" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white/10 border border-white/10 text-white font-semibold hover:bg-white/15 transition">
-                    📢 ভর্তি বিজ্ঞপ্তি
-                </a>
-            </div>
+    <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-500/20 border border-brand-400/30 text-brand-200 text-xs sm:text-sm font-bold uppercase tracking-wider">
+            🎓 Admission Information
+        </span>
+        <h1 class="mt-4 text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white">
+            ভর্তি সংক্রান্ত তথ্য
+        </h1>
+        <p class="mt-3 max-w-2xl mx-auto text-sm sm:text-base text-slate-300 leading-6">
+            ভর্তি বিজ্ঞপ্তি, আবেদনের সময়সূচি, প্রয়োজনীয় নির্দেশনা এবং অনলাইনে আবেদন সংক্রান্ত সকল গুরুত্বপূর্ণ তথ্য এখানে পাওয়া যাবে।
+        </p>
+        <div class="mt-6 flex flex-wrap items-center justify-center gap-3">
+            <a href="{{ route('online-admission') }}" class="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-brand-primary text-white font-bold text-sm shadow-lg shadow-brand-500/20 hover:bg-brand-secondary transition active:scale-95">
+                📝 অনলাইনে আবেদন
+            </a>
+            <a href="#admission-notice" class="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-white/10 border border-white/20 text-white font-bold text-sm hover:bg-white/15 transition active:scale-95">
+                📢 ভর্তি বিজ্ঞপ্তি
+            </a>
         </div>
     </div>
 </section>

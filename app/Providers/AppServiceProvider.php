@@ -25,22 +25,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        View::composer('frontend.*', function ($view) {
-
-            /*
-            |--------------------------------------------------------------------------
-            | Website Settings
-            |--------------------------------------------------------------------------
-            */
-
+        View::composer(['frontend.*', 'backend.*'], function ($view) {
             $websiteSetting = WebsiteSetting::first();
+            $view->with('websiteSetting', $websiteSetting);
+        });
 
-            /*
-            |--------------------------------------------------------------------------
-            | Latest Notices
-            |--------------------------------------------------------------------------
-            */
-
+        View::composer('frontend.*', function ($view) {
             $latestNotices = Notice::where('status', 1)
                 ->where('is_delete', 0)
                 ->orderBy('notice_date', 'desc')
@@ -48,17 +38,7 @@ class AppServiceProvider extends ServiceProvider
                 ->limit(10)
                 ->get();
 
-
-            /*
-            |--------------------------------------------------------------------------
-            | Share Data With Frontend Views
-            |--------------------------------------------------------------------------
-            */
-
-            $view->with([
-                'websiteSetting' => $websiteSetting,
-                'latestNotices' => $latestNotices,
-            ]);
+            $view->with('latestNotices', $latestNotices);
         });
 
         /*

@@ -10,6 +10,47 @@
     font-display: swap;
 }
 
+:root {
+    --brand-primary: #0c3c74;
+    --brand-secondary: #0c73db;
+    --brand-dark: #072449;
+    --accent-gold: #d97706;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
 html, body {
     font-family: 'Kalpurush', 'Noto Sans Bengali', sans-serif;
+    color: #0f172a;
+    background-color: #ffffff;
+}
+
+::selection {
+    background-color: #0c73db;
+    color: #ffffff;
+}
+
+/* Base custom utility components */
+@layer components {
+    .btn-brand {
+        @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-brand-700 hover:bg-brand-800 text-white font-bold text-sm shadow-md shadow-brand-700/20 transition-all duration-200 hover:shadow-lg active:scale-95;
+    }
+
+    .btn-accent {
+        @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-accent-500 hover:bg-accent-600 text-slate-950 font-bold text-sm shadow-md shadow-accent-500/20 transition-all duration-200 hover:shadow-lg active:scale-95;
+    }
+
+    .btn-outline-brand {
+        @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl border-2 border-brand-700 text-brand-700 hover:bg-brand-50 font-bold text-sm transition-all duration-200 active:scale-95;
+    }
+
+    .badge-brand {
+        @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-brand-50 text-brand-700 border border-brand-200;
+    }
+
+    .badge-accent {
+        @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-accent-50 text-accent-700 border border-accent-200;
+    }
 }

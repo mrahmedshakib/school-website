@@ -4,48 +4,46 @@
 @section('content')
 
 {{-- HERO --}}
-<section class="relative overflow-hidden bg-slate-950">
-    <div class="absolute inset-0 bg-gradient-to-br from-indigo-950 via-slate-950 to-slate-900"></div>
-    <div class="absolute top-0 right-0 w-96 h-96 rounded-full bg-indigo-500/10 blur-3xl"></div>
+<section class="relative overflow-hidden bg-[#061d36] py-12 sm:py-16 text-white">
+    <div class="absolute inset-0 bg-gradient-to-br from-[#05172d] via-[#0c3c74] to-[#061d36]"></div>
+    <div class="absolute top-0 right-0 w-96 h-96 rounded-full bg-brand-400/10 blur-3xl"></div>
     <div class="absolute bottom-0 left-0 w-80 h-80 rounded-full bg-blue-500/10 blur-3xl"></div>
-    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
-        <div class="max-w-3xl">
-            <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-500/10 border border-indigo-400/20 text-indigo-200 text-sm font-semibold">
-                💳 Fee Payment Portal
-            </span>
-            <h1 class="mt-4 text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white">
-                ভর্তি ফি পরিশোধ
-            </h1>
-            <p class="mt-3 text-sm sm:text-base text-slate-300 leading-7">
-                আপনার Application Number দিয়ে আবেদন অনুসন্ধান করুন এবং SSLCOMMERZ, bKash, Nagad, Rocket বা Bank Transfer মাধ্যমে নির্ধারিত ভর্তি ফি পরিশোধ করুন।
-            </p>
+    <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-500/20 border border-brand-400/30 text-brand-200 text-xs sm:text-sm font-bold uppercase tracking-wider">
+            💳 Fee Payment Portal
+        </span>
+        <h1 class="mt-4 text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white">
+            ভর্তি ফি পরিশোধ
+        </h1>
+        <p class="mt-3 text-sm sm:text-base text-slate-300 max-w-2xl mx-auto leading-6">
+            আপনার Application Number দিয়ে আবেদন অনুসন্ধান করুন এবং SSLCOMMERZ, bKash, Nagad, Rocket বা Bank Transfer মাধ্যমে নির্ধারিত ভর্তি ফি পরিশোধ করুন।
+        </p>
 
-            {{-- 4-STEP FLOW INDICATOR --}}
-            <div class="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 text-left">
-                <!-- Step 1: Done -->
-                <div class="rounded-2xl border border-white/10 bg-white/5 p-3 backdrop-blur">
-                    <span class="w-6 h-6 rounded-full bg-emerald-500 text-white text-xs font-bold inline-flex items-center justify-center mb-1">✓</span>
-                    <p class="text-xs font-bold text-white">১. আবেদন ফরম পূরণ</p>
-                    <span class="text-[10px] text-emerald-300 block">সম্পন্ন হয়েছে</span>
-                </div>
-                <!-- Step 2: Done -->
-                <div class="rounded-2xl border border-white/10 bg-white/5 p-3 backdrop-blur">
-                    <span class="w-6 h-6 rounded-full bg-emerald-500 text-white text-xs font-bold inline-flex items-center justify-center mb-1">✓</span>
-                    <p class="text-xs font-bold text-white">২. Application No.</p>
-                    <span class="text-[10px] text-emerald-300 block">সংগৃহীত</span>
-                </div>
-                <!-- Step 3: Active -->
-                <div class="rounded-2xl border-2 border-indigo-400 bg-indigo-600/40 p-3 backdrop-blur shadow-md">
-                    <span class="w-6 h-6 rounded-full bg-indigo-400 text-slate-950 text-xs font-black inline-flex items-center justify-center mb-1">৩</span>
-                    <p class="text-xs font-bold text-white">৩. ভর্তি ফি পরিশোধ</p>
-                    <span class="text-[10px] text-indigo-200 block font-semibold">চলমান ধাপ (Active)</span>
-                </div>
-                <!-- Step 4 -->
-                <div class="rounded-2xl border border-white/10 bg-white/5 p-3 backdrop-blur text-slate-400">
-                    <span class="w-6 h-6 rounded-full bg-white/10 text-slate-300 text-xs font-bold inline-flex items-center justify-center mb-1">৪</span>
-                    <p class="text-xs font-bold text-slate-300">৪. মানি রসিদ ও ভর্তি</p>
-                    <span class="text-[10px] text-slate-400 block">চূড়ান্ত নিশ্চয়তা</span>
-                </div>
+        {{-- 4-STEP FLOW INDICATOR --}}
+        <div class="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 text-left max-w-3xl mx-auto">
+            <!-- Step 1: Done -->
+            <div class="rounded-2xl border border-white/10 bg-white/5 p-3.5 backdrop-blur">
+                <span class="w-6 h-6 rounded-full bg-emerald-500 text-white text-xs font-bold inline-flex items-center justify-center mb-1">✓</span>
+                <p class="text-xs font-bold text-white">১. আবেদন ফরম পূরণ</p>
+                <span class="text-[10px] text-emerald-300 block">সম্পন্ন হয়েছে</span>
+            </div>
+            <!-- Step 2: Done -->
+            <div class="rounded-2xl border border-white/10 bg-white/5 p-3.5 backdrop-blur">
+                <span class="w-6 h-6 rounded-full bg-emerald-500 text-white text-xs font-bold inline-flex items-center justify-center mb-1">✓</span>
+                <p class="text-xs font-bold text-white">২. Application No.</p>
+                <span class="text-[10px] text-emerald-300 block">সংগৃহীত</span>
+            </div>
+            <!-- Step 3: Active -->
+            <div class="rounded-2xl border-2 border-brand-300 bg-brand-500/30 p-3.5 backdrop-blur shadow-md">
+                <span class="w-6 h-6 rounded-full bg-white text-brand-900 text-xs font-black inline-flex items-center justify-center mb-1">৩</span>
+                <p class="text-xs font-bold text-white">৩. ভর্তি ফি পরিশোধ</p>
+                <span class="text-[10px] text-brand-200 block font-semibold">চলমান ধাপ (Active)</span>
+            </div>
+            <!-- Step 4 -->
+            <div class="rounded-2xl border border-white/10 bg-white/5 p-3.5 backdrop-blur text-slate-400">
+                <span class="w-6 h-6 rounded-full bg-white/10 text-slate-300 text-xs font-bold inline-flex items-center justify-center mb-1">৪</span>
+                <p class="text-xs font-bold text-slate-300">৪. মানি রসিদ ও ভর্তি</p>
+                <span class="text-[10px] text-slate-400 block">চূড়ান্ত নিশ্চয়তা</span>
             </div>
         </div>
     </div>

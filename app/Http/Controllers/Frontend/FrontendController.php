@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Mpdf\Mpdf;
+use Mpdf\Config\ConfigVariables;
+use Mpdf\Config\FontVariables;
 use App\Services\SmsService;
 use App\Models\Notice;
 use App\Models\Slider;
@@ -921,6 +924,50 @@ class FrontendController extends Controller
 
     /*
     |--------------------------------------------------------------------------
+    | Bengali mPDF Instance Generator
+    |--------------------------------------------------------------------------
+    */
+    protected function createBengaliMpdf(array $options = []): Mpdf
+    {
+        $defaultConfig = (new ConfigVariables())->getDefaults();
+        $fontDirs = $defaultConfig['fontDir'];
+
+        $defaultFontConfig = (new FontVariables())->getDefaults();
+        $fontData = $defaultFontConfig['fontdata'];
+
+        $tempDir = storage_path('app/mpdf_temp');
+        if (!is_dir($tempDir)) {
+            @mkdir($tempDir, 0777, true);
+        }
+
+        $config = array_merge([
+            'mode' => 'utf-8',
+            'format' => 'A4',
+            'margin_left' => 10,
+            'margin_right' => 10,
+            'margin_top' => 10,
+            'margin_bottom' => 10,
+            'margin_header' => 0,
+            'margin_footer' => 0,
+            'fontDir' => array_merge($fontDirs, [public_path('fonts/Kalpurush')]),
+            'fontdata' => $fontData + [
+                'kalpurush' => [
+                    'R' => 'kalpurush.ttf',
+                    'useOTL' => 0xFF,
+                    'useKashida' => 75,
+                ]
+            ],
+            'default_font' => 'kalpurush',
+            'autoScriptToLang' => true,
+            'autoLangToFont' => true,
+            'tempDir' => $tempDir,
+        ], $options);
+
+        return new Mpdf($config);
+    }
+
+    /*
+    |--------------------------------------------------------------------------
     | Download Admission Application PDF
     |--------------------------------------------------------------------------
     */
@@ -934,53 +981,30 @@ class FrontendController extends Controller
         $websiteSetting = WebsiteSetting::first();
 
         try {
-            $fontPath = str_replace('\\', '/', public_path('fonts/Kalpurush/kalpurush.ttf'));
-
-            if (!file_exists($fontPath)) {
-                return response(
-                    'Kalpurush font পাওয়া যায়নি: ' . $fontPath,
-                    500
-                );
-            }
-
-            $pdf = Pdf::loadView(
+            $html = view(
                 'frontend.admission.application-pdf',
                 [
                     'application' => $application,
                     'websiteSetting' => $websiteSetting,
                 ]
-            );
+            )->render();
 
-            $pdf->setPaper('A4', 'portrait');
+            $mpdf = $this->createBengaliMpdf([
+                'margin_left' => 12,
+                'margin_right' => 12,
+                'margin_top' => 10,
+                'margin_bottom' => 10,
+            ]);
 
-            /*
-            |--------------------------------------------------------------------------
-            | Register Kalpurush Font for all weights and styles to prevent DomPDF
-            | from falling back to Helvetica-Bold for bold Bengali headings & titles!
-            |--------------------------------------------------------------------------
-            */
-            $dompdf = $pdf->getDomPDF();
-            $fontMetrics = $dompdf->getFontMetrics();
+            $mpdf->WriteHTML($html);
+            $pdfContent = $mpdf->Output('', 'S');
 
-            $styles = ['normal', 'italic'];
-            $weights = ['normal', 'bold', 'bolder', '500', '600', '700', '800', '900'];
-            foreach (['Kalpurush', 'kalpurush'] as $family) {
-                foreach ($styles as $style) {
-                    foreach ($weights as $weight) {
-                        $fontMetrics->registerFont(
-                            ['family' => $family, 'style' => $style, 'weight' => $weight],
-                            $fontPath
-                        );
-                    }
-                }
-            }
-
-            return $pdf->download(
-                'Application-' . $application->application_no . '.pdf'
-            );
+            return response($pdfContent, 200, [
+                'Content-Type' => 'application/pdf',
+                'Content-Disposition' => 'attachment; filename="Application-' . $application->application_no . '.pdf"',
+            ]);
 
         } catch (\Throwable $e) {
-
             Log::error('Admission PDF Error', [
                 'application_no' => $applicationNo,
                 'error' => $e->getMessage(),
@@ -1007,31 +1031,32 @@ class FrontendController extends Controller
         $websiteSetting = WebsiteSetting::first();
 
         try {
-            $fontPath = str_replace('\\', '/', public_path('fonts/Kalpurush/kalpurush.ttf'));
-            $pdf = Pdf::loadView('frontend.admission.admit-card-pdf', [
+            $html = view('frontend.admission.admit-card-pdf', [
                 'application' => $application,
                 'websiteSetting' => $websiteSetting,
+            ])->render();
+
+            $mpdf = $this->createBengaliMpdf([
+                'margin_left' => 12,
+                'margin_right' => 12,
+                'margin_top' => 10,
+                'margin_bottom' => 10,
             ]);
-            $pdf->setPaper('A4', 'portrait');
 
-            $dompdf = $pdf->getDomPDF();
-            $fontMetrics = $dompdf->getFontMetrics();
-            $styles = ['normal', 'italic'];
-            $weights = ['normal', 'bold', 'bolder', '500', '600', '700', '800', '900'];
-            foreach (['Kalpurush', 'kalpurush'] as $family) {
-                foreach ($styles as $style) {
-                    foreach ($weights as $weight) {
-                        $fontMetrics->registerFont(
-                            ['family' => $family, 'style' => $style, 'weight' => $weight],
-                            $fontPath
-                        );
-                    }
-                }
-            }
+            $mpdf->WriteHTML($html);
+            $pdfContent = $mpdf->Output('', 'S');
 
-            return $pdf->download('AdmitCard-' . $application->application_no . '.pdf');
+            return response($pdfContent, 200, [
+                'Content-Type' => 'application/pdf',
+                'Content-Disposition' => 'attachment; filename="AdmitCard-' . $application->application_no . '.pdf"',
+            ]);
         } catch (\Throwable $e) {
-            Log::error('Admit Card PDF Error', ['error' => $e->getMessage()]);
+            Log::error('Admit Card PDF Error', [
+                'application_no' => $applicationNo,
+                'error' => $e->getMessage(),
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
+            ]);
             return response('<h3>প্রবেশপত্র তৈরি করা সম্ভব হয়নি।</h3><p>' . e($e->getMessage()) . '</p>', 500);
         }
     }
@@ -1047,31 +1072,32 @@ class FrontendController extends Controller
         $websiteSetting = WebsiteSetting::first();
 
         try {
-            $fontPath = str_replace('\\', '/', public_path('fonts/Kalpurush/kalpurush.ttf'));
-            $pdf = Pdf::loadView('frontend.admission.receipt-pdf', [
+            $html = view('frontend.admission.receipt-pdf', [
                 'application' => $application,
                 'websiteSetting' => $websiteSetting,
+            ])->render();
+
+            $mpdf = $this->createBengaliMpdf([
+                'margin_left' => 12,
+                'margin_right' => 12,
+                'margin_top' => 10,
+                'margin_bottom' => 10,
             ]);
-            $pdf->setPaper('A4', 'portrait');
 
-            $dompdf = $pdf->getDomPDF();
-            $fontMetrics = $dompdf->getFontMetrics();
-            $styles = ['normal', 'italic'];
-            $weights = ['normal', 'bold', 'bolder', '500', '600', '700', '800', '900'];
-            foreach (['Kalpurush', 'kalpurush'] as $family) {
-                foreach ($styles as $style) {
-                    foreach ($weights as $weight) {
-                        $fontMetrics->registerFont(
-                            ['family' => $family, 'style' => $style, 'weight' => $weight],
-                            $fontPath
-                        );
-                    }
-                }
-            }
+            $mpdf->WriteHTML($html);
+            $pdfContent = $mpdf->Output('', 'S');
 
-            return $pdf->download('Receipt-' . $application->application_no . '.pdf');
+            return response($pdfContent, 200, [
+                'Content-Type' => 'application/pdf',
+                'Content-Disposition' => 'attachment; filename="Receipt-' . $application->application_no . '.pdf"',
+            ]);
         } catch (\Throwable $e) {
-            Log::error('Receipt PDF Error', ['error' => $e->getMessage()]);
+            Log::error('Receipt PDF Error', [
+                'application_no' => $applicationNo,
+                'error' => $e->getMessage(),
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
+            ]);
             return response('<h3>মানি রিসিট তৈরি করা সম্ভব হয়নি।</h3><p>' . e($e->getMessage()) . '</p>', 500);
         }
     }

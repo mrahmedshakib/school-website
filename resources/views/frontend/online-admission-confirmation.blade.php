@@ -18,10 +18,10 @@
                 <span class="text-[10px] text-emerald-700 block">সফলভাবে দাখিলকৃত</span>
             </div>
             <!-- Step 2: Active -->
-            <div class="rounded-2xl border-2 border-indigo-600 bg-indigo-50/90 p-3 shadow-md">
-                <span class="w-6 h-6 rounded-full bg-indigo-600 text-white text-xs font-black inline-flex items-center justify-center mb-1">২</span>
-                <p class="text-xs font-bold text-indigo-950">২. নিশ্চিতকরণ ও PDF</p>
-                <span class="text-[10px] text-indigo-700 font-semibold block">বর্তমান ধাপ (Active)</span>
+            <div class="rounded-2xl border-2 border-brand-primary bg-brand-50/90 p-3 shadow-md">
+                <span class="w-6 h-6 rounded-full bg-brand-primary text-white text-xs font-black inline-flex items-center justify-center mb-1">২</span>
+                <p class="text-xs font-bold text-brand-950">২. নিশ্চিতকরণ ও PDF</p>
+                <span class="text-[10px] text-brand-700 font-semibold block">বর্তমান ধাপ (Active)</span>
             </div>
             <!-- Step 3: Next -->
             <div class="rounded-2xl border border-slate-200 bg-white p-3 shadow-sm">
@@ -41,7 +41,7 @@
         <div class="rounded-3xl border border-slate-200 bg-white shadow-xl overflow-hidden">
 
             {{-- Top Hero Banner --}}
-            <div class="bg-gradient-to-r from-emerald-600 via-teal-600 to-indigo-700 p-8 sm:p-10 text-white text-center relative overflow-hidden">
+            <div class="bg-gradient-to-r from-emerald-600 via-brand-primary to-brand-900 p-8 sm:p-10 text-white text-center relative overflow-hidden">
                 <div class="w-20 h-20 rounded-full bg-white/20 backdrop-blur border border-white/30 text-white flex items-center justify-center text-4xl font-black mx-auto mb-4 shadow-lg animate-bounce">
                     ✓
                 </div>
@@ -62,13 +62,13 @@
             {{-- Application No Display Box --}}
             <div class="p-6 sm:p-10">
 
-                <div class="rounded-2xl border-2 border-indigo-200 bg-indigo-50/70 p-6 text-center max-w-xl mx-auto shadow-sm">
-                    <span class="text-xs font-bold uppercase tracking-widest text-indigo-700">
+                <div class="rounded-2xl border-2 border-brand-200 bg-brand-50/70 p-6 text-center max-w-xl mx-auto shadow-sm">
+                    <span class="text-xs font-bold uppercase tracking-widest text-brand-700">
                         আপনার নির্ধারিত Application Number
                     </span>
 
                     <div class="mt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
-                        <span id="appNoText" class="text-3xl sm:text-4xl font-black text-indigo-900 font-mono tracking-wider">
+                        <span id="appNoText" class="text-3xl sm:text-4xl font-black text-brand-950 font-mono tracking-wider">
                             {{ $application->application_no }}
                         </span>
 
@@ -76,14 +76,14 @@
                             type="button"
                             onclick="copyAppNo()"
                             id="copyBtn"
-                            class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white border border-indigo-200 text-indigo-700 text-xs font-bold hover:bg-indigo-50 shadow-sm transition"
+                            class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white border border-brand-200 text-brand-primary text-xs font-bold hover:bg-brand-50 shadow-sm transition"
                         >
                             <span>📋</span>
                             <span id="copyBtnText">নম্বর কপি করুন</span>
                         </button>
                     </div>
 
-                    <p class="mt-2 text-xs text-indigo-600">
+                    <p class="mt-2 text-xs text-brand-600">
                         ভর্তি সংক্রান্ত যেকোনো তথ্য বা ভর্তি ফি পরিশোধের সময় এই নম্বরটি প্রয়োজন হবে।
                     </p>
                 </div>
@@ -94,7 +94,7 @@
                     <a
                         href="{{ route('online-admission.application.pdf', ['applicationNo' => $application->application_no]) }}"
                         target="_blank"
-                        class="flex items-center justify-center gap-2.5 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm sm:text-base py-4 px-6 shadow-xl shadow-indigo-600/25 transition text-center"
+                        class="flex items-center justify-center gap-2.5 rounded-2xl bg-brand-primary hover:bg-brand-secondary text-white font-bold text-sm sm:text-base py-4 px-6 shadow-xl shadow-brand-500/25 transition text-center"
                     >
                         <span class="text-xl">📄</span>
                         <span>Application Form (PDF) ডাউনলোড</span>

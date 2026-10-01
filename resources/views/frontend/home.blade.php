@@ -95,7 +95,7 @@
                                                h-2
                                                mr-2
                                                rounded-full
-                                               bg-emerald-400"
+                                               bg-accent-400"
                                     ></span>
 
                                     {{ $slider->subtitle }}
@@ -158,8 +158,8 @@
                                            shadow-lg
                                            transition-all
                                            duration-300
-                                           hover:bg-emerald-400
-                                           hover:text-white
+                                           hover:bg-accent-500
+                                           hover:text-slate-950
                                            hover:-translate-y-1"
                                 >
 
@@ -630,7 +630,7 @@
                 {{-- LEFT CONTENT --}}
                 <div>
 
-                    <span class="text-blue-700 font-semibold">
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-brand-50 text-brand-700 border border-brand-100">
                         আমাদের সম্পর্কে
                     </span>
 
@@ -654,8 +654,8 @@
                         <a
                             href="{{ $about->button_url ?: route('about') }}"
                             class="inline-flex mt-7 px-6 py-3
-                                bg-slate-900 text-white rounded-lg
-                                font-semibold hover:bg-blue-700
+                                bg-brand-700 text-white rounded-xl
+                                font-bold hover:bg-brand-800 shadow-md shadow-brand-700/20
                                 transition"
                         >
                             {{ $about->button_text }}
@@ -681,7 +681,7 @@
 
                         <div
                             class="w-full h-[350px]
-                                bg-slate-100
+                                bg-brand-50/50 border border-brand-100
                                 flex items-center justify-center"
                         >
                             <div class="text-center">
@@ -718,7 +718,7 @@
 
         <div class="text-center max-w-2xl mx-auto">
 
-            <span class="text-blue-700 font-semibold">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-brand-50 text-brand-700 border border-brand-100">
                 আমাদের লক্ষ্য ও উদ্দেশ্য
             </span>
 
@@ -734,10 +734,10 @@
 
         <div class="grid md:grid-cols-2 gap-6 mt-10">
 
-            <div class="bg-white rounded-2xl p-8 shadow-sm border border-slate-200">
+            <div class="bg-white rounded-2xl p-8 shadow-sm border border-slate-200 hover:shadow-md hover:border-brand-200 transition">
 
                 <div
-                    class="w-14 h-14 rounded-xl bg-blue-100
+                    class="w-14 h-14 rounded-xl bg-brand-50 border border-brand-100 text-brand-700
                            flex items-center justify-center
                            text-2xl mb-5"
                 >
@@ -755,10 +755,10 @@
             </div>
 
 
-            <div class="bg-white rounded-2xl p-8 shadow-sm border border-slate-200">
+            <div class="bg-white rounded-2xl p-8 shadow-sm border border-slate-200 hover:shadow-md hover:border-accent-200 transition">
 
                 <div
-                    class="w-14 h-14 rounded-xl bg-green-100
+                    class="w-14 h-14 rounded-xl bg-accent-50 border border-accent-100 text-accent-700
                            flex items-center justify-center
                            text-2xl mb-5"
                 >
@@ -791,7 +791,7 @@
 
         <div class="text-center">
 
-            <span class="text-blue-700 font-semibold">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-brand-50 text-brand-700 border border-brand-100">
                 {{ app()->getLocale() === 'en' ? 'Quick Statistics' : 'গুরুত্বপূর্ণ তথ্য' }}
             </span>
 
@@ -807,52 +807,52 @@
 
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mt-10">
 
-            <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 text-center">
+            <div class="p-6 rounded-2xl bg-white border border-brand-100/80 shadow-sm hover:shadow-md hover:border-brand-300 transition text-center group">
 
-                <div class="text-3xl font-extrabold text-blue-700">
+                <div class="text-3xl sm:text-4xl font-black text-brand-700 group-hover:text-brand-600 transition">
                     @bnDigit($totalTeachers)+
                 </div>
 
-                <p class="mt-2 text-slate-600 font-medium">
+                <p class="mt-2 text-slate-600 font-semibold text-sm">
                     {{ app()->getLocale() === 'en' ? 'Honorable Teachers' : 'অভিজ্ঞ শিক্ষকবৃন্দ' }}
                 </p>
 
             </div>
 
 
-            <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 text-center">
+            <div class="p-6 rounded-2xl bg-white border border-brand-100/80 shadow-sm hover:shadow-md hover:border-brand-300 transition text-center group">
 
-                <div class="text-3xl font-extrabold text-blue-700">
+                <div class="text-3xl sm:text-4xl font-black text-brand-700 group-hover:text-brand-600 transition">
                     @bnDigit($totalStudents)+
                 </div>
 
-                <p class="mt-2 text-slate-600 font-medium">
+                <p class="mt-2 text-slate-600 font-semibold text-sm">
                     {{ app()->getLocale() === 'en' ? 'Active Students' : 'নিয়মিত শিক্ষার্থী' }}
                 </p>
 
             </div>
 
 
-            <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 text-center">
+            <div class="p-6 rounded-2xl bg-white border border-brand-100/80 shadow-sm hover:shadow-md hover:border-brand-300 transition text-center group">
 
-                <div class="text-3xl font-extrabold text-blue-700">
+                <div class="text-3xl sm:text-4xl font-black text-brand-700 group-hover:text-brand-600 transition">
                     @bnDigit($totalClasses)
                 </div>
 
-                <p class="mt-2 text-slate-600 font-medium">
+                <p class="mt-2 text-slate-600 font-semibold text-sm">
                     {{ app()->getLocale() === 'en' ? 'Academic Classes' : 'একাডেমিক শ্রেণি' }}
                 </p>
 
             </div>
 
 
-            <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 text-center">
+            <div class="p-6 rounded-2xl bg-white border border-brand-100/80 shadow-sm hover:shadow-md hover:border-brand-300 transition text-center group">
 
-                <div class="text-3xl font-extrabold text-blue-700">
+                <div class="text-3xl sm:text-4xl font-black text-brand-700 group-hover:text-brand-600 transition">
                     @bnDigit($totalStaff)+
                 </div>
 
-                <p class="mt-2 text-slate-600 font-medium">
+                <p class="mt-2 text-slate-600 font-semibold text-sm">
                     {{ app()->getLocale() === 'en' ? 'Supporting Staff' : 'কর্মকর্তা ও কর্মচারী' }}
                 </p>
 
@@ -956,9 +956,9 @@
                     href="{{ route('administration') }}"
                     class="inline-flex items-center gap-2
                            px-6 py-3 rounded-xl
-                           bg-gray-900 text-white
-                           font-semibold
-                           hover:bg-gray-800 transition"
+                           bg-brand-700 text-white
+                           font-bold shadow-md shadow-brand-700/20
+                           hover:bg-brand-800 transition"
                 >
                     {{ app()->getLocale() === 'en' ? 'View All Administration' : 'সকল পরিচালনা পর্ষদ' }}
                     →
@@ -979,21 +979,21 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
             <div>
-                <span class="text-blue-700 font-semibold">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-brand-50 text-brand-700 border border-brand-100">
                     আমাদের শিক্ষক
                 </span>
                 <h2 class="mt-3 text-3xl sm:text-4xl font-extrabold text-slate-900">
                     অভিজ্ঞ শিক্ষকবৃন্দ
                 </h2>
             </div>
-            <a href="{{ route('teachers') }}" class="font-semibold text-blue-700 hover:text-blue-900 transition">
+            <a href="{{ route('teachers') }}" class="font-bold text-brand-700 hover:text-brand-900 transition">
                 সকল শিক্ষক →
             </a>
         </div>
 
         <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-10">
             @forelse($teachers as $teacher)
-                <div class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition">
+                <div class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-md hover:border-brand-200 transition">
                     @if($teacher->image)
                         <img
                             src="{{ asset($teacher->image) }}"
@@ -1012,7 +1012,7 @@
                         </h3>
 
                         @if($teacher->designation)
-                            <p class="mt-1 text-sm text-blue-700 font-medium">
+                            <p class="mt-1 text-sm text-brand-700 font-semibold">
                                 {{ $teacher->designation }}
                             </p>
                         @endif
@@ -1043,7 +1043,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
             <div>
-                <span class="text-emerald-700 font-semibold">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-brand-50 text-brand-700 border border-brand-100">
                     আমাদের কর্মচারীবৃন্দ
                 </span>
 
@@ -1054,7 +1054,7 @@
 
             <a
                 href="{{ route('staff') }}"
-                class="font-semibold text-emerald-700 hover:text-emerald-900 transition"
+                class="font-bold text-brand-700 hover:text-brand-900 transition"
             >
                 সকল কর্মচারী →
             </a>
@@ -1062,7 +1062,7 @@
 
         <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-10">
             @forelse($staff as $member)
-                <div class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition">
+                <div class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-md hover:border-brand-200 transition">
                     @if($member->image)
                         <img
                             src="{{ asset($member->image) }}"
@@ -1081,7 +1081,7 @@
                         </h3>
 
                         @if($member->designation)
-                            <p class="mt-1 text-sm text-emerald-700 font-medium">
+                            <p class="mt-1 text-sm text-brand-700 font-semibold">
                                 {{ $member->designation }}
                             </p>
                         @endif
@@ -1103,10 +1103,10 @@
 {{-- =========================================================
     GALLERY
 ========================================================= --}}
-<section class="py-16 sm:py-20 bg-white">
+<section class="py-16 sm:py-20 bg-slate-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center">
-            <span class="text-blue-700 font-semibold">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-brand-50 text-brand-700 border border-brand-100">
                 আমাদের কার্যক্রম
             </span>
             <h2 class="mt-3 text-3xl sm:text-4xl font-extrabold text-slate-900">
@@ -1116,7 +1116,7 @@
 
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-10">
             @forelse($galleries as $gallery)
-                <a href="{{ route('gallery') }}" class="group block overflow-hidden rounded-xl">
+                <a href="{{ route('gallery') }}" class="group block overflow-hidden rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition">
                     @if($gallery->image)
                         <img
                             src="{{ asset($gallery->image) }}"
@@ -1143,9 +1143,9 @@
         <div class="text-center mt-8">
             <a
                 href="{{ route('gallery') }}"
-                class="inline-flex px-6 py-3 border border-slate-300 rounded-lg font-semibold hover:bg-slate-900 hover:text-white transition"
+                class="inline-flex items-center gap-2 px-6 py-3 bg-white border border-brand-200 text-brand-700 rounded-xl font-bold hover:bg-brand-50 shadow-sm transition"
             >
-                সম্পূর্ণ গ্যালারি দেখুন
+                সম্পূর্ণ গ্যালারি দেখুন →
             </a>
         </div>
     </div>
@@ -1154,7 +1154,7 @@
 {{-- =========================================================
     ADMISSION CTA
 ========================================================= --}}
-<section class="py-16 sm:py-20 bg-slate-900 text-white">
+<section class="py-16 sm:py-20 bg-gradient-to-br from-brand-950 via-brand-900 to-slate-950 text-white relative overflow-hidden">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 text-center">
         @if($admissions->count())
             @php
@@ -1166,7 +1166,7 @@
             </h2>
 
             @if($admission->description)
-                <p class="mt-5 text-white/70 text-base sm:text-lg max-w-3xl mx-auto">
+                <p class="mt-5 text-white/80 text-base sm:text-lg max-w-3xl mx-auto">
                     {{ Str::limit(strip_tags($admission->description), 250) }}
                 </p>
             @endif
@@ -1176,14 +1176,14 @@
                     href="{{ $admission->application_url }}"
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="inline-flex mt-8 px-7 py-3.5 bg-white text-slate-900 rounded-lg font-bold hover:bg-blue-100 transition"
+                    class="inline-flex mt-8 px-7 py-3.5 bg-accent-500 hover:bg-accent-400 text-slate-950 rounded-xl font-bold shadow-lg shadow-accent-500/25 transition duration-300 hover:scale-105"
                 >
                     ভর্তি আবেদন করুন
                 </a>
             @else
                 <a
                     href="{{ route('admission') }}"
-                    class="inline-flex mt-8 px-7 py-3.5 bg-white text-slate-900 rounded-lg font-bold hover:bg-blue-100 transition"
+                    class="inline-flex mt-8 px-7 py-3.5 bg-accent-500 hover:bg-accent-400 text-slate-950 rounded-xl font-bold shadow-lg shadow-accent-500/25 transition duration-300 hover:scale-105"
                 >
                     ভর্তি সংক্রান্ত তথ্য
                 </a>
@@ -1195,14 +1195,14 @@
                 জন্য আজই ভর্তি করুন
             </h2>
 
-            <p class="mt-5 text-white/70 text-base sm:text-lg">
+            <p class="mt-5 text-white/80 text-base sm:text-lg">
                 মানসম্মত শিক্ষা ও সুন্দর পরিবেশে আপনার সন্তানের
                 ভবিষ্যৎ গড়ে তুলতে আমাদের সাথে থাকুন।
             </p>
 
             <a
                 href="{{ route('admission') }}"
-                class="inline-flex mt-8 px-7 py-3.5 bg-white text-slate-900 rounded-lg font-bold hover:bg-blue-100 transition"
+                class="inline-flex mt-8 px-7 py-3.5 bg-accent-500 hover:bg-accent-400 text-slate-950 rounded-xl font-bold shadow-lg shadow-accent-500/25 transition duration-300 hover:scale-105"
             >
                 ভর্তি সংক্রান্ত তথ্য
             </a>
@@ -1219,9 +1219,9 @@
 
         <div class="grid md:grid-cols-3 gap-6">
 
-            <div class="p-7 rounded-2xl bg-slate-50 border border-slate-200">
+            <div class="p-7 rounded-2xl bg-white border border-slate-200 hover:border-brand-200 hover:shadow-md transition">
 
-                <div class="text-2xl">
+                <div class="w-12 h-12 rounded-xl bg-brand-50 border border-brand-100 text-brand-700 flex items-center justify-center text-2xl">
                     📍
                 </div>
 
@@ -1236,9 +1236,9 @@
             </div>
 
 
-            <div class="p-7 rounded-2xl bg-slate-50 border border-slate-200">
+            <div class="p-7 rounded-2xl bg-white border border-slate-200 hover:border-brand-200 hover:shadow-md transition">
 
-                <div class="text-2xl">
+                <div class="w-12 h-12 rounded-xl bg-brand-50 border border-brand-100 text-brand-700 flex items-center justify-center text-2xl">
                     ☎️
                 </div>
 
@@ -1258,9 +1258,9 @@
             </div>
 
 
-            <div class="p-7 rounded-2xl bg-slate-50 border border-slate-200">
+            <div class="p-7 rounded-2xl bg-white border border-slate-200 hover:border-brand-200 hover:shadow-md transition">
 
-                <div class="text-2xl">
+                <div class="w-12 h-12 rounded-xl bg-brand-50 border border-brand-100 text-brand-700 flex items-center justify-center text-2xl">
                     ✉️
                 </div>
 

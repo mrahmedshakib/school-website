@@ -15,11 +15,20 @@
         content="@yield('meta_keywords', '')"
     >
 
-    @if(!empty($websiteSetting?->favicon))
-        <link
-            rel="icon"
-            href="{{ asset('storage/' . $websiteSetting->favicon) }}"
-        >
+    @php
+        $faviconUrl = asset('favicon.ico');
+        if (!empty($websiteSetting?->favicon)) {
+            if (file_exists(public_path($websiteSetting->favicon))) {
+                $faviconUrl = asset($websiteSetting->favicon);
+            } elseif (file_exists(public_path('storage/' . $websiteSetting->favicon))) {
+                $faviconUrl = asset('storage/' . $websiteSetting->favicon);
+            }
+        }
+    @endphp
+    <link rel="icon" type="image/x-icon" href="{{ $faviconUrl }}">
+    <link rel="shortcut icon" href="{{ $faviconUrl }}">
+    @if(!empty($websiteSetting?->logo) && file_exists(public_path($websiteSetting->logo)))
+        <link rel="apple-touch-icon" href="{{ asset($websiteSetting->logo) }}">
     @endif
 
     {{-- ================= KALPURUSH BENGALI FONT ================= --}}

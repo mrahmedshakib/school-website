@@ -5,11 +5,11 @@
 @section('content')
 
 {{-- HERO SECTION --}}
-<section class="relative overflow-hidden bg-slate-950 py-10 sm:py-14 text-white">
-    <div class="absolute inset-0 bg-gradient-to-br from-indigo-950 via-slate-950 to-slate-900"></div>
-    <div class="absolute top-0 right-0 w-96 h-96 rounded-full bg-indigo-500/10 blur-3xl"></div>
+<section class="relative overflow-hidden bg-[#061d36] py-10 sm:py-14 text-white">
+    <div class="absolute inset-0 bg-gradient-to-br from-[#05172d] via-[#0c3c74] to-[#061d36]"></div>
+    <div class="absolute top-0 right-0 w-96 h-96 rounded-full bg-brand-400/10 blur-3xl"></div>
     <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-500/20 border border-indigo-400/30 text-indigo-300 text-xs font-bold uppercase tracking-widest">
+        <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-500/20 border border-brand-400/30 text-brand-200 text-xs font-bold uppercase tracking-widest">
             📥 Student Portal
         </span>
         <h1 class="mt-4 text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight">
@@ -44,7 +44,7 @@
             {{-- Tab selector --}}
             <div class="flex items-center gap-3 p-1.5 rounded-2xl bg-slate-100 max-w-md mb-6">
                 <button type="button" id="tabAppNo" onclick="switchSearchTab('app_no')"
-                        class="flex-1 py-2 px-3 rounded-xl text-xs font-bold transition bg-white text-indigo-700 shadow-sm">
+                        class="flex-1 py-2 px-3 rounded-xl text-xs font-bold transition bg-white text-brand-primary shadow-sm">
                     আবেদন নম্বর দিয়ে
                 </button>
                 <button type="button" id="tabMobileDob" onclick="switchSearchTab('mobile_dob')"
@@ -65,7 +65,7 @@
                         </label>
                         <input type="text" name="application_no" value="{{ old('application_no') }}"
                                placeholder="যেমন: BLSC-{{ date('Y') }}-XXXXX"
-                               class="w-full rounded-2xl border border-slate-300 font-mono font-bold text-sm px-4 py-3 outline-none focus:border-indigo-600 focus:ring-4 focus:ring-indigo-100">
+                               class="w-full rounded-2xl border border-slate-300 font-mono font-bold text-sm px-4 py-3 outline-none focus:border-brand-primary focus:ring-4 focus:ring-brand-100">
                         <span class="text-[11px] text-slate-400 mt-1 block">অনলাইন আবেদন সম্পন্ন করার সময় আপনাকে প্রদত্ত নম্বর</span>
                     </div>
                 </div>
@@ -79,7 +79,7 @@
                             </label>
                             <input type="tel" name="guardian_phone" value="{{ old('guardian_phone') }}"
                                    placeholder="01XXXXXXXXX"
-                                   class="w-full rounded-2xl border border-slate-300 font-mono text-sm px-4 py-3 outline-none focus:border-indigo-600 focus:ring-4 focus:ring-indigo-100">
+                                   class="w-full rounded-2xl border border-slate-300 font-mono text-sm px-4 py-3 outline-none focus:border-brand-primary focus:ring-4 focus:ring-brand-100">
                         </div>
 
                         <div>
@@ -87,14 +87,14 @@
                                 শিক্ষার্থীর জন্ম তারিখ *
                             </label>
                             <input type="date" name="date_of_birth" value="{{ old('date_of_birth') }}"
-                                   class="w-full rounded-2xl border border-slate-300 text-sm px-4 py-3 outline-none focus:border-indigo-600 focus:ring-4 focus:ring-indigo-100">
+                                   class="w-full rounded-2xl border border-slate-300 text-sm px-4 py-3 outline-none focus:border-brand-primary focus:ring-4 focus:ring-brand-100">
                         </div>
                     </div>
                 </div>
 
                 <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-end">
                     <button type="submit"
-                            class="inline-flex items-center gap-2 px-8 py-3 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-sm shadow-lg shadow-indigo-600/20 transition active:scale-95">
+                            class="inline-flex items-center gap-2 px-8 py-3 rounded-2xl bg-brand-primary hover:bg-brand-secondary text-white font-extrabold text-sm shadow-lg shadow-brand-500/20 transition active:scale-95">
                         <span>🔍</span> অনুসন্ধান করুন (Search)
                     </button>
                 </div>
@@ -106,17 +106,17 @@
             @php
                 $approvedPayment = $application->payments->where('status', 'approved')->first();
             @endphp
-            <div class="bg-white rounded-3xl border border-indigo-200 p-6 sm:p-8 shadow-md relative overflow-hidden">
-                <div class="absolute top-0 right-0 w-32 h-32 bg-indigo-50 rounded-bl-full -z-0"></div>
+            <div class="bg-white rounded-3xl border border-brand-200 p-6 sm:p-8 shadow-md relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-brand-50 rounded-bl-full -z-0"></div>
 
                 <div class="relative z-10 space-y-6">
                     {{-- Student Header --}}
                     <div class="flex flex-col sm:flex-row items-start sm:items-center gap-5 pb-6 border-b border-slate-100">
                         @if($application->student_photo)
                             <img src="{{ asset($application->student_photo) }}" alt="Photo"
-                                 class="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl object-cover border-2 border-indigo-100 shadow-sm">
+                                 class="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl object-cover border-2 border-brand-100 shadow-sm">
                         @else
-                            <div class="w-20 h-20 rounded-2xl bg-indigo-50 text-indigo-400 font-bold flex items-center justify-center text-xs">
+                            <div class="w-20 h-20 rounded-2xl bg-brand-50 text-brand-400 font-bold flex items-center justify-center text-xs">
                                 ছবি নেই
                             </div>
                         @endif
@@ -131,7 +131,7 @@
                                         ভর্তি নিশ্চিত ✓
                                     </span>
                                 @elseif($application->status === 'selected_lottery')
-                                    <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-indigo-100 text-indigo-800">
+                                    <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-brand-100 text-brand-800">
                                         লটারিতে নির্বাচিত (মেধা #{{ $application->lottery_rank }})
                                     </span>
                                 @endif
@@ -142,7 +142,7 @@
                             </p>
 
                             <div class="flex flex-wrap items-center gap-3 mt-3 text-xs text-slate-600">
-                                <span class="font-mono font-bold text-indigo-700 bg-indigo-50 px-2.5 py-1 rounded-lg">
+                                <span class="font-mono font-bold text-brand-700 bg-brand-50 px-2.5 py-1 rounded-lg">
                                     App No: {{ $application->application_no }}
                                 </span>
                                 <span class="bg-slate-100 px-2.5 py-1 rounded-lg font-semibold">
@@ -177,15 +177,15 @@
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
                             {{-- Application PDF --}}
                             <a href="{{ route('online-admission.pdf', $application->application_no) }}" target="_blank"
-                               class="flex items-center justify-between p-4 rounded-2xl border border-slate-200 bg-slate-50/50 hover:bg-indigo-50 hover:border-indigo-300 transition group">
+                               class="flex items-center justify-between p-4 rounded-2xl border border-slate-200 bg-slate-50/50 hover:bg-brand-50 hover:border-brand-300 transition group">
                                 <div class="flex items-center gap-3">
                                     <span class="text-2xl">📄</span>
                                     <div>
-                                        <p class="text-xs font-bold text-slate-900 group-hover:text-indigo-700">আবেদন ফরম (PDF)</p>
+                                        <p class="text-xs font-bold text-slate-900 group-hover:text-brand-700">আবেদন ফরম (PDF)</p>
                                         <span class="text-[10px] text-slate-400">Application Copy</span>
                                     </div>
                                 </div>
-                                <span class="text-xs font-bold text-indigo-600">ডাউনলোড ↓</span>
+                                <span class="text-xs font-bold text-brand-600">ডাউনলোড ↓</span>
                             </a>
 
                             {{-- Admit Card PDF --}}

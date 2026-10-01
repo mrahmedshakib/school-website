@@ -4,6 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Admin Panel')</title>
+    @php
+        $faviconUrl = asset('favicon.ico');
+        if (!empty($websiteSetting?->favicon)) {
+            if (file_exists(public_path($websiteSetting->favicon))) {
+                $faviconUrl = asset($websiteSetting->favicon);
+            } elseif (file_exists(public_path('storage/' . $websiteSetting->favicon))) {
+                $faviconUrl = asset('storage/' . $websiteSetting->favicon);
+            }
+        }
+    @endphp
+    <link rel="icon" type="image/x-icon" href="{{ $faviconUrl }}">
+    <link rel="shortcut icon" href="{{ $faviconUrl }}">
+    @if(!empty($websiteSetting?->logo) && file_exists(public_path($websiteSetting->logo)))
+        <link rel="apple-touch-icon" href="{{ asset($websiteSetting->logo) }}">
+    @endif
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
         @font-face {

@@ -39,8 +39,8 @@
                 {{-- Bangla Name --}}
                 <a href="{{ route('home') }}"
                 class="block text-2xl sm:text-3xl lg:text-4xl
-                        font-extrabold text-slate-900
-                        leading-tight hover:text-blue-700 transition">
+                        font-extrabold text-brand-950
+                        leading-tight hover:text-brand-700 transition">
 
                     {{ $websiteSetting->school_name_bn
                         ?? $websiteSetting->school_name
@@ -51,9 +51,9 @@
 
                 {{-- English Name --}}
                 <a href="{{ route('home') }}"
-                class="block mt-1 text-lg sm:text-xl lg:text-2xl
-                        font-bold text-slate-700
-                        leading-tight hover:text-blue-700 transition">
+                class="block mt-1 text-base sm:text-lg lg:text-xl
+                        font-bold text-brand-800/90
+                        leading-tight hover:text-brand-600 transition">
 
                     {{ $websiteSetting->school_name
                         ?? 'Our School' }}
@@ -62,7 +62,7 @@
 
 
                 {{-- Tagline --}}
-                <p class="mt-2 text-sm sm:text-base text-slate-500">
+                <p class="mt-1.5 text-xs sm:text-sm text-slate-500 font-medium">
                     {{ $websiteSetting->tagline
                         ?? 'শিক্ষা • শৃঙ্খলা • সাফল্য' }}
                 </p>
@@ -70,21 +70,23 @@
             </div>
 
             {{-- ================= HEADER LANGUAGE TOGGLE ================= --}}
+            {{--
             <div class="absolute right-0 top-1/2 -translate-y-1/2 hidden md:flex items-center gap-2">
                 @php $currentLocale = app()->getLocale(); @endphp
                 <div class="inline-flex p-1 rounded-2xl bg-slate-100 border border-slate-200 shadow-sm">
                     <a href="{{ route('locale.switch', 'bn') }}"
-                       class="px-3.5 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 {{ $currentLocale === 'bn' ? 'bg-indigo-600 text-white shadow' : 'text-slate-600 hover:text-slate-900' }}">
+                       class="px-3.5 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 {{ $currentLocale === 'bn' ? 'bg-brand-700 text-white shadow' : 'text-slate-600 hover:text-slate-900' }}">
                         <span>🇧🇩</span>
                         <span>বাংলা</span>
                     </a>
                     <a href="{{ route('locale.switch', 'en') }}"
-                       class="px-3.5 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 {{ $currentLocale === 'en' ? 'bg-indigo-600 text-white shadow' : 'text-slate-600 hover:text-slate-900' }}">
+                       class="px-3.5 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 {{ $currentLocale === 'en' ? 'bg-brand-700 text-white shadow' : 'text-slate-600 hover:text-slate-900' }}">
                         <span>🇬🇧</span>
                         <span>English</span>
                     </a>
                 </div>
             </div>
+            --}}
 
         </div>
     </div>
@@ -105,7 +107,7 @@
                     {{-- Quick Mobile Language Switcher --}}
                     @php $mobileLocale = app()->getLocale(); @endphp
                     <a href="{{ route('locale.switch', $mobileLocale === 'bn' ? 'en' : 'bn') }}"
-                       class="px-2.5 py-1 rounded-lg bg-indigo-50 border border-indigo-200 text-xs font-extrabold text-indigo-700 flex items-center gap-1 shadow-sm active:scale-95">
+                       class="px-2.5 py-1 rounded-lg bg-brand-50 border border-brand-200 text-xs font-extrabold text-brand-700 flex items-center gap-1 shadow-sm active:scale-95">
                         <span>{{ $mobileLocale === 'bn' ? '🇬🇧 EN' : '🇧🇩 বাংলা' }}</span>
                     </a>
                 </div>
@@ -455,11 +457,11 @@
                     <div class="desktop-dropdown">
                         <button
                             type="button"
-                            class="px-4 py-4 text-sm font-bold text-blue-700
-                                   hover:text-blue-900 transition flex items-center gap-1.5"
+                            class="px-4 py-4 text-sm font-bold text-brand-800
+                                   hover:text-brand-950 transition flex items-center gap-1.5"
                         >
                             <span>ভর্তি</span>
-                            <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-black bg-blue-100 text-blue-700 uppercase">
+                            <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-black bg-accent-100 text-accent-800 border border-accent-300 uppercase">
                                 New
                             </span>
                             <svg
@@ -478,29 +480,29 @@
                         </button>
 
                         <div class="desktop-dropdown-menu absolute right-0 top-full z-50
-                                    w-64 bg-white border border-slate-200
+                                    w-64 bg-white border border-slate-200 border-t-2 border-t-accent-500
                                     rounded-b-2xl shadow-xl py-1.5 divide-y divide-slate-100">
                             <div class="py-1">
                                 <a href="{{ route('admission') }}"
-                                   class="block px-4 py-2.5 text-xs text-slate-700 hover:bg-slate-50 font-medium">
+                                   class="block px-4 py-2.5 text-xs text-slate-700 hover:bg-brand-50 hover:text-brand-700 font-medium transition">
                                     📢 {{ __('ভর্তি বিজ্ঞপ্তি ও নির্দেশাবলী') }}
                                 </a>
                                 <a href="{{ route('online-admission') }}"
-                                   class="block px-4 py-2.5 text-xs text-blue-700 hover:bg-blue-50 font-bold">
+                                   class="block px-4 py-2.5 text-xs text-brand-700 hover:bg-brand-50 font-bold transition">
                                     📝 {{ __('অনলাইনে আবেদন ফরম') }}
                                 </a>
                                 <a href="{{ route('admission-fee') }}"
-                                   class="block px-4 py-2.5 text-xs text-slate-700 hover:bg-slate-50 font-medium">
+                                   class="block px-4 py-2.5 text-xs text-slate-700 hover:bg-brand-50 hover:text-brand-700 font-medium transition">
                                     💳 {{ __('ভর্তি ফি পরিশোধ (SSLCOMMERZ/MFS)') }}
                                 </a>
                             </div>
                             <div class="py-1">
                                 <a href="{{ route('online-admission.download') }}"
-                                   class="block px-4 py-2.5 text-xs text-indigo-700 hover:bg-indigo-50 font-semibold">
+                                   class="block px-4 py-2.5 text-xs text-brand-800 hover:bg-brand-50 font-semibold transition">
                                     📥 {{ __('আবেদন ও প্রবেশপত্র রি-ডাউনলোড') }}
                                 </a>
                                 <a href="{{ route('admission.lottery') }}"
-                                   class="block px-4 py-2.5 text-xs text-emerald-700 hover:bg-emerald-50 font-semibold">
+                                   class="block px-4 py-2.5 text-xs text-emerald-700 hover:bg-emerald-50 font-semibold transition">
                                     🏆 {{ __('ডিজিটাল লটারি ও রেজাল্ট') }}
                                 </a>
                             </div>
@@ -510,7 +512,7 @@
                     {{-- Quick Language Toggle in Navbar --}}
                     @php $navLocale = app()->getLocale(); @endphp
                     <a href="{{ route('locale.switch', $navLocale === 'bn' ? 'en' : 'bn') }}"
-                       class="ml-3 px-3 py-1.5 rounded-full border border-indigo-200 bg-indigo-50/70 hover:bg-indigo-100 text-indigo-700 text-xs font-black transition flex items-center gap-1 shadow-sm active:scale-95"
+                       class="ml-3 px-3 py-1.5 rounded-full border border-brand-200 bg-brand-50/80 hover:bg-brand-100 text-brand-700 text-xs font-black transition flex items-center gap-1 shadow-sm active:scale-95"
                        title="{{ $navLocale === 'bn' ? 'Switch to English' : 'বাংলায় দেখুন' }}">
                         <span>🌐</span>
                         <span>{{ $navLocale === 'bn' ? 'EN' : 'বাং' }}</span>
@@ -833,12 +835,12 @@
                     <div class="grid grid-cols-2 gap-2">
                         @php $mLocale = app()->getLocale(); @endphp
                         <a href="{{ route('locale.switch', 'bn') }}"
-                           class="py-2.5 px-3 rounded-xl text-center text-xs font-bold transition flex items-center justify-center gap-1.5 {{ $mLocale === 'bn' ? 'bg-indigo-600 text-white shadow' : 'bg-slate-100 text-slate-700' }}">
+                           class="py-2.5 px-3 rounded-xl text-center text-xs font-bold transition flex items-center justify-center gap-1.5 {{ $mLocale === 'bn' ? 'bg-brand-700 text-white shadow' : 'bg-slate-100 text-slate-700' }}">
                             <span>🇧🇩</span>
                             <span>বাংলা</span>
                         </a>
                         <a href="{{ route('locale.switch', 'en') }}"
-                           class="py-2.5 px-3 rounded-xl text-center text-xs font-bold transition flex items-center justify-center gap-1.5 {{ $mLocale === 'en' ? 'bg-indigo-600 text-white shadow' : 'bg-slate-100 text-slate-700' }}">
+                           class="py-2.5 px-3 rounded-xl text-center text-xs font-bold transition flex items-center justify-center gap-1.5 {{ $mLocale === 'en' ? 'bg-brand-700 text-white shadow' : 'bg-slate-100 text-slate-700' }}">
                             <span>🇬🇧</span>
                             <span>English</span>
                         </a>
@@ -858,12 +860,12 @@
     LATEST NOTICE TICKER
 ========================================================= --}}
 
-<section class="bg-slate-900 text-white overflow-hidden">
+<section class="bg-[#061d36] text-white overflow-hidden border-y border-brand-900/60 shadow-inner">
     <div class="max-w-7xl mx-auto flex items-stretch">
 
         {{-- Label --}}
-        <div class="shrink-0 bg-red-600 px-4 sm:px-6 flex items-center gap-2
-                    text-sm sm:text-base font-semibold relative z-10 shadow-lg">
+        <div class="shrink-0 bg-gradient-to-r from-red-600 to-rose-600 px-4 sm:px-6 flex items-center gap-2
+                    text-sm sm:text-base font-bold relative z-10 shadow-lg">
             <span class="text-lg">🔔</span>
             <span>সর্বশেষ নোটিশ</span>
         </div>

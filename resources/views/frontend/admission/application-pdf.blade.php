@@ -44,7 +44,7 @@
         }
 
         html, body, table, td, th, div, p, span, h1, h2, h3, h4, h5, h6, strong, b {
-            font-family: 'Kalpurush', sans-serif !important;
+            font-family: 'kalpurush', 'Kalpurush', sans-serif !important;
         }
 
         body {
