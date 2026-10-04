@@ -1,40 +1,49 @@
 @extends('frontend.layouts.app')
 
-@section('title', app()->getLocale() === 'en' ? 'Academic Subjects | ' . ($websiteSetting->site_title ?? 'School') : 'পাঠ্য বিষয়সমূহ | ' . ($websiteSetting->site_title ?? 'বিদ্যালয়'))
+@section('title', (app()->getLocale() === 'en' ? 'Academic Subjects | ' : 'পাঠ্য বিষয়সমূহ | ') . ($websiteSetting->site_title ?? ($websiteSetting->school_name_bn ?? $websiteSetting->school_name ?? 'বিদ্যালয়')))
 
 @section('content')
-<section class="bg-gradient-to-b from-blue-50/50 via-slate-50 to-white py-12 sm:py-16">
+
+{{-- =========================================================
+    PAGE HEADER (HERO)
+========================================================= --}}
+<section class="relative overflow-hidden bg-gradient-to-br from-brand-950 via-brand-900 to-slate-950 py-16 sm:py-20 text-white text-center">
+    <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center z-10">
+        {{-- Breadcrumb --}}
+        <nav class="flex items-center justify-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-400 mb-4">
+            <a href="{{ route('home') }}" class="hover:text-white transition">{{ app()->getLocale() === 'en' ? 'Home' : 'হোম' }}</a>
+            <span>/</span>
+            <span class="text-brand-300">{{ app()->getLocale() === 'en' ? 'Academic Subjects' : 'বিষয়সমূহ' }}</span>
+        </nav>
+
+        <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-800/60 border border-brand-700/60 text-brand-200 text-xs font-bold tracking-wide mb-4 shadow-sm">
+            📖 {{ app()->getLocale() === 'en' ? 'Curriculum Structure' : 'পাঠ্য বিষয় ও নম্বর বণ্টন' }}
+        </span>
+
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white">
+            {{ app()->getLocale() === 'en' ? 'List of Academic Subjects' : 'শ্রেণিভিত্তিক পাঠ্য বিষয়সমূহ' }}
+        </h1>
+
+        <p class="mt-4 text-base sm:text-lg text-slate-300 leading-relaxed max-w-2xl mx-auto">
+            {{ app()->getLocale() === 'en' ? 'Detailed list of compulsory and elective subjects with subject codes and mark distributions.' : 'আবশ্যিক ও নৈর্বাচনিক বিষয়সমূহ, বিষয় কোড এবং পূর্ণমান ও মূল্যায়ন নির্দেশিকা।' }}
+        </p>
+    </div>
+</section>
+
+{{-- =========================================================
+    MAIN CONTENT
+========================================================= --}}
+<section class="py-12 sm:py-16 bg-slate-50 min-h-[60vh]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {{-- Breadcrumb & Title --}}
-        <div class="mb-8">
-            <nav class="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-500 mb-3">
-                <a href="{{ route('home') }}" class="hover:text-blue-600 transition">{{ app()->getLocale() === 'en' ? 'Home' : 'হোম' }}</a>
-                <span>/</span>
-                <span class="text-blue-600">{{ app()->getLocale() === 'en' ? 'Academic Subjects' : 'বিষয়সমূহ' }}</span>
-            </nav>
-            <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
-                <div>
-                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-indigo-100 text-indigo-800">
-                        📖 {{ app()->getLocale() === 'en' ? 'Curriculum Structure' : 'পাঠ্য বিষয় ও নম্বর বণ্টন' }}
-                    </span>
-                    <h1 class="mt-2 text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-                        {{ app()->getLocale() === 'en' ? 'List of Academic Subjects' : 'শ্রেণিভিত্তিক পাঠ্য বিষয়সমূহ' }}
-                    </h1>
-                    <p class="mt-2 text-slate-600 max-w-2xl text-sm sm:text-base">
-                        {{ app()->getLocale() === 'en' ? 'Detailed list of compulsory and elective subjects with subject codes and mark distributions.' : 'আবশ্যিক ও নৈর্বাচনিক বিষয়সমূহ, বিষয় কোড এবং পূর্ণমান ও মূল্যায়ন নির্দেশিকা।' }}
-                    </p>
-                </div>
-            </div>
-        </div>
 
         {{-- Filters --}}
-        <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm mb-8">
+        <div class="bg-white rounded-2xl p-5 sm:p-6 border border-slate-200/80 shadow-sm mb-8">
             <form method="GET" action="{{ route('subjects') }}" class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div>
-                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
                         {{ app()->getLocale() === 'en' ? 'Filter by Class' : 'শ্রেণি নির্বাচন' }}
                     </label>
-                    <select name="class" class="w-full text-sm rounded-xl border-slate-300 focus:border-blue-500 focus:ring-blue-500 bg-slate-50 p-2.5">
+                    <select name="class" class="w-full text-sm rounded-xl border-slate-300 focus:border-brand-500 focus:ring-brand-500 bg-slate-50/70 p-2.5">
                         <option value="">{{ app()->getLocale() === 'en' ? 'All Classes' : 'সকল শ্রেণি' }}</option>
                         @foreach($classes as $c)
                             <option value="{{ $c }}" {{ request('class') == $c ? 'selected' : '' }}>{{ $c }}</option>
@@ -43,10 +52,10 @@
                 </div>
 
                 <div>
-                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
                         {{ app()->getLocale() === 'en' ? 'Group / Department' : 'বিভাগ / শাখা' }}
                     </label>
-                    <select name="group_name" class="w-full text-sm rounded-xl border-slate-300 focus:border-blue-500 focus:ring-blue-500 bg-slate-50 p-2.5">
+                    <select name="group_name" class="w-full text-sm rounded-xl border-slate-300 focus:border-brand-500 focus:ring-brand-500 bg-slate-50/70 p-2.5">
                         <option value="">{{ app()->getLocale() === 'en' ? 'All Groups' : 'সকল বিভাগ' }}</option>
                         @foreach($groups as $g)
                             <option value="{{ $g }}" {{ request('group_name') == $g ? 'selected' : '' }}>{{ $g }}</option>
@@ -55,13 +64,15 @@
                 </div>
 
                 <div class="flex items-end gap-2">
-                    <button type="submit" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2.5 px-4 rounded-xl text-sm transition flex items-center justify-center gap-2 shadow-sm">
+                    <button type="submit" class="flex-1 bg-brand-700 hover:bg-brand-800 text-white font-semibold py-2.5 px-4 rounded-xl text-sm transition flex items-center justify-center gap-2 shadow-sm">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                         {{ app()->getLocale() === 'en' ? 'Filter' : 'ফিল্টার' }}
                     </button>
-                    <a href="{{ route('subjects') }}" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium py-2.5 px-3 rounded-xl text-sm transition">
-                        {{ app()->getLocale() === 'en' ? 'Reset' : 'রিসেট' }}
-                    </a>
+                    @if(request('class') || request('group_name'))
+                        <a href="{{ route('subjects') }}" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium py-2.5 px-4 rounded-xl text-sm transition">
+                            {{ app()->getLocale() === 'en' ? 'Reset' : 'রিসেট' }}
+                        </a>
+                    @endif
                 </div>
             </form>
         </div>
@@ -71,14 +82,14 @@
             <div class="space-y-8">
                 @foreach($subjects as $className => $classSubjects)
                     <div class="bg-white rounded-2xl border border-slate-200/90 shadow-sm overflow-hidden">
-                        <div class="bg-gradient-to-r from-slate-900 to-indigo-900 px-6 py-4 flex items-center justify-between">
+                        <div class="bg-gradient-to-r from-brand-950 to-brand-850 px-6 py-4 flex items-center justify-between">
                             <div class="flex items-center gap-3">
                                 <span class="w-3 h-3 rounded-full bg-emerald-400"></span>
                                 <h2 class="text-lg font-bold text-white tracking-wide">
                                     {{ $className }}
                                 </h2>
                             </div>
-                            <span class="text-xs font-semibold px-3 py-1 rounded-full bg-white/20 text-white backdrop-blur-sm">
+                            <span class="text-xs font-semibold px-3 py-1 rounded-full bg-white/15 text-brand-100 border border-white/10 backdrop-blur-sm">
                                 {{ $classSubjects->count() }} {{ app()->getLocale() === 'en' ? 'Subjects' : 'টি বিষয়' }}
                             </span>
                         </div>
@@ -86,19 +97,19 @@
                         <div class="overflow-x-auto">
                             <table class="w-full text-left border-collapse">
                                 <thead>
-                                    <tr class="bg-slate-50/80 text-xs font-bold text-slate-600 uppercase tracking-wider border-b border-slate-200">
-                                        <th class="py-3.5 px-6">{{ app()->getLocale() === 'en' ? 'Code' : 'বিষয় কোড' }}</th>
-                                        <th class="py-3.5 px-6">{{ app()->getLocale() === 'en' ? 'Subject Name' : 'বিষয়ের নাম' }}</th>
-                                        <th class="py-3.5 px-6">{{ app()->getLocale() === 'en' ? 'Group' : 'বিভাগ' }}</th>
-                                        <th class="py-3.5 px-6">{{ app()->getLocale() === 'en' ? 'Type' : 'ধরন' }}</th>
-                                        <th class="py-3.5 px-6 text-center">{{ app()->getLocale() === 'en' ? 'Total Marks' : 'পূর্ণমান' }}</th>
-                                        <th class="py-3.5 px-6 text-center">{{ app()->getLocale() === 'en' ? 'Theory / Practical' : 'তত্ত্বীয় / ব্যবহারিক' }}</th>
+                                    <tr class="bg-slate-50 text-xs font-bold text-slate-600 uppercase tracking-wider border-b border-slate-200">
+                                        <th class="py-4 px-6">{{ app()->getLocale() === 'en' ? 'Code' : 'বিষয় কোড' }}</th>
+                                        <th class="py-4 px-6">{{ app()->getLocale() === 'en' ? 'Subject Name' : 'বিষয়ের নাম' }}</th>
+                                        <th class="py-4 px-6">{{ app()->getLocale() === 'en' ? 'Group' : 'বিভাগ' }}</th>
+                                        <th class="py-4 px-6">{{ app()->getLocale() === 'en' ? 'Type' : 'ধরন' }}</th>
+                                        <th class="py-4 px-6 text-center">{{ app()->getLocale() === 'en' ? 'Total Marks' : 'পূর্ণমান' }}</th>
+                                        <th class="py-4 px-6 text-center">{{ app()->getLocale() === 'en' ? 'Theory / Practical' : 'তত্ত্বীয় / ব্যবহারিক' }}</th>
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-slate-100 text-sm">
                                     @foreach($classSubjects as $sub)
-                                        <tr class="hover:bg-indigo-50/30 transition">
-                                            <td class="py-3.5 px-6 font-mono font-bold text-indigo-700">
+                                        <tr class="hover:bg-brand-50/40 transition">
+                                            <td class="py-3.5 px-6 font-mono font-bold text-brand-700">
                                                 {{ $sub->subject_code ?? '-' }}
                                             </td>
                                             <td class="py-3.5 px-6 font-bold text-slate-900">
@@ -115,7 +126,7 @@
                                                 </span>
                                             </td>
                                             <td class="py-3.5 px-6">
-                                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium {{ $sub->subject_type === 'Elective' ? 'bg-amber-100 text-amber-800' : 'bg-emerald-100 text-emerald-800' }}">
+                                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold {{ $sub->subject_type === 'Elective' ? 'bg-amber-100 text-amber-800' : 'bg-emerald-100 text-emerald-800' }}">
                                                     {{ $sub->subject_type ?? 'Compulsory' }}
                                                 </span>
                                             </td>
@@ -134,8 +145,8 @@
                 @endforeach
             </div>
         @else
-            <div class="bg-white rounded-2xl p-12 text-center border border-slate-200 shadow-sm">
-                <div class="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto text-2xl text-slate-400 mb-4">
+            <div class="bg-white rounded-3xl p-12 text-center border border-slate-200 shadow-sm max-w-xl mx-auto">
+                <div class="w-16 h-16 bg-brand-50 rounded-2xl flex items-center justify-center mx-auto text-3xl mb-4 text-brand-600">
                     📖
                 </div>
                 <h3 class="text-lg font-bold text-slate-800 mb-1">

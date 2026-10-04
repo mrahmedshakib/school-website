@@ -11,27 +11,24 @@
 {{-- =========================================================
     PAGE HEADER
 ========================================================= --}}
-<section class="relative overflow-hidden bg-slate-950 py-16 sm:py-20 text-white">
-    <div class="absolute inset-0 bg-gradient-to-br from-indigo-950 via-slate-950 to-slate-900 opacity-90"></div>
-    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<section class="relative overflow-hidden bg-gradient-to-br from-brand-950 via-brand-900 to-slate-950 py-16 sm:py-20 text-white text-center">
+    <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
         {{-- Breadcrumb --}}
-        <nav class="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-400 mb-4">
+        <nav class="flex items-center justify-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-400 mb-4">
             <a href="{{ route('home') }}" class="hover:text-white transition">{{ app()->getLocale() === 'en' ? 'Home' : 'হোম' }}</a>
             <span>/</span>
-            <span class="text-indigo-400">{{ app()->getLocale() === 'en' ? 'Administration' : 'প্রশাসন' }}</span>
+            <span class="text-brand-300">{{ app()->getLocale() === 'en' ? 'Administration' : 'প্রশাসন' }}</span>
         </nav>
 
-        <div class="max-w-3xl">
-            <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 text-emerald-400 text-xs font-bold tracking-wide mb-4">
-                🏛️ {{ app()->getLocale() === 'en' ? 'Governing Body' : 'পরিচালনা পর্ষদ ও প্রশাসন' }}
-            </span>
-            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight">
-                {{ app()->getLocale() === 'en' ? 'Administration & Governance' : 'প্রশাসন ও পরিচালনা পর্ষদ' }}
-            </h1>
-            <p class="mt-4 text-base sm:text-lg text-slate-300 leading-relaxed max-w-2xl">
-                {{ app()->getLocale() === 'en' ? 'Meet the dedicated administrative team and leadership steering our institution towards excellence.' : 'বিদ্যালয়ের সুষ্ঠু পরিচালনা, নীতি নির্ধারণ ও শিক্ষা পরিবেশ সমুন্নত রাখতে নিবেদিত পরিচালনা পর্ষদ।' }}
-            </p>
-        </div>
+        <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-800/60 border border-brand-700/60 text-brand-200 text-xs font-bold tracking-wide mb-4 shadow-sm">
+            🏛️ {{ app()->getLocale() === 'en' ? 'Governing Body' : 'পরিচালনা পর্ষদ ও প্রশাসন' }}
+        </span>
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white">
+            {{ app()->getLocale() === 'en' ? 'Administration & Governance' : 'প্রশাসন ও পরিচালনা পর্ষদ' }}
+        </h1>
+        <p class="mt-4 text-base sm:text-lg text-slate-300 leading-relaxed max-w-2xl mx-auto">
+            {{ app()->getLocale() === 'en' ? 'Meet the dedicated administrative team and leadership steering our institution towards excellence.' : 'বিদ্যালয়ের সুষ্ঠু পরিচালনা, নীতি নির্ধারণ ও শিক্ষা পরিবেশ সমুন্নত রাখতে নিবেদিত পরিচালনা পর্ষদ।' }}
+        </p>
     </div>
 </section>
 

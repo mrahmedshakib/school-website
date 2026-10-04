@@ -11,28 +11,26 @@
 {{-- =========================================================
     PAGE HEADER
 ========================================================= --}}
-<section class="relative overflow-hidden bg-gradient-to-br from-brand-950 via-brand-900 to-slate-950 py-16 sm:py-20 text-white">
-    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<section class="relative overflow-hidden bg-gradient-to-br from-brand-950 via-brand-900 to-slate-950 py-16 sm:py-20 text-white text-center">
+    <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
         {{-- Breadcrumb --}}
-        <nav class="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-400 mb-4">
+        <nav class="flex items-center justify-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-400 mb-4">
             <a href="{{ route('home') }}" class="hover:text-white transition">{{ app()->getLocale() === 'en' ? 'Home' : 'হোম' }}</a>
             <span>/</span>
             <span class="text-brand-300">{{ app()->getLocale() === 'en' ? 'About Us' : 'আমাদের পরিচিতি' }}</span>
         </nav>
 
-        <div class="max-w-3xl">
-            <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-800/60 border border-brand-700/60 text-brand-200 text-xs font-bold tracking-wide mb-4">
-                🏫 {{ app()->getLocale() === 'en' ? 'Institution Profile' : 'প্রতিষ্ঠান পরিচিতি' }}
-            </span>
-            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight">
-                {{ $about?->title ?? ($websiteSetting->school_name_bn ?? $websiteSetting->school_name ?? 'আমাদের পরিচিতি') }}
-            </h1>
-            @if(isset($websiteSetting) && $websiteSetting->tagline)
-                <p class="mt-4 text-base sm:text-lg text-slate-300 leading-relaxed max-w-2xl">
-                    {{ $websiteSetting->tagline }}
-                </p>
-            @endif
-        </div>
+        <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-800/60 border border-brand-700/60 text-brand-200 text-xs font-bold tracking-wide mb-4 shadow-sm">
+            🏫 {{ app()->getLocale() === 'en' ? 'Institution Profile' : 'প্রতিষ্ঠান পরিচিতি' }}
+        </span>
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white">
+            {{ $about?->title ?? ($websiteSetting->school_name_bn ?? $websiteSetting->school_name ?? 'আমাদের পরিচিতি') }}
+        </h1>
+        @if(isset($websiteSetting) && $websiteSetting->tagline)
+            <p class="mt-4 text-base sm:text-lg text-slate-300 leading-relaxed max-w-2xl mx-auto">
+                {{ $websiteSetting->tagline }}
+            </p>
+        @endif
     </div>
 </section>
 

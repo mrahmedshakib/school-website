@@ -9,27 +9,34 @@
 @section('content')
 
 {{-- Header --}}
-<section class="bg-slate-900 py-16 sm:py-20 text-white text-center">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6">
-        <span class="inline-block px-4 py-1.5 rounded-full bg-white/10 text-emerald-400 text-sm font-semibold tracking-wide mb-4">
-            আমাদের নেতৃত্ব
+<section class="relative overflow-hidden bg-gradient-to-br from-brand-950 via-brand-900 to-slate-950 py-16 sm:py-20 text-white text-center">
+    <div class="relative max-w-4xl mx-auto px-4 sm:px-6 flex flex-col items-center z-10">
+        {{-- Breadcrumb --}}
+        <nav class="flex items-center justify-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-400 mb-4">
+            <a href="{{ route('home') }}" class="hover:text-white transition">{{ app()->getLocale() === 'en' ? 'Home' : 'হোম' }}</a>
+            <span>/</span>
+            <span class="text-brand-300">{{ app()->getLocale() === 'en' ? 'Leadership' : 'নেতৃত্ব ও প্রশাসন' }}</span>
+        </nav>
+
+        <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-800/60 border border-brand-700/60 text-brand-200 text-xs font-bold tracking-wide mb-4 shadow-sm">
+            🏛️ আমাদের নেতৃত্ব
         </span>
-        <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight">
+        <h1 class="text-3xl sm:text-5xl font-black tracking-tight text-white">
             নেতৃত্ব ও পরিচালনা পর্ষদ
         </h1>
-        <p class="mt-4 text-base sm:text-lg text-white/80 max-w-2xl mx-auto">
+        <p class="mt-4 text-base sm:text-lg text-slate-300 max-w-2xl mx-auto">
             সুযোগ্য নেতৃত্ব ও সার্বক্ষণিক দিকনির্দেশনায় আমাদের প্রতিষ্ঠান এগিয়ে চলেছে।
         </p>
     </div>
 </section>
 
 {{-- Leadership List --}}
-<section class="py-16 sm:py-20 bg-slate-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+<section class="py-12 sm:py-16 bg-slate-50 min-h-[60vh]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
 
         @forelse($administrations as $admin)
 
-            <div class="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden p-6 sm:p-10 transition duration-300 hover:shadow-md">
+            <div class="bg-white rounded-3xl border border-slate-200/90 shadow-sm overflow-hidden p-6 sm:p-10 transition duration-300 hover:shadow-xl hover:border-brand-300">
 
                 <div class="grid md:grid-cols-12 gap-8 items-start">
 
@@ -54,17 +61,23 @@
                             {{ $admin->name }}
                         </h2>
 
-                        <p class="mt-1 text-sm font-semibold text-blue-700">
+                        <p class="mt-1 text-sm font-bold text-brand-700">
                             {{ $admin->designation }}
                         </p>
 
                         @if($admin->phone || $admin->email)
-                            <div class="mt-4 pt-4 border-t border-slate-100 text-xs text-slate-500 space-y-1">
+                            <div class="mt-4 pt-4 border-t border-slate-100 text-xs text-slate-600 space-y-1.5">
                                 @if($admin->phone)
-                                    <p>☎ {{ $admin->phone }}</p>
+                                    <p class="flex items-center justify-center gap-1.5">
+                                        <span class="text-brand-600">📞</span>
+                                        <a href="tel:{{ $admin->phone }}" class="hover:underline font-medium">{{ $admin->phone }}</a>
+                                    </p>
                                 @endif
                                 @if($admin->email)
-                                    <p class="break-all">✉ {{ $admin->email }}</p>
+                                    <p class="flex items-center justify-center gap-1.5">
+                                        <span class="text-brand-600">✉️</span>
+                                        <a href="mailto:{{ $admin->email }}" class="hover:underline truncate">{{ $admin->email }}</a>
+                                    </p>
                                 @endif
                             </div>
                         @endif
@@ -74,11 +87,11 @@
                     {{-- Message / Description --}}
                     <div class="md:col-span-8 lg:col-span-9">
 
-                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-blue-50 text-blue-700 text-xs font-semibold uppercase tracking-wider mb-4">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-brand-50 text-brand-700 border border-brand-100 text-xs font-semibold uppercase tracking-wider mb-4">
                             বাণী ও বক্তব্য
                         </div>
 
-                        <h3 class="text-2xl font-extrabold text-slate-900 mb-4">
+                        <h3 class="text-2xl font-black text-slate-900 mb-4">
                             {{ $admin->designation }} মহোদয়ের বাণী
                         </h3>
 
@@ -100,8 +113,11 @@
 
         @empty
 
-            <div class="text-center py-16 bg-white rounded-2xl border border-slate-200">
-                <p class="text-slate-500 text-lg">বর্তমানে কোনো তথ্য পাওয়া যায়নি।</p>
+            <div class="text-center py-16 bg-white rounded-3xl border border-slate-200 max-w-xl mx-auto shadow-sm">
+                <div class="w-16 h-16 bg-brand-50 rounded-2xl flex items-center justify-center mx-auto text-3xl mb-4 text-brand-600">
+                    🏛️
+                </div>
+                <p class="text-slate-600 text-base font-semibold">বর্তমানে কোনো তথ্য পাওয়া যায়নি।</p>
             </div>
 
         @endforelse
