@@ -202,179 +202,80 @@
 
         <div class="overflow-x-auto">
 
-            <table class="w-full text-sm">
-
-                <thead class="bg-slate-50
-                              border-b border-slate-200">
-
+            <table class="w-full text-xs">
+                <thead class="bg-slate-50 border-b border-slate-200 text-[11px] font-bold uppercase tracking-wider text-slate-500">
                     <tr>
-
-                        <th class="text-left px-5 py-4">
-                            Payment
-                        </th>
-
-                        <th class="text-left px-5 py-4">
-                            Student
-                        </th>
-
-                        <th class="text-left px-5 py-4">
-                            Amount
-                        </th>
-
-                        <th class="text-left px-5 py-4">
-                            Method
-                        </th>
-
-                        <th class="text-left px-5 py-4">
-                            Transaction
-                        </th>
-
-                        <th class="text-left px-5 py-4">
-                            Status
-                        </th>
-
-                        <th class="text-right px-5 py-4">
-                            Action
-                        </th>
-
+                        <th class="text-left px-3 py-2.5 w-36">পেমেন্ট নম্বর</th>
+                        <th class="text-left px-3 py-2.5">শিক্ষার্থী ও আবেদন</th>
+                        <th class="text-left px-3 py-2.5 w-24">পরিমাণ</th>
+                        <th class="text-left px-3 py-2.5 w-20">মেথড</th>
+                        <th class="text-left px-3 py-2.5 w-36">ট্রানজ্যাকশন আইডি</th>
+                        <th class="text-center px-3 py-2.5 w-24">স্ট্যাটাস</th>
+                        <th class="text-right px-3 py-2.5 w-20">অ্যাকশন</th>
                     </tr>
-
                 </thead>
 
-
                 <tbody class="divide-y divide-slate-100">
-
                     @forelse($payments as $payment)
-
-                        <tr class="hover:bg-slate-50">
-
-                            <td class="px-5 py-4">
-
-                                <p class="font-semibold
-                                          text-slate-900">
-
+                        <tr class="hover:bg-slate-50 transition">
+                            <td class="px-3 py-2.5">
+                                <p class="font-bold text-slate-900 font-mono text-[11px]">
                                     {{ $payment->payment_no }}
-
                                 </p>
-
-                                <p class="text-xs text-slate-500 mt-1">
-
-                                    {{ $payment->created_at->format('d M Y h:i A') }}
-
+                                <p class="text-[10px] text-slate-400 mt-0.5">
+                                    {{ $payment->created_at->format('d M, Y h:i A') }}
                                 </p>
-
                             </td>
 
-
-                            <td class="px-5 py-4">
-
+                            <td class="px-3 py-2.5">
                                 @if($payment->application)
-
-                                    <p class="font-semibold">
-
+                                    <p class="font-bold text-slate-900 line-clamp-1">
                                         {{ $payment->application->student_name }}
-
                                     </p>
-
-                                    <p class="text-xs text-slate-500">
-
+                                    <p class="text-[10px] text-emerald-700 font-mono">
                                         {{ $payment->application->application_no }}
-
                                     </p>
-
                                 @else
-
-                                    <span class="text-red-500">
-                                        Deleted Application
-                                    </span>
-
+                                    <span class="text-rose-500 text-[11px]">মুছে ফেলা আবেদন</span>
                                 @endif
-
                             </td>
 
-
-                            <td class="px-5 py-4 font-bold">
-
+                            <td class="px-3 py-2.5 font-bold text-slate-900">
                                 ৳ {{ number_format($payment->amount, 2) }}
-
                             </td>
 
-
-                            <td class="px-5 py-4">
-
-                                {{ strtoupper($payment->payment_method) }}
-
+                            <td class="px-3 py-2.5 uppercase font-mono text-[11px] text-slate-600">
+                                {{ $payment->payment_method }}
                             </td>
 
-
-                            <td class="px-5 py-4">
-
-                                <span class="font-mono text-xs">
-
+                            <td class="px-3 py-2.5">
+                                <span class="font-mono text-[11px] text-slate-700 bg-slate-100 px-1.5 py-0.5 rounded">
                                     {{ $payment->transaction_id }}
-
                                 </span>
-
                             </td>
 
-
-                            <td class="px-5 py-4">
-
+                            <td class="px-3 py-2.5 text-center whitespace-nowrap">
                                 @if($payment->status === 'approved')
-
-                                    <span
-                                        class="px-3 py-1 rounded-full
-                                               text-xs font-semibold
-                                               bg-green-100
-                                               text-green-700"
-                                    >
+                                    <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800">
                                         Approved
                                     </span>
-
                                 @elseif($payment->status === 'pending')
-
-                                    <span
-                                        class="px-3 py-1 rounded-full
-                                               text-xs font-semibold
-                                               bg-yellow-100
-                                               text-yellow-700"
-                                    >
+                                    <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-800">
                                         Pending
                                     </span>
-
                                 @else
-
-                                    <span
-                                        class="px-3 py-1 rounded-full
-                                               text-xs font-semibold
-                                               bg-red-100
-                                               text-red-700"
-                                    >
+                                    <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-100 text-rose-800">
                                         Rejected
                                     </span>
-
                                 @endif
-
                             </td>
 
-
-                            <td class="px-5 py-4 text-right">
-
-                                <a
-                                    href="{{ route('admin.admission-payments.show', $payment) }}"
-                                    class="inline-flex
-                                           px-4 py-2 rounded-lg
-                                           bg-indigo-600 text-white
-                                           text-xs font-semibold
-                                           hover:bg-indigo-700"
-                                >
-
-                                    View
-
+                            <td class="px-3 py-2.5 text-right whitespace-nowrap">
+                                <a href="{{ route('admin.admission-payments.show', $payment) }}"
+                                   class="inline-flex px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-700 text-xs font-bold hover:bg-emerald-100 transition">
+                                    বিস্তারিত
                                 </a>
-
                             </td>
-
                         </tr>
 
                     @empty

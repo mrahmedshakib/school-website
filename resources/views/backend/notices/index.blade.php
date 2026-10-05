@@ -27,20 +27,7 @@
                       d="M12 4v16m8-8H4"/>
             </svg>
             Add Notice
-        </a>
     </div>
-    {{-- Success Message --}}
-    @if(session('success'))
-        <div class="mb-6 rounded-2xl border border-green-200 bg-green-50 px-5 py-4 text-sm text-green-700">
-            {{ session('success') }}
-        </div>
-    @endif
-    {{-- Error Message --}}
-    @if(session('error'))
-        <div class="mb-6 rounded-2xl border border-red-200 bg-red-50 px-5 py-4 text-sm text-red-700">
-            {{ session('error') }}
-        </div>
-    @endif
     {{-- Table Card --}}
     <div class="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
         {{-- Card Header --}}
@@ -54,138 +41,90 @@
         </div>
         {{-- Desktop Table --}}
         <div class="hidden overflow-x-auto md:block">
-            <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gray-50">
+            <table class="w-full divide-y divide-gray-200 text-xs">
+                <thead class="bg-slate-50 border-b border-slate-200 text-[11px] font-bold uppercase tracking-wider text-slate-500">
                     <tr>
-                        <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-500">
-                            #
-                        </th>
-                        <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-500">
-                            Notice
-                        </th>
-                        <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-500">
-                            Date
-                        </th>
-                        <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-500">
-                            File
-                        </th>
-                        <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-500">
-                            Status
-                        </th>
-                        <th class="px-6 py-4 text-right text-xs font-bold uppercase tracking-wider text-gray-500">
-                            Action
-                        </th>
+                        <th class="px-3 py-2.5 w-12 text-center">#</th>
+                        <th class="px-3.5 py-2.5">নোটিশ শিরোনাম ও বিষয়</th>
+                        <th class="px-3 py-2.5 w-28 whitespace-nowrap">তারিখ</th>
+                        <th class="px-3 py-2.5 w-24 text-center whitespace-nowrap">ফাইল</th>
+                        <th class="px-3 py-2.5 w-20 text-center whitespace-nowrap">অবস্থা</th>
+                        <th class="px-3 py-2.5 w-24 text-right whitespace-nowrap">অ্যাকশন</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-gray-100 bg-white">
+                <tbody class="divide-y divide-slate-100 bg-white text-xs">
                     @forelse($notices as $notice)
-                        <tr class="transition hover:bg-gray-50">
+                        <tr class="transition hover:bg-slate-50">
                             {{-- Number --}}
-                            <td class="px-6 py-5 whitespace-nowrap">
-                                <span class="text-sm font-semibold text-gray-500">
-                                    {{ $notices->firstItem() + $loop->index }}
-                                </span>
+                            <td class="px-3 py-2.5 text-center text-slate-400 font-mono">
+                                {{ $notices->firstItem() + $loop->index }}
                             </td>
                             {{-- Notice --}}
-                            <td class="px-6 py-5">
-                                <div class="max-w-md">
-                                    <div class="flex items-center gap-2 mb-1">
-                                        <span class="inline-flex px-2.5 py-0.5 rounded-full text-xs font-semibold bg-teal-50 text-teal-700 border border-teal-200">
-                                            {{ $notice->category ?? 'General' }}
-                                        </span>
-                                    </div>
-                                    <p class="font-semibold text-gray-900">
-                                        {{ $notice->title_bn ?: $notice->title }}
-                                    </p>
-                                    @if($notice->title_en)
-                                        <p class="text-xs text-gray-500 font-medium">
-                                            {{ $notice->title_en }}
-                                        </p>
-                                    @endif
-                                    @if($notice->description || $notice->description_bn)
-                                        <p class="mt-1 line-clamp-2 text-xs text-gray-400">
-                                            {{ $notice->description_bn ?: $notice->description }}
-                                        </p>
-                                    @endif
+                            <td class="px-3.5 py-2.5">
+                                <div class="flex items-center gap-1.5 mb-0.5">
+                                    <span class="inline-flex px-2 py-0.2 rounded text-[10px] font-bold bg-teal-50 text-teal-700 border border-teal-200">
+                                        {{ $notice->category ?? 'সাধারণ' }}
+                                    </span>
                                 </div>
+                                <p class="font-bold text-slate-900 leading-snug line-clamp-1">
+                                    {{ $notice->title_bn ?: $notice->title }}
+                                </p>
+                                @if($notice->title_en)
+                                    <p class="text-[11px] text-slate-400 font-normal truncate">
+                                        {{ $notice->title_en }}
+                                    </p>
+                                @endif
                             </td>
                             {{-- Date --}}
-                            <td class="px-6 py-5 whitespace-nowrap">
+                            <td class="px-3 py-2.5 whitespace-nowrap text-slate-600 font-mono text-[11px]">
                                 @if($notice->notice_date)
-                                    <span class="text-sm text-gray-700">
-                                        {{ $notice->notice_date->format('d M Y') }}
-                                    </span>
+                                    {{ $notice->notice_date->format('d M, Y') }}
                                 @else
-                                    <span class="text-sm text-gray-400">
-                                        —
-                                    </span>
+                                    <span class="text-slate-400">—</span>
                                 @endif
                             </td>
                             {{-- File --}}
-                            <td class="px-6 py-5 whitespace-nowrap">
+                            <td class="px-3 py-2.5 text-center whitespace-nowrap">
                                 @if($notice->file)
-                                    <a
-                                        href="{{ asset($notice->file) }}"
-                                        target="_blank"
-                                        class="inline-flex items-center gap-2 rounded-lg bg-gray-100 px-3 py-2 text-xs font-semibold text-gray-700 transition hover:bg-gray-200"
-                                    >
-                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                             class="h-4 w-4"
-                                             fill="none"
-                                             viewBox="0 0 24 24"
-                                             stroke="currentColor"
-                                             stroke-width="2">
-                                            <path stroke-linecap="round"
-                                                  stroke-linejoin="round"
-                                                  d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                    <a href="{{ asset($notice->file) }}" target="_blank"
+                                       class="inline-flex items-center gap-1 rounded-lg bg-emerald-50 px-2 py-1 text-[11px] font-bold text-emerald-700 hover:bg-emerald-100 transition">
+                                        <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
                                         </svg>
-                                        View File
+                                        পিডিএফ
                                     </a>
                                 @else
-                                    <span class="text-sm text-gray-400">
-                                        No file
-                                    </span>
+                                    <span class="text-[11px] text-slate-300">নেই</span>
                                 @endif
                             </td>
                             {{-- Status --}}
-                            <td class="px-6 py-5 whitespace-nowrap">
-                                <form
-                                    action="{{ route('admin.notices.toggle-status', ['id' => $notice->id]) }}"
-                                    method="POST"
-                                >
+                            <td class="px-3 py-2.5 text-center whitespace-nowrap">
+                                <form action="{{ route('admin.notices.toggle-status', ['id' => $notice->id]) }}" method="POST">
                                     @csrf
                                     @method('PATCH')
-                                    <button
-                                        type="submit"
-                                        class="inline-flex items-center rounded-full px-3 py-1 text-xs font-bold transition {{ $notice->status ? 'bg-green-100 text-green-700 hover:bg-green-200' : 'bg-red-100 text-red-700 hover:bg-red-200' }}"
-                                    >
-                                        {{ $notice->status ? 'Active' : 'Inactive' }}
+                                    <button type="submit"
+                                            class="inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-bold transition {{ $notice->status ? 'bg-emerald-100 text-emerald-800 hover:bg-emerald-200' : 'bg-rose-100 text-rose-800 hover:bg-rose-200' }}">
+                                        {{ $notice->status ? 'সক্রিয়' : 'নিষ্ক্রিয়' }}
                                     </button>
                                 </form>
                             </td>
                             {{-- Actions --}}
-                            <td class="px-6 py-5 whitespace-nowrap">
-                                <div class="flex justify-end gap-2">
-                                    {{-- Edit --}}
-                                    <a
-                                        href="{{ route('admin.notices.edit', ['id' => $notice->id]) }}"
-                                        class="inline-flex items-center justify-center rounded-lg bg-blue-50 px-3 py-2 text-xs font-semibold text-blue-700 transition hover:bg-blue-100"
-                                    >
-                                        Edit
+                            <td class="px-3 py-2.5 text-right whitespace-nowrap">
+                                <div class="flex items-center justify-end gap-1">
+                                    <a href="{{ route('admin.notices.edit', ['id' => $notice->id]) }}"
+                                       title="সম্পাদনা করুন"
+                                       class="p-1.5 rounded-lg text-slate-500 hover:text-emerald-700 hover:bg-emerald-50 transition">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
                                     </a>
-                                    {{-- Delete --}}
-                                    <form
-                                        action="{{ route('admin.notices.destroy', ['id' => $notice->id]) }}"
-                                        method="POST"
-                                        onsubmit="return confirm('Are you sure you want to delete this notice?')"
-                                    >
+                                    <form action="{{ route('admin.notices.destroy', ['id' => $notice->id]) }}"
+                                          method="POST"
+                                          onsubmit="return confirm('আপনি কি নিশ্চিত যে এই নোটিশটি মুছে ফেলতে চান?')"
+                                          class="inline">
                                         @csrf
                                         @method('DELETE')
-                                        <button
-                                            type="submit"
-                                            class="inline-flex items-center justify-center rounded-lg bg-red-50 px-3 py-2 text-xs font-semibold text-red-700 transition hover:bg-red-100"
-                                        >
-                                            Delete
+                                        <button type="submit" title="মুছে ফেলুন"
+                                                class="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
                                         </button>
                                     </form>
                                 </div>

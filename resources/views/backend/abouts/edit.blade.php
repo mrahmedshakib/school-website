@@ -332,10 +332,10 @@
             <button
                 type="submit"
                 class="inline-flex items-center justify-center gap-2 rounded-xl
-                       bg-gray-900 px-6 py-3 text-sm font-semibold text-white
-                       shadow-sm transition hover:bg-gray-800
+                       bg-emerald-600 px-6 py-3 text-sm font-semibold text-white
+                       shadow-sm transition hover:bg-emerald-700
                        focus:outline-none focus:ring-2
-                       focus:ring-gray-900 focus:ring-offset-2"
+                       focus:ring-emerald-600 focus:ring-offset-2"
             >
                 <svg xmlns="http://www.w3.org/2000/svg"
                      class="h-5 w-5"

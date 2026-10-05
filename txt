@@ -1,2 +1,9 @@
-Email:    admin@gmail.com
-Password: Admin@12345
+
+ইমেইল: superadmin@gmail.com
+পাসওয়ার্ড: password
+রোল: Super Admin
+
+
+ইমেইল: management@gmail.com
+পাসওয়ার্ড: password
+রোল: Admin

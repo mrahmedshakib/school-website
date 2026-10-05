@@ -84,6 +84,7 @@
 
     @include('frontend.layouts.footer')
 
+    @include('components.developer-contact-modal')
 
     @stack('scripts')
 

@@ -222,7 +222,7 @@
                             {{ old('status', 1) ? 'checked' : '' }}
                         >
 
-                        <div class="w-11 h-6 bg-slate-300 rounded-full peer peer-checked:bg-indigo-600 transition"></div>
+                        <div class="w-11 h-6 bg-slate-300 rounded-full peer peer-checked:bg-emerald-600 transition"></div>
 
                         <div class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition peer-checked:translate-x-5"></div>
 
@@ -237,14 +237,14 @@
 
                 <a
                     href="{{ route('admin.galleries.index') }}"
-                    class="inline-flex items-center justify-center px-5 py-2.5 border border-slate-300 text-slate-700 rounded-lg text-sm font-semibold hover:bg-white transition"
+                    class="inline-flex items-center justify-center px-5 py-2.5 border border-slate-300 text-slate-700 rounded-xl text-sm font-semibold hover:bg-white transition"
                 >
                     Cancel
                 </a>
 
                 <button
                     type="submit"
-                    class="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-indigo-600 text-white rounded-lg text-sm font-semibold hover:bg-indigo-700 transition"
+                    class="inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-emerald-600 text-white rounded-xl text-sm font-semibold hover:bg-emerald-700 transition shadow-sm"
                 >
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path

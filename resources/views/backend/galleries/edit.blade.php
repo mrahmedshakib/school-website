@@ -235,9 +235,9 @@
             <button
                 type="submit"
                 class="inline-flex items-center justify-center
-                       px-5 py-2.5 rounded-lg
-                       bg-indigo-600 text-white text-sm font-semibold
-                       hover:bg-indigo-700 transition"
+                       px-6 py-2.5 rounded-xl
+                       bg-emerald-600 text-white text-sm font-semibold
+                       hover:bg-emerald-700 transition shadow-sm"
             >
                 Update Gallery
             </button>

@@ -1,158 +1,154 @@
 @extends('backend.layouts.app')
-@section('title', 'Coming Soon')
+
+@section('title', 'News & Articles')
+@section('page_title', 'News & Articles')
+
 @section('content')
+<div class="max-w-7xl mx-auto space-y-6">
 
-<section class="min-h-[80vh] bg-white flex items-center justify-center overflow-hidden relative">
+    {{-- Page Header --}}
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div>
+            <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+                News & Articles
+            </h1>
+            <p class="text-sm text-slate-500 mt-1">
+                Manage press releases, school achievements, campus news, and announcements.
+            </p>
+        </div>
 
-    {{-- Background Decoration --}}
-    <div class="absolute -top-32 -right-32 w-80 h-80 bg-blue-100 rounded-full blur-3xl opacity-60"></div>
-    <div class="absolute -bottom-32 -left-32 w-80 h-80 bg-indigo-100 rounded-full blur-3xl opacity-60"></div>
-
-    <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-20">
-
-        {{-- Icon --}}
-        <div class="mx-auto mb-8 w-20 h-20 rounded-2xl bg-blue-50
-                    flex items-center justify-center
-                    border border-blue-100 shadow-sm">
-
-            <svg class="w-10 h-10 text-blue-600"
-                 fill="none"
-                 stroke="currentColor"
-                 viewBox="0 0 24 24">
-
-                <path stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="1.8"
-                      d="M12 8v4l3 2m6-2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-
+        <a href="{{ route('admin.news.create') }}" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm shadow-sm transition">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
             </svg>
-        </div>
-
-        {{-- Badge --}}
-        <span class="inline-flex items-center gap-2
-                     px-4 py-2 rounded-full
-                     bg-blue-50 text-blue-700
-                     text-sm font-semibold
-                     border border-blue-100">
-
-            <span class="w-2 h-2 rounded-full bg-blue-600 animate-pulse"></span>
-
-            Something New Is Coming
-        </span>
-
-        {{-- Heading --}}
-        <h1 class="mt-7 text-4xl sm:text-5xl lg:text-6xl
-                   font-extrabold tracking-tight text-slate-900">
-
-            Coming
-            <span class="text-blue-600">Soon</span>
-        </h1>
-
-        {{-- Description --}}
-        <p class="mt-6 max-w-2xl mx-auto
-                  text-base sm:text-lg
-                  leading-8 text-slate-500">
-
-            আমরা নতুন কিছু নিয়ে কাজ করছি।
-            এই পেজটি খুব শীঘ্রই আরও সুন্দর ও প্রয়োজনীয় তথ্য
-            নিয়ে আপনার জন্য প্রস্তুত হবে।
-        </p>
-
-        {{-- Status Cards --}}
-        <div class="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl mx-auto">
-
-            <div class="rounded-2xl border border-slate-200
-                        bg-white p-5 shadow-sm">
-
-                <div class="text-2xl font-bold text-slate-900">
-                    01
-                </div>
-
-                <p class="mt-1 text-sm text-slate-500">
-                    New Content
-                </p>
-
-            </div>
-
-            <div class="rounded-2xl border border-slate-200
-                        bg-white p-5 shadow-sm">
-
-                <div class="text-2xl font-bold text-slate-900">
-                    02
-                </div>
-
-                <p class="mt-1 text-sm text-slate-500">
-                    Better Experience
-                </p>
-
-            </div>
-
-            <div class="rounded-2xl border border-slate-200
-                        bg-white p-5 shadow-sm">
-
-                <div class="text-2xl font-bold text-slate-900">
-                    03
-                </div>
-
-                <p class="mt-1 text-sm text-slate-500">
-                    Coming Soon
-                </p>
-
-            </div>
-
-        </div>
-
-        {{-- Progress --}}
-        <div class="max-w-xl mx-auto mt-10">
-
-            <div class="flex items-center justify-between mb-2">
-                <span class="text-sm font-medium text-slate-600">
-                    Development Progress
-                </span>
-
-                <span class="text-sm font-semibold text-blue-600">
-                    75%
-                </span>
-            </div>
-
-            <div class="h-2.5 bg-slate-100 rounded-full overflow-hidden">
-                <div class="h-full w-3/4 bg-blue-600 rounded-full"></div>
-            </div>
-
-        </div>
-
-        {{-- Back Button --}}
-        <div class="mt-10">
-
-            <a href="{{ route('admin.dashboard') }}"
-               class="inline-flex items-center gap-2
-                      px-6 py-3 rounded-xl
-                      bg-slate-900 text-white
-                      text-sm font-semibold
-                      shadow-lg shadow-slate-200
-                      hover:bg-blue-600
-                      transition duration-300">
-
-                <svg class="w-4 h-4"
-                     fill="none"
-                     stroke="currentColor"
-                     viewBox="0 0 24 24">
-
-                    <path stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
-
-                </svg>
-
-                Back to Homepage
-
-            </a>
-
-        </div>
-
+            Publish News
+        </a>
     </div>
 
-</section>
+    {{-- Table Card --}}
+    <div class="bg-white rounded-3xl border border-slate-200/80 shadow-xs overflow-hidden">
+        <div class="px-6 py-5 border-b border-slate-100 flex items-center justify-between">
+            <div>
+                <h2 class="text-base font-bold text-slate-900">All Published News</h2>
+                <p class="text-xs text-slate-400 mt-0.5">Total {{ $news->total() }} news items in database</p>
+            </div>
+            <span class="text-xs font-semibold px-3 py-1 rounded-full bg-slate-100 text-slate-600">
+                Page {{ $news->currentPage() }} of {{ $news->lastPage() }}
+            </span>
+        </div>
 
+        @if($news->count())
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-xs">
+                    <thead class="bg-slate-50/80 border-b border-slate-200/80 text-[11px] font-bold uppercase tracking-wider text-slate-500">
+                        <tr>
+                            <th class="px-3 py-2.5 w-10 text-center">#</th>
+                            <th class="px-3 py-2.5 w-14 text-center">ছবি</th>
+                            <th class="px-3.5 py-2.5">সংবাদ শিরোনাম ও বিবরণ</th>
+                            <th class="px-3 py-2.5 w-28 whitespace-nowrap">প্রকাশের তারিখ</th>
+                            <th class="px-3 py-2.5 w-16 text-center whitespace-nowrap">ক্রম</th>
+                            <th class="px-3 py-2.5 w-20 text-center whitespace-nowrap">অবস্থা</th>
+                            <th class="px-3 py-2.5 w-20 text-right whitespace-nowrap">অ্যাকশন</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 text-slate-700">
+                        @foreach($news as $item)
+                            <tr class="hover:bg-slate-50/70 transition">
+                                <td class="px-3 py-2.5 text-center font-mono text-slate-400">
+                                    {{ $news->firstItem() + $loop->index }}
+                                </td>
+
+                                <td class="px-3 py-2.5 text-center">
+                                    @if($item->image)
+                                        <img src="{{ asset($item->image) }}" alt="{{ $item->title }}" class="w-10 h-10 rounded-lg object-cover border border-slate-200 shadow-xs mx-auto">
+                                    @else
+                                        <div class="w-10 h-10 rounded-lg bg-slate-100 text-slate-400 flex items-center justify-center text-[10px] font-semibold border border-slate-200 mx-auto">
+                                            নেই
+                                        </div>
+                                    @endif
+                                </td>
+
+                                <td class="px-3.5 py-2.5">
+                                    <h3 class="font-bold text-slate-900 line-clamp-1 hover:text-emerald-600 transition">
+                                        {{ $item->title }}
+                                    </h3>
+                                    @if($item->short_description)
+                                        <p class="text-[11px] text-slate-500 mt-0.5 line-clamp-1">
+                                            {{ $item->short_description }}
+                                        </p>
+                                    @endif
+                                </td>
+
+                                <td class="px-3 py-2.5 whitespace-nowrap text-[11px] text-slate-600 font-mono">
+                                    @if($item->published_at)
+                                        <span>{{ \Carbon\Carbon::parse($item->published_at)->format('d M, Y') }}</span>
+                                    @else
+                                        <span class="text-slate-400">—</span>
+                                    @endif
+                                </td>
+
+                                <td class="px-3 py-2.5 text-center whitespace-nowrap font-mono text-slate-500">
+                                    {{ $item->sort_order ?? 0 }}
+                                </td>
+
+                                <td class="px-3 py-2.5 text-center whitespace-nowrap">
+                                    @if($item->status)
+                                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800">
+                                            প্রকাশিত
+                                        </span>
+                                    @else
+                                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-slate-100 text-slate-600">
+                                            খসড়া
+                                        </span>
+                                    @endif
+                                </td>
+
+                                <td class="px-3 py-2.5 text-right whitespace-nowrap">
+                                    <div class="flex items-center justify-end gap-1">
+                                        <a href="{{ route('admin.news.edit', $item->id) }}" class="p-1.5 rounded-lg text-slate-500 hover:text-emerald-600 hover:bg-emerald-50 transition" title="সম্পাদনা">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                            </svg>
+                                        </a>
+
+                                        <form action="{{ route('admin.news.destroy', $item->id) }}" method="POST" onsubmit="return confirm('আপনি কি নিশ্চিত যে এই সংবাদটি মুছে ফেলতে চান?');" class="inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition" title="মুছুন">
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6M9 7V4a1 1 0 011-1h4a1 1 0 011 1v3m-9 0h14"/>
+                                                </svg>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+
+            @if($news->hasPages())
+                <div class="px-6 py-4 border-t border-slate-100">
+                    {{ $news->links() }}
+                </div>
+            @endif
+        @else
+            {{-- Empty State --}}
+            <div class="p-12 text-center">
+                <div class="w-16 h-16 rounded-2xl bg-teal-50 text-teal-600 flex items-center justify-center text-3xl mx-auto mb-4">
+                    📰
+                </div>
+                <h3 class="text-base font-bold text-slate-900">No News Published Yet</h3>
+                <p class="text-xs sm:text-sm text-slate-500 mt-1 mb-6 max-w-sm mx-auto">
+                    Publish your first school news, event recap, or press release to keep the website active.
+                </p>
+                <a href="{{ route('admin.news.create') }}" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm shadow-sm transition">
+                    + Publish News
+                </a>
+            </div>
+        @endif
+    </div>
+
+</div>
 @endsection

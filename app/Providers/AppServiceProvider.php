@@ -25,7 +25,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        View::composer(['frontend.*', 'backend.*'], function ($view) {
+        View::composer('*', function ($view) {
             $websiteSetting = WebsiteSetting::first();
             $view->with('websiteSetting', $websiteSetting);
         });
@@ -39,6 +39,21 @@ class AppServiceProvider extends ServiceProvider
                 ->get();
 
             $view->with('latestNotices', $latestNotices);
+        });
+
+        /*
+        |--------------------------------------------------------------------------
+        | RBAC Gate Definition
+        |--------------------------------------------------------------------------
+        */
+        \Illuminate\Support\Facades\Gate::before(function ($user, $ability) {
+            if (method_exists($user, 'isSuperAdmin') && $user->isSuperAdmin()) {
+                return true;
+            }
+            if (method_exists($user, 'hasPermission')) {
+                return $user->hasPermission($ability) ?: null;
+            }
+            return null;
         });
 
         /*

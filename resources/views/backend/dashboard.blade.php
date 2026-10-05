@@ -1,488 +1,348 @@
 @extends('backend.layouts.app')
 
-@section('title', 'Dashboard')
-@section('page_title', 'Dashboard')
+@section('title', 'Admin Dashboard')
+@section('page_title', 'Admin Dashboard')
 
 @section('content')
-
-<div class="space-y-8">
+<div class="space-y-8 max-w-7xl mx-auto">
 
     {{-- =========================================================
-        HEADER
+        WELCOME BANNER
     ========================================================== --}}
-    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5">
+    <div class="relative overflow-hidden rounded-3xl bg-gradient-to-r from-slate-900 via-emerald-950 to-teal-900 text-white p-6 sm:p-8 shadow-xl border border-emerald-800/30">
+        <div class="absolute -right-16 -top-16 w-64 h-64 rounded-full bg-emerald-500/10 blur-3xl pointer-events-none"></div>
+        <div class="absolute right-1/3 -bottom-16 w-64 h-64 rounded-full bg-teal-500/10 blur-3xl pointer-events-none"></div>
 
-        <div>
-            <p class="text-sm font-semibold text-[#0F766E] mb-1">
-                School Administration
-            </p>
-
-            <h1 class="text-3xl font-black text-[#123B5D]">
-                Dashboard
-            </h1>
-
-            <p class="text-gray-500 mt-2">
-                Welcome back! Here's what's happening on your school website.
-            </p>
-        </div>
-
-        <div class="flex items-center gap-3">
-
-            <div class="px-4 py-3 rounded-2xl bg-white border border-gray-100 shadow-sm">
-                <p class="text-xs text-gray-400">
-                    Today
-                </p>
-
-                <p class="text-sm font-bold text-gray-700">
-                    {{ now()->format('d M Y') }}
+        <div class="relative z-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+            <div class="space-y-2 max-w-2xl">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-xs font-semibold">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    School Management System
+                </div>
+                <h1 class="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-white">
+                    Welcome back, {{ auth()->user()->name ?? 'Administrator' }}! 👋
+                </h1>
+                <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
+                    Here is the real-time overview of your school website, admissions, academic records, and visitor traffic.
                 </p>
             </div>
 
+            <div class="flex flex-wrap items-center gap-3">
+                <div class="px-4 py-3 rounded-2xl bg-white/10 backdrop-blur-md border border-white/15 shadow-sm text-left">
+                    <p class="text-[11px] uppercase tracking-wider text-emerald-300 font-semibold">Today</p>
+                    <p class="text-sm font-bold text-white">{{ now()->format('l, d M Y') }}</p>
+                </div>
+                <a href="{{ route('admin.settings.edit') }}" class="px-4 py-3 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs sm:text-sm font-bold transition shadow-lg shadow-emerald-950/30 inline-flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    </svg>
+                    Settings
+                </a>
+            </div>
+        </div>
+    </div>
+
+    {{-- =========================================================
+        PRIMARY STAT CARDS
+    ========================================================== --}}
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+
+        {{-- Students --}}
+        <div class="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-xs hover:shadow-xl hover:-translate-y-1 transition duration-200 group">
+            <div class="flex items-center justify-between">
+                <div class="w-12 h-12 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-xl group-hover:scale-110 transition-transform">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+                    </svg>
+                </div>
+                <span class="text-xs font-bold text-blue-700 bg-blue-50 px-2.5 py-1 rounded-full">Academic</span>
+            </div>
+            <p class="text-xs font-medium text-slate-500 mt-4">Enrolled Students</p>
+            <h3 class="text-3xl font-extrabold text-slate-900 mt-1">@bnDigit($totalStudents)</h3>
+            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+                <span class="text-slate-400">Total Enrolled</span>
+                <a href="{{ route('admin.students.index') }}" class="font-bold text-blue-600 hover:text-blue-700 flex items-center gap-1">Manage →</a>
+            </div>
+        </div>
+
+        {{-- Teachers --}}
+        <div class="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-xs hover:shadow-xl hover:-translate-y-1 transition duration-200 group">
+            <div class="flex items-center justify-between">
+                <div class="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold text-xl group-hover:scale-110 transition-transform">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
+                    </svg>
+                </div>
+                <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full">Faculty</span>
+            </div>
+            <p class="text-xs font-medium text-slate-500 mt-4">Teachers & Staff</p>
+            <h3 class="text-3xl font-extrabold text-slate-900 mt-1">@bnDigit($totalTeachers)</h3>
+            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+                <span class="text-slate-400">Total Staff</span>
+                <a href="{{ route('admin.teachers.index') }}" class="font-bold text-emerald-600 hover:text-emerald-700 flex items-center gap-1">Manage →</a>
+            </div>
+        </div>
+
+        {{-- Applications --}}
+        <div class="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-xs hover:shadow-xl hover:-translate-y-1 transition duration-200 group">
+            <div class="flex items-center justify-between">
+                <div class="w-12 h-12 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center font-bold text-xl group-hover:scale-110 transition-transform">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                    </svg>
+                </div>
+                @if($pendingApplications > 0)
+                    <span class="text-xs font-bold text-amber-800 bg-amber-100 px-2.5 py-1 rounded-full">@bnDigit($pendingApplications) Pending</span>
+                @else
+                    <span class="text-xs font-bold text-slate-600 bg-slate-100 px-2.5 py-1 rounded-full">Admission</span>
+                @endif
+            </div>
+            <p class="text-xs font-medium text-slate-500 mt-4">Online Applications</p>
+            <h3 class="text-3xl font-extrabold text-slate-900 mt-1">@bnDigit($totalApplications)</h3>
+            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+                <span class="text-slate-400">Total Applicants</span>
+                <a href="{{ route('admin.admission-applications.index') }}" class="font-bold text-amber-600 hover:text-amber-700 flex items-center gap-1">View All →</a>
+            </div>
+        </div>
+
+        {{-- Total Visitors --}}
+        <div class="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-xs hover:shadow-xl hover:-translate-y-1 transition duration-200 group">
+            <div class="flex items-center justify-between">
+                <div class="w-12 h-12 rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center font-bold text-xl group-hover:scale-110 transition-transform">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                    </svg>
+                </div>
+                <span class="text-xs font-bold text-purple-700 bg-purple-50 px-2.5 py-1 rounded-full">Traffic</span>
+            </div>
+            <p class="text-xs font-medium text-slate-500 mt-4">Total Visitors</p>
+            <h3 class="text-3xl font-extrabold text-slate-900 mt-1">@bnDigit($totalVisitors)</h3>
+            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+                <span class="text-slate-400">Today: @bnDigit($todayVisitors)</span>
+                <span class="font-semibold text-purple-600">Active</span>
+            </div>
         </div>
 
     </div>
 
-
     {{-- =========================================================
-        MAIN STAT CARDS
+        CONTENT MODULE STATS (4 Secondary Cards)
     ========================================================== --}}
-    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5">
-
+    <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {{-- Notices --}}
-        <div class="group relative overflow-hidden
-                    bg-white rounded-3xl border border-gray-100
-                    p-6 shadow-sm
-                    hover:shadow-xl hover:-translate-y-1
-                    transition duration-300">
-
-            <div class="absolute -right-8 -top-8
-                        w-28 h-28 rounded-full
-                        bg-[#0F766E]/5
-                        group-hover:scale-150 transition duration-500">
-            </div>
-
-            <div class="relative">
-
-                <div class="flex items-center justify-between">
-
-                    <div class="w-12 h-12 rounded-2xl
-                                bg-[#0F766E]/10
-                                flex items-center justify-center
-                                text-xl">
-                        📢
-                    </div>
-
-                    <span class="text-xs font-bold text-[#0F766E]
-                                 bg-[#0F766E]/10
-                                 px-3 py-1.5 rounded-full">
-                        Content
-                    </span>
-
+        <a href="{{ route('admin.notices.index') }}" class="p-5 rounded-2xl bg-white border border-slate-200/80 shadow-xs hover:border-emerald-300 hover:shadow-md transition group">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold shrink-0">📢</div>
+                <div>
+                    <p class="text-xs text-slate-500 font-medium">Notices</p>
+                    <p class="text-xl font-bold text-slate-900 group-hover:text-emerald-600 transition-colors">@bnDigit($totalNotices)</p>
                 </div>
-
-                <p class="text-sm font-medium text-gray-500 mt-5">
-                    Total Notices
-                </p>
-
-                <h2 class="text-4xl font-black text-[#123B5D] mt-1">
-                    {{ $totalNotices }}
-                </h2>
-
-                <a
-                    href="{{ route('admin.notices.index') }}"
-                    class="inline-flex items-center gap-1
-                           mt-4 text-sm font-bold
-                           text-[#0F766E]
-                           hover:gap-2 transition-all"
-                >
-                    Manage Notices →
-                </a>
-
             </div>
-
-        </div>
-
+        </a>
 
         {{-- News --}}
-        <div class="group relative overflow-hidden
-                    bg-white rounded-3xl border border-gray-100
-                    p-6 shadow-sm
-                    hover:shadow-xl hover:-translate-y-1
-                    transition duration-300">
-
-            <div class="absolute -right-8 -top-8
-                        w-28 h-28 rounded-full
-                        bg-[#123B5D]/5
-                        group-hover:scale-150 transition duration-500">
-            </div>
-
-            <div class="relative">
-
-                <div class="flex items-center justify-between">
-
-                    <div class="w-12 h-12 rounded-2xl
-                                bg-[#123B5D]/10
-                                flex items-center justify-center
-                                text-xl">
-                        📰
-                    </div>
-
-                    <span class="text-xs font-bold text-[#123B5D]
-                                 bg-[#123B5D]/10
-                                 px-3 py-1.5 rounded-full">
-                        News
-                    </span>
-
+        <a href="{{ route('admin.news.index') }}" class="p-5 rounded-2xl bg-white border border-slate-200/80 shadow-xs hover:border-teal-300 hover:shadow-md transition group">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-teal-50 text-teal-600 flex items-center justify-center font-bold shrink-0">📰</div>
+                <div>
+                    <p class="text-xs text-slate-500 font-medium">News Articles</p>
+                    <p class="text-xl font-bold text-slate-900 group-hover:text-teal-600 transition-colors">@bnDigit($totalNews)</p>
                 </div>
-
-                <p class="text-sm font-medium text-gray-500 mt-5">
-                    Total News
-                </p>
-
-                <h2 class="text-4xl font-black text-[#123B5D] mt-1">
-                    {{ $totalNews }}
-                </h2>
-
-                <span class="inline-flex items-center gap-1
-                             mt-4 text-sm font-semibold
-                             text-gray-400">
-                    News management coming soon
-                </span>
-
             </div>
-
-        </div>
-
+        </a>
 
         {{-- Events --}}
-        <div class="group relative overflow-hidden
-                    bg-white rounded-3xl border border-gray-100
-                    p-6 shadow-sm
-                    hover:shadow-xl hover:-translate-y-1
-                    transition duration-300">
-
-            <div class="absolute -right-8 -top-8
-                        w-28 h-28 rounded-full
-                        bg-amber-500/5
-                        group-hover:scale-150 transition duration-500">
-            </div>
-
-            <div class="relative">
-
-                <div class="flex items-center justify-between">
-
-                    <div class="w-12 h-12 rounded-2xl
-                                bg-amber-100
-                                flex items-center justify-center
-                                text-xl">
-                        📅
-                    </div>
-
-                    <span class="text-xs font-bold text-amber-600
-                                 bg-amber-50
-                                 px-3 py-1.5 rounded-full">
-                        Events
-                    </span>
-
+        <a href="{{ route('admin.events.index') }}" class="p-5 rounded-2xl bg-white border border-slate-200/80 shadow-xs hover:border-indigo-300 hover:shadow-md transition group">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold shrink-0">📅</div>
+                <div>
+                    <p class="text-xs text-slate-500 font-medium">Events & Programs</p>
+                    <p class="text-xl font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">@bnDigit($totalEvents)</p>
                 </div>
-
-                <p class="text-sm font-medium text-gray-500 mt-5">
-                    Total Events
-                </p>
-
-                <h2 class="text-4xl font-black text-[#123B5D] mt-1">
-                    {{ $totalEvents }}
-                </h2>
-
-                <span class="inline-flex items-center gap-1
-                             mt-4 text-sm font-semibold
-                             text-gray-400">
-                    Event management coming soon
-                </span>
-
             </div>
+        </a>
 
-        </div>
-
-
-        {{-- Gallery --}}
-        <div class="group relative overflow-hidden
-                    bg-white rounded-3xl border border-gray-100
-                    p-6 shadow-sm
-                    hover:shadow-xl hover:-translate-y-1
-                    transition duration-300">
-
-            <div class="absolute -right-8 -top-8
-                        w-28 h-28 rounded-full
-                        bg-purple-500/5
-                        group-hover:scale-150 transition duration-500">
-            </div>
-
-            <div class="relative">
-
-                <div class="flex items-center justify-between">
-
-                    <div class="w-12 h-12 rounded-2xl
-                                bg-purple-100
-                                flex items-center justify-center
-                                text-xl">
-                        🖼️
-                    </div>
-
-                    <span class="text-xs font-bold text-purple-600
-                                 bg-purple-50
-                                 px-3 py-1.5 rounded-full">
-                        Media
-                    </span>
-
+        {{-- Photo Gallery --}}
+        <a href="{{ route('admin.galleries.index') }}" class="p-5 rounded-2xl bg-white border border-slate-200/80 shadow-xs hover:border-rose-300 hover:shadow-md transition group">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center font-bold shrink-0">🖼️</div>
+                <div>
+                    <p class="text-xs text-slate-500 font-medium">Gallery Photos</p>
+                    <p class="text-xl font-bold text-slate-900 group-hover:text-rose-600 transition-colors">@bnDigit($totalGalleryImages)</p>
                 </div>
-
-                <p class="text-sm font-medium text-gray-500 mt-5">
-                    Gallery Images
-                </p>
-
-                <h2 class="text-4xl font-black text-[#123B5D] mt-1">
-                    {{ $totalGalleryImages }}
-                </h2>
-
-                <span class="inline-flex items-center gap-1
-                             mt-4 text-sm font-semibold
-                             text-gray-400">
-                    Gallery management coming soon
-                </span>
-
             </div>
-
-        </div>
-
-    </div>
-
-
-    {{-- =========================================================
-        VISITOR CHART
-    ========================================================= --}}
-    <div class="bg-white rounded-3xl
-                border border-gray-100
-                shadow-sm overflow-hidden">
-
-        <div class="px-6 sm:px-7 py-6
-                    border-b border-gray-100
-                    flex flex-col sm:flex-row
-                    sm:items-center sm:justify-between
-                    gap-3">
-
-            <div>
-
-                <h2 class="text-xl font-black text-[#123B5D]">
-                    Visitor Analytics
-                </h2>
-
-                <p class="text-sm text-gray-400 mt-1">
-                    Website visitors over the last 7 days.
-                </p>
-
-            </div>
-
-            <div class="flex items-center gap-2">
-
-                <span class="w-2.5 h-2.5 rounded-full
-                            bg-[#0F766E]">
-                </span>
-
-                <span class="text-xs font-semibold text-gray-500">
-                    Visitors
-                </span>
-
-            </div>
-
-        </div>
-
-
-        <div class="p-5 sm:p-7">
-
-            <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
-
-                {{-- Summary --}}
-                <div class="lg:col-span-1
-                            rounded-2xl
-                            bg-[#F7F8F4]
-                            p-6">
-
-                    <p class="text-sm text-gray-500">
-                        Last 7 Days
-                    </p>
-
-                    <h3 class="text-4xl font-black
-                            text-[#123B5D] mt-2">
-
-                        {{ number_format($visitorChart->sum('visitors')) }}
-
-                    </h3>
-
-                    <p class="text-xs text-gray-400 mt-2">
-                        Total recorded visits
-                    </p>
-
-                    <div class="mt-6 pt-5 border-t border-gray-200">
-
-                        <p class="text-sm text-gray-500">
-                            Today
-                        </p>
-
-                        <p class="text-2xl font-black
-                                text-[#0F766E] mt-1">
-
-                            {{ number_format($todayVisitors) }}
-
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                {{-- Chart --}}
-                <div class="lg:col-span-3">
-
-                    <div class="h-[280px] flex items-end gap-3 sm:gap-5">
-
-                        @php
-                            $maxVisitors = max(
-                                $visitorChart->max('visitors'),
-                                1
-                            );
-                        @endphp
-
-                        @foreach($visitorChart as $item)
-
-                            @php
-                                $height = $item['visitors'] > 0
-                                    ? max(
-                                        8,
-                                        ($item['visitors'] / $maxVisitors) * 100
-                                    )
-                                    : 4;
-                            @endphp
-
-                            <div class="flex-1 h-full
-                                        flex flex-col
-                                        justify-end
-                                        items-center gap-3">
-
-                                {{-- Number --}}
-                                <span class="text-xs font-bold text-gray-500">
-                                    {{ $item['visitors'] }}
-                                </span>
-
-                                {{-- Bar --}}
-                                <div
-                                    class="w-full max-w-[55px]
-                                        rounded-t-xl
-                                        bg-[#0F766E]
-                                        hover:bg-[#123B5D]
-                                        transition-all duration-300"
-                                    style="height: {{ $height }}%;"
-                                    title="{{ $item['visitors'] }} visitors"
-                                >
-                                </div>
-
-                                {{-- Date --}}
-                                <span class="text-[11px] sm:text-xs
-                                            font-semibold text-gray-400
-                                            whitespace-nowrap">
-                                    {{ $item['date'] }}
-                                </span>
-
-                            </div>
-
-                        @endforeach
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
+        </a>
     </div>
 
     {{-- =========================================================
-        RECENT NOTICE
+        QUICK ACTIONS BAR
     ========================================================== --}}
-    <div class="bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden">
-
-        <div class="px-6 py-5 border-b border-gray-100
-                    flex items-center justify-between">
-
-            <div>
-
-                <h2 class="text-lg font-black text-[#123B5D]">
-                    Notice Management
-                </h2>
-
-                <p class="text-xs text-gray-400 mt-1">
-                    Keep your school announcements up to date.
-                </p>
-
-            </div>
-
-            <a
-                href="{{ route('admin.notices.index') }}"
-                class="text-sm font-bold text-[#0F766E]
-                       hover:underline"
-            >
-                View All →
+    <div class="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-xs">
+        <h2 class="text-base font-bold text-slate-900 mb-4 flex items-center gap-2">
+            <svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+            </svg>
+            Quick Actions / দ্রুত সেবা
+        </h2>
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+            <a href="{{ route('admin.notices.create') }}" class="flex flex-col items-center justify-center p-4 rounded-2xl bg-slate-50 hover:bg-emerald-50 hover:text-emerald-700 text-slate-700 border border-slate-200/60 hover:border-emerald-200 transition text-center group">
+                <span class="text-2xl mb-1 group-hover:scale-110 transition-transform">📢</span>
+                <span class="text-xs font-bold">Add Notice</span>
             </a>
 
+            <a href="{{ route('admin.news.create') }}" class="flex flex-col items-center justify-center p-4 rounded-2xl bg-slate-50 hover:bg-teal-50 hover:text-teal-700 text-slate-700 border border-slate-200/60 hover:border-teal-200 transition text-center group">
+                <span class="text-2xl mb-1 group-hover:scale-110 transition-transform">📰</span>
+                <span class="text-xs font-bold">Add News</span>
+            </a>
+
+            <a href="{{ route('admin.events.create') }}" class="flex flex-col items-center justify-center p-4 rounded-2xl bg-slate-50 hover:bg-indigo-50 hover:text-indigo-700 text-slate-700 border border-slate-200/60 hover:border-indigo-200 transition text-center group">
+                <span class="text-2xl mb-1 group-hover:scale-110 transition-transform">📅</span>
+                <span class="text-xs font-bold">Add Event</span>
+            </a>
+
+            <a href="{{ route('admin.students.create') }}" class="flex flex-col items-center justify-center p-4 rounded-2xl bg-slate-50 hover:bg-blue-50 hover:text-blue-700 text-slate-700 border border-slate-200/60 hover:border-blue-200 transition text-center group">
+                <span class="text-2xl mb-1 group-hover:scale-110 transition-transform">👨‍🎓</span>
+                <span class="text-xs font-bold">Add Student</span>
+            </a>
+
+            <a href="{{ route('admin.admission-lottery.index') }}" class="flex flex-col items-center justify-center p-4 rounded-2xl bg-slate-50 hover:bg-amber-50 hover:text-amber-700 text-slate-700 border border-slate-200/60 hover:border-amber-200 transition text-center group">
+                <span class="text-2xl mb-1 group-hover:scale-110 transition-transform">🎲</span>
+                <span class="text-xs font-bold">Lottery Draw</span>
+            </a>
+
+            <a href="{{ route('admin.settings.edit') }}" class="flex flex-col items-center justify-center p-4 rounded-2xl bg-slate-50 hover:bg-purple-50 hover:text-purple-700 text-slate-700 border border-slate-200/60 hover:border-purple-200 transition text-center group">
+                <span class="text-2xl mb-1 group-hover:scale-110 transition-transform">⚙️</span>
+                <span class="text-xs font-bold">Edit Settings</span>
+            </a>
         </div>
+    </div>
 
-        <div class="p-6">
+    {{-- =========================================================
+        TWO COLUMNS: RECENT NOTICES & RECENT APPLICATIONS
+    ========================================================== --}}
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
-            <div class="flex flex-col sm:flex-row
-                        sm:items-center sm:justify-between
-                        gap-4 rounded-2xl
-                        bg-[#F7F8F4]
-                        p-5">
-
-                <div class="flex items-center gap-4">
-
-                    <div class="w-11 h-11 rounded-xl
-                                bg-[#0F766E]/10
-                                flex items-center justify-center">
-                        📢
-                    </div>
-
+        {{-- Recent Notices --}}
+        <div class="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-xs flex flex-col justify-between">
+            <div>
+                <div class="flex items-center justify-between pb-4 border-b border-slate-100">
                     <div>
-                        <p class="font-bold text-[#123B5D]">
-                            {{ $totalNotices }} Active/Available Notices
-                        </p>
-
-                        <p class="text-xs text-gray-400 mt-1">
-                            Manage notices from the notice section.
-                        </p>
+                        <h2 class="text-base font-bold text-slate-900">Recent Notices</h2>
+                        <p class="text-xs text-slate-400 mt-0.5">Latest announcements published</p>
                     </div>
-
+                    <a href="{{ route('admin.notices.index') }}" class="text-xs font-bold text-emerald-600 hover:text-emerald-700">View All →</a>
                 </div>
 
-                <a
-                    href="{{ route('admin.notices.index') }}"
-                    class="inline-flex items-center justify-center
-                           px-5 py-2.5 rounded-xl
-                           bg-[#0F766E] text-white
-                           text-sm font-bold
-                           hover:bg-[#0b625d]
-                           transition"
-                >
-                    Manage Notices
-                </a>
-
+                <div class="divide-y divide-slate-100 mt-2">
+                    @forelse($recentNotices as $notice)
+                        <div class="py-3.5 flex items-start justify-between gap-3 group">
+                            <div class="min-w-0">
+                                <h4 class="text-sm font-semibold text-slate-800 group-hover:text-emerald-600 transition truncate">
+                                    {{ $notice->title }}
+                                </h4>
+                                <div class="flex items-center gap-2 mt-1 text-xs text-slate-400">
+                                    <span>📅 {{ $notice->notice_date ? \Carbon\Carbon::parse($notice->notice_date)->format('d M Y') : 'N/A' }}</span>
+                                    <span>•</span>
+                                    <span class="{{ $notice->status ? 'text-emerald-600 font-medium' : 'text-slate-400' }}">
+                                        {{ $notice->status ? 'Active' : 'Inactive' }}
+                                    </span>
+                                </div>
+                            </div>
+                            <a href="{{ route('admin.notices.edit', $notice->id) }}" class="text-xs font-semibold px-2.5 py-1.5 rounded-lg bg-slate-100 text-slate-600 hover:bg-emerald-50 hover:text-emerald-600 transition shrink-0">
+                                Edit
+                            </a>
+                        </div>
+                    @empty
+                        <div class="py-8 text-center text-slate-400 text-xs">No notices found.</div>
+                    @endforelse
+                </div>
             </div>
-
+            <div class="pt-4 border-t border-slate-100 text-center">
+                <a href="{{ route('admin.notices.create') }}" class="text-xs font-bold text-emerald-600 hover:underline inline-flex items-center gap-1">
+                    + Publish New Notice
+                </a>
+            </div>
         </div>
 
+        {{-- Recent Applications --}}
+        <div class="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-xs flex flex-col justify-between">
+            <div>
+                <div class="flex items-center justify-between pb-4 border-b border-slate-100">
+                    <div>
+                        <h2 class="text-base font-bold text-slate-900">Recent Applications</h2>
+                        <p class="text-xs text-slate-400 mt-0.5">Latest online admission applicants</p>
+                    </div>
+                    <a href="{{ route('admin.admission-applications.index') }}" class="text-xs font-bold text-amber-600 hover:text-amber-700">View All →</a>
+                </div>
+
+                <div class="divide-y divide-slate-100 mt-2">
+                    @forelse($recentApplications as $app)
+                        <div class="py-3.5 flex items-start justify-between gap-3 group">
+                            <div class="min-w-0">
+                                <h4 class="text-sm font-semibold text-slate-800 group-hover:text-amber-600 transition truncate">
+                                    {{ $app->student_name_en ?? $app->student_name_bn ?? 'Applicant' }}
+                                </h4>
+                                <div class="flex items-center gap-2 mt-1 text-xs text-slate-400">
+                                    <span>Class: <strong class="text-slate-600">{{ $app->applied_class ?? 'N/A' }}</strong></span>
+                                    <span>•</span>
+                                    <span>Roll/ID: {{ $app->application_no ?? $app->id }}</span>
+                                </div>
+                            </div>
+                            <span class="text-[11px] font-bold px-2.5 py-1 rounded-full shrink-0 {{ $app->status == 'approved' ? 'bg-emerald-100 text-emerald-700' : ($app->status == 'rejected' ? 'bg-rose-100 text-rose-700' : 'bg-amber-100 text-amber-700') }}">
+                                {{ ucfirst($app->status ?? 'pending') }}
+                            </span>
+                        </div>
+                    @empty
+                        <div class="py-8 text-center text-slate-400 text-xs">No online applications yet.</div>
+                    @endforelse
+                </div>
+            </div>
+            <div class="pt-4 border-t border-slate-100 text-center">
+                <a href="{{ route('admin.admission-applications.index') }}" class="text-xs font-bold text-amber-600 hover:underline inline-flex items-center gap-1">
+                    Manage All Applications →
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    {{-- =========================================================
+        7-DAY VISITOR TRAFFIC CHART
+    ========================================================== --}}
+    <div class="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-xs">
+        <div class="flex items-center justify-between mb-6">
+            <div>
+                <h2 class="text-base font-bold text-slate-900">Website Traffic (Last 7 Days)</h2>
+                <p class="text-xs text-slate-400 mt-0.5">Daily visitor count for the past week</p>
+            </div>
+            <span class="text-xs font-semibold px-3 py-1 rounded-full bg-slate-100 text-slate-600">
+                Total Today: @bnDigit($todayVisitors)
+            </span>
+        </div>
+
+        @php
+            $maxVis = max(1, $visitorChart->max('visitors'));
+        @endphp
+        <div class="grid grid-cols-7 gap-2 sm:gap-4 items-end h-48 pt-6 pb-2 border-b border-slate-100">
+            @foreach($visitorChart as $bar)
+                @php
+                    $pct = max(8, round(($bar['visitors'] / $maxVis) * 100));
+                @endphp
+                <div class="flex flex-col items-center h-full justify-end group">
+                    <span class="text-[10px] sm:text-xs font-bold text-slate-600 mb-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                        @bnDigit($bar['visitors'])
+                    </span>
+                    <div class="w-full max-w-[40px] rounded-t-xl bg-gradient-to-t from-emerald-600 to-teal-400 group-hover:from-emerald-500 group-hover:to-teal-300 transition-all duration-300 shadow-sm" style="height: {{ $pct }}%;"></div>
+                    <span class="text-[10px] sm:text-xs text-slate-400 mt-2 font-medium truncate">
+                        {{ $bar['date'] }}
+                    </span>
+                </div>
+            @endforeach
+        </div>
     </div>
 
 </div>
-
 @endsection

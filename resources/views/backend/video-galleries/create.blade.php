@@ -66,12 +66,12 @@
             </div>
 
             <div class="flex items-center gap-3">
-                <input type="checkbox" name="status" id="status" value="1" {{ old('status', 1) ? 'checked' : '' }} class="rounded text-red-600">
+                <input type="checkbox" name="status" id="status" value="1" {{ old('status', 1) ? 'checked' : '' }} class="rounded text-emerald-600 focus:ring-emerald-500">
                 <label for="status" class="text-sm font-semibold text-gray-700">Active (Visible on public video gallery)</label>
             </div>
 
             <div class="pt-4 border-t border-gray-100 flex justify-end gap-3">
-                <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-xl text-sm transition">
+                <button type="submit" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-xl text-sm transition shadow-sm">
                     Save Video
                 </button>
             </div>

@@ -7,17 +7,11 @@
             <h1 class="text-2xl sm:text-3xl font-bold text-gray-900">Student Marksheets & Individual Results</h1>
             <p class="mt-2 text-sm text-gray-500">Manage individual searchable student exam marks and grades.</p>
         </div>
-        <a href="{{ route('admin.student-marks.create') }}" class="inline-flex items-center justify-center gap-2 rounded-xl bg-indigo-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-700">
+        <a href="{{ route('admin.student-marks.create') }}" class="inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-700">
             <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
             Add Student Marksheet
         </a>
     </div>
-
-    @if(session('success'))
-        <div class="mb-6 rounded-2xl border border-green-200 bg-green-50 px-5 py-4 text-sm text-green-700">
-            {{ session('success') }}
-        </div>
-    @endif
 
     <div class="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
         <div class="border-b border-gray-200 px-6 py-5 flex justify-between items-center">
@@ -38,54 +32,61 @@
         </div>
 
         <div class="overflow-x-auto">
-            <table class="min-w-full divide-y divide-gray-200 text-sm">
-                <thead class="bg-gray-50 text-xs font-bold uppercase tracking-wider text-gray-500">
+            <table class="w-full divide-y divide-gray-200 text-xs">
+                <thead class="bg-gray-50 text-[11px] font-bold uppercase tracking-wider text-gray-500">
                     <tr>
-                        <th class="px-6 py-4 text-left">Roll</th>
-                        <th class="px-6 py-4 text-left">Student Name</th>
-                        <th class="px-6 py-4 text-left">Class & Section</th>
-                        <th class="px-6 py-4 text-left">Exam Name</th>
-                        <th class="px-6 py-4 text-center">GPA</th>
-                        <th class="px-6 py-4 text-center">Grade</th>
-                        <th class="px-6 py-4 text-center">Total Marks</th>
-                        <th class="px-6 py-4 text-center">Status</th>
-                        <th class="px-6 py-4 text-right">Actions</th>
+                        <th class="px-3 py-2 text-left w-14">Roll</th>
+                        <th class="px-3 py-2 text-left">Student Name</th>
+                        <th class="px-3 py-2 text-left w-24">Class (Sec)</th>
+                        <th class="px-3 py-2 text-left">Exam</th>
+                        <th class="px-3 py-2 text-center w-14">GPA</th>
+                        <th class="px-3 py-2 text-center w-12">Grade</th>
+                        <th class="px-3 py-2 text-center w-14">Total</th>
+                        <th class="px-3 py-2 text-center w-20">Status</th>
+                        <th class="px-3 py-2 text-right w-20">Actions</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-gray-100 bg-white">
+                <tbody class="divide-y divide-gray-100 bg-white text-slate-700">
                     @forelse($marks as $item)
                         <tr class="hover:bg-gray-50 transition">
-                            <td class="px-6 py-4 font-mono font-bold text-indigo-700">{{ $item->roll_no }}</td>
-                            <td class="px-6 py-4">
-                                <span class="font-bold text-gray-900 block">{{ $item->student_name_bn }}</span>
-                                <span class="text-xs text-gray-500 block">{{ $item->student_name_en }}</span>
+                            <td class="px-3 py-2 font-mono font-bold text-indigo-700 whitespace-nowrap">{{ $item->roll_no }}</td>
+                            <td class="px-3 py-2">
+                                <span class="font-bold text-gray-900 block line-clamp-1">{{ $item->student_name_bn }}</span>
+                                <span class="text-[11px] text-gray-500 block line-clamp-1">{{ $item->student_name_en }}</span>
                             </td>
-                            <td class="px-6 py-4 font-medium text-gray-800">
+                            <td class="px-3 py-2 font-medium text-gray-800 whitespace-nowrap">
                                 {{ $item->class }} {{ $item->section ? '(' . $item->section . ')' : '' }}
                             </td>
-                            <td class="px-6 py-4 text-xs font-medium text-gray-700">
-                                {{ $item->exam_name_bn ?? $item->exam_name_en }} ({{ $item->academic_year }})
+                            <td class="px-3 py-2 text-[11px] font-medium text-gray-700">
+                                <span class="line-clamp-1">{{ $item->exam_name_bn ?? $item->exam_name_en }}</span>
+                                <span class="text-[10px] text-gray-400">({{ $item->academic_year }})</span>
                             </td>
-                            <td class="px-6 py-4 text-center font-black text-indigo-700">{{ number_format($item->gpa, 2) }}</td>
-                            <td class="px-6 py-4 text-center font-bold text-gray-800">{{ $item->grade }}</td>
-                            <td class="px-6 py-4 text-center font-bold text-gray-900">{{ $item->total_marks }}</td>
-                            <td class="px-6 py-4 text-center">
-                                <span class="px-2.5 py-0.5 text-xs font-bold rounded-full {{ $item->result_status == 'PASSED' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700' }}">
+                            <td class="px-3 py-2 text-center font-black text-indigo-700 whitespace-nowrap">{{ number_format($item->gpa, 2) }}</td>
+                            <td class="px-3 py-2 text-center font-bold text-gray-800 whitespace-nowrap">{{ $item->grade }}</td>
+                            <td class="px-3 py-2 text-center font-bold text-gray-900 whitespace-nowrap">{{ $item->total_marks }}</td>
+                            <td class="px-3 py-2 text-center whitespace-nowrap">
+                                <span class="px-2 py-0.5 text-[11px] font-bold rounded-full {{ $item->result_status == 'PASSED' ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' : 'bg-rose-50 text-rose-700 border border-rose-200' }}">
                                     {{ $item->result_status }}
                                 </span>
                             </td>
-                            <td class="px-6 py-4 text-right space-x-2">
-                                <a href="{{ route('admin.student-marks.edit', $item->id) }}" class="text-blue-600 hover:text-blue-800 font-semibold text-xs">Edit</a>
-                                <form method="POST" action="{{ route('admin.student-marks.destroy', $item->id) }}" class="inline-block" onsubmit="return confirm('Delete this mark record?')">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="text-red-600 hover:text-red-800 font-semibold text-xs">Delete</button>
-                                </form>
+                            <td class="px-3 py-2 text-right whitespace-nowrap">
+                                <div class="flex items-center justify-end gap-1">
+                                    <a href="{{ route('admin.student-marks.edit', $item->id) }}" class="p-1 rounded bg-indigo-50 text-indigo-600 hover:bg-indigo-600 hover:text-white transition" title="Edit">
+                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.5-8.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 7.5-7.5z"/></svg>
+                                    </a>
+                                    <form method="POST" action="{{ route('admin.student-marks.destroy', $item->id) }}" class="inline-block" onsubmit="return confirm('Delete this mark record?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="p-1 rounded bg-rose-50 text-rose-600 hover:bg-rose-600 hover:text-white transition" title="Delete">
+                                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-8V4a1 1 0 00-1-1h-3a1 1 0 00-1 1v3m-4 0h14"/></svg>
+                                        </button>
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="9" class="px-6 py-8 text-center text-gray-400">No student marks recorded yet.</td>
+                            <td colspan="9" class="px-3 py-6 text-center text-gray-400">No student marks recorded yet.</td>
                         </tr>
                     @endforelse
                 </tbody>

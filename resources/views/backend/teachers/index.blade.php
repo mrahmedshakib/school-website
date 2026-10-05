@@ -19,215 +19,138 @@
 
         <a
             href="{{ route('admin.teachers.create') }}"
-            class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 transition"
+            class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-600 text-white text-sm font-semibold hover:bg-emerald-700 transition shadow-sm"
         >
             <span class="text-lg leading-none">+</span>
             Add Teacher / Staff
         </a>
     </div>
 
-    {{-- Success Message --}}
-    @if(session('success'))
-        <div class="mb-6 rounded-lg border border-green-200 bg-green-50 px-4 py-3">
-            <p class="text-sm font-medium text-green-700">
-                {{ session('success') }}
-            </p>
-        </div>
-    @endif
-
-    {{-- Error Message --}}
-    @if(session('error'))
-        <div class="mb-6 rounded-lg border border-red-200 bg-red-50 px-4 py-3">
-            <p class="text-sm font-medium text-red-700">
-                {{ session('error') }}
-            </p>
-        </div>
-    @endif
-
     {{-- Table --}}
     <div class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
 
         <div class="overflow-x-auto">
-            <table class="w-full text-sm">
+            <table class="w-full text-xs">
 
                 {{-- Table Header --}}
-                <thead class="bg-gray-50 border-b border-gray-200">
+                <thead class="bg-slate-50 border-b border-slate-200 text-[11px] font-bold uppercase tracking-wider text-slate-500">
                     <tr>
-                        <th class="px-5 py-4 text-left font-semibold text-gray-700">
-                            #
-                        </th>
-
-                        <th class="px-5 py-4 text-left font-semibold text-gray-700">
-                            Image
-                        </th>
-
-                        <th class="px-5 py-4 text-left font-semibold text-gray-700">
-                            Name
-                        </th>
-
-                        <th class="px-5 py-4 text-left font-semibold text-gray-700">
-                            Type
-                        </th>
-
-                        <th class="px-5 py-4 text-left font-semibold text-gray-700">
-                            Designation
-                        </th>
-
-                        <th class="px-5 py-4 text-left font-semibold text-gray-700">
-                            Subject
-                        </th>
-
-                        <th class="px-5 py-4 text-left font-semibold text-gray-700">
-                            Phone
-                        </th>
-
-                        <th class="px-5 py-4 text-left font-semibold text-gray-700">
-                            Status
-                        </th>
-
-                        <th class="px-5 py-4 text-right font-semibold text-gray-700">
-                            Action
-                        </th>
+                        <th class="px-3 py-2.5 w-10 text-center">#</th>
+                        <th class="px-3 py-2.5 w-12 text-center">ছবি</th>
+                        <th class="px-3.5 py-2.5">নাম ও ইমেইল</th>
+                        <th class="px-3 py-2.5 w-20 text-center">ধরন</th>
+                        <th class="px-3 py-2.5">পদবি ও বিষয়</th>
+                        <th class="px-3 py-2.5 w-28 whitespace-nowrap">ফোন</th>
+                        <th class="px-3 py-2.5 w-20 text-center whitespace-nowrap">অবস্থা</th>
+                        <th class="px-3 py-2.5 w-24 text-right whitespace-nowrap">অ্যাকশন</th>
                     </tr>
                 </thead>
 
                 {{-- Table Body --}}
-                <tbody class="divide-y divide-gray-100">
-
+                <tbody class="divide-y divide-slate-100 text-xs">
                     @forelse($teachers as $teacher)
-
-                        <tr class="hover:bg-gray-50 transition">
-
+                        <tr class="hover:bg-slate-50 transition">
                             {{-- Number --}}
-                            <td class="px-5 py-4 text-gray-500">
+                            <td class="px-3 py-2.5 text-center text-slate-400 font-mono">
                                 {{ $teachers->firstItem() + $loop->index }}
                             </td>
 
                             {{-- Image --}}
-                            <td class="px-5 py-4">
+                            <td class="px-3 py-2.5 text-center">
                                 @if($teacher->image)
-
-                                    <img
-                                        src="{{ asset($teacher->image) }}"
-                                        alt="{{ $teacher->name }}"
-                                        class="w-12 h-12 rounded-full object-cover border border-gray-200"
-                                    >
-
+                                    <img src="{{ asset($teacher->image) }}"
+                                         alt="{{ $teacher->name }}"
+                                         class="w-9 h-9 rounded-full object-cover border border-slate-200 mx-auto">
                                 @else
-
-                                    <div class="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center text-xl">
-                                        {{ $teacher->type === 'staff' ? '👨‍💼' : '👨‍🏫' }}
+                                    <div class="w-9 h-9 rounded-full bg-emerald-50 text-emerald-700 font-bold flex items-center justify-center text-xs mx-auto">
+                                        {{ mb_substr($teacher->name_bn ?: $teacher->name, 0, 1) }}
                                     </div>
-
                                 @endif
                             </td>
 
                             {{-- Name --}}
-                            <td class="px-5 py-4">
-                                <div class="font-semibold text-gray-900">
+                            <td class="px-3.5 py-2.5">
+                                <div class="font-bold text-slate-900 leading-snug line-clamp-1">
                                     {{ $teacher->name_bn ?: $teacher->name }}
                                 </div>
-
                                 @if($teacher->name_en)
-                                    <div class="text-xs text-gray-500">
+                                    <div class="text-[11px] text-slate-400 font-normal truncate">
                                         {{ $teacher->name_en }}
                                     </div>
                                 @endif
-
                                 @if($teacher->email)
-                                    <div class="text-xs text-gray-400 mt-0.5">
+                                    <div class="text-[10px] text-slate-400 truncate">
                                         {{ $teacher->email }}
                                     </div>
                                 @endif
                             </td>
 
                             {{-- Type --}}
-                            <td class="px-5 py-4">
+                            <td class="px-3 py-2.5 text-center whitespace-nowrap">
                                 @if($teacher->type === 'teacher')
-
-                                    <span class="inline-flex items-center px-2.5 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-semibold">
-                                        Teacher
+                                    <span class="inline-flex items-center px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-bold">
+                                        শিক্ষক
                                     </span>
-
                                 @else
-
-                                    <span class="inline-flex items-center px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-700 text-xs font-semibold">
-                                        Staff
+                                    <span class="inline-flex items-center px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200 text-[10px] font-bold">
+                                        স্টাফ
                                     </span>
-
                                 @endif
                             </td>
 
-                            {{-- Designation --}}
-                            <td class="px-5 py-4 text-gray-600">
-                                <div>{{ $teacher->designation_bn ?: $teacher->designation ?: '-' }}</div>
-                                @if($teacher->designation_en)
-                                    <div class="text-xs text-gray-400">{{ $teacher->designation_en }}</div>
-                                @endif
-                            </td>
-
-                            {{-- Subject --}}
-                            <td class="px-5 py-4 text-gray-600">
-                                @if($teacher->type === 'teacher')
-                                    {{ $teacher->subject ?: '-' }}
-                                @else
-                                    -
+                            {{-- Designation & Subject --}}
+                            <td class="px-3 py-2.5">
+                                <div class="font-semibold text-slate-800 line-clamp-1">
+                                    {{ $teacher->designation_bn ?: $teacher->designation ?: '-' }}
+                                </div>
+                                @if($teacher->type === 'teacher' && $teacher->subject)
+                                    <div class="text-[11px] text-slate-400">
+                                        বিষয়: {{ $teacher->subject }}
+                                    </div>
                                 @endif
                             </td>
 
                             {{-- Phone --}}
-                            <td class="px-5 py-4 text-gray-600">
+                            <td class="px-3 py-2.5 whitespace-nowrap text-slate-600 font-mono text-[11px]">
                                 {{ $teacher->phone ?: '-' }}
                             </td>
 
                             {{-- Status --}}
-                            <td class="px-5 py-4">
+                            <td class="px-3 py-2.5 text-center whitespace-nowrap">
                                 @if($teacher->status)
-
-                                    <span class="inline-flex px-2.5 py-1 rounded-full bg-green-100 text-green-700 text-xs font-semibold">
-                                        Active
+                                    <span class="inline-flex px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold">
+                                        সক্রিয়
                                     </span>
-
                                 @else
-
-                                    <span class="inline-flex px-2.5 py-1 rounded-full bg-gray-100 text-gray-600 text-xs font-semibold">
-                                        Inactive
+                                    <span class="inline-flex px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 text-[10px] font-semibold">
+                                        নিষ্ক্রিয়
                                     </span>
-
                                 @endif
                             </td>
 
                             {{-- Actions --}}
-                            <td class="px-5 py-4">
-                                <div class="flex items-center justify-end gap-2">
-
-                                    <a
-                                        href="{{ route('admin.teachers.edit', $teacher->id) }}"
-                                        class="px-3 py-1.5 rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-100 text-xs font-medium transition"
-                                    >
-                                        Edit
+                            <td class="px-3 py-2.5 text-right whitespace-nowrap">
+                                <div class="flex items-center justify-end gap-1">
+                                    <a href="{{ route('admin.teachers.edit', $teacher->id) }}"
+                                       title="সম্পাদনা করুন"
+                                       class="p-1.5 rounded-lg text-slate-500 hover:text-emerald-700 hover:bg-emerald-50 transition">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
                                     </a>
 
-                                    <form
-                                        action="{{ route('admin.teachers.destroy', $teacher->id) }}"
-                                        method="POST"
-                                        onsubmit="return confirm('Are you sure you want to delete this member?');"
-                                    >
+                                    <form action="{{ route('admin.teachers.destroy', $teacher->id) }}"
+                                          method="POST"
+                                          onsubmit="return confirm('আপনি কি নিশ্চিত যে এই শিক্ষক/স্টাফকে মুছে ফেলতে চান?');"
+                                          class="inline">
                                         @csrf
                                         @method('DELETE')
-
-                                        <button
-                                            type="submit"
-                                            class="px-3 py-1.5 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 text-xs font-medium transition"
-                                        >
-                                            Delete
+                                        <button type="submit" title="মুছে ফেলুন"
+                                                class="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
                                         </button>
                                     </form>
-
                                 </div>
                             </td>
-
-                        </tr>
+                        </tr>           </tr>
 
                     @empty
 

@@ -12,18 +12,11 @@
                 Manage curriculum and syllabuses for all classes (Bilingual: Bangla & English).
             </p>
         </div>
-        <a href="{{ route('admin.syllabuses.create') }}" class="inline-flex items-center justify-center gap-2 rounded-xl bg-indigo-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-700">
+        <a href="{{ route('admin.syllabuses.create') }}" class="inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-700">
             <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
             Add Syllabus
         </a>
     </div>
-
-    {{-- Messages --}}
-    @if(session('success'))
-        <div class="mb-6 rounded-2xl border border-green-200 bg-green-50 px-5 py-4 text-sm text-green-700">
-            {{ session('success') }}
-        </div>
-    @endif
 
     {{-- Table Card --}}
     <div class="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
@@ -45,61 +38,69 @@
         </div>
 
         <div class="overflow-x-auto">
-            <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gray-50 text-xs font-bold uppercase tracking-wider text-gray-500">
+            <table class="w-full divide-y divide-gray-200 text-xs">
+                <thead class="bg-gray-50 text-[11px] font-bold uppercase tracking-wider text-gray-500">
                     <tr>
-                        <th class="px-6 py-4 text-left">#</th>
-                        <th class="px-6 py-4 text-left">Class & Year</th>
-                        <th class="px-6 py-4 text-left">Title (BN / EN)</th>
-                        <th class="px-6 py-4 text-left">Subject</th>
-                        <th class="px-6 py-4 text-left">PDF File</th>
-                        <th class="px-6 py-4 text-left">Status</th>
-                        <th class="px-6 py-4 text-right">Actions</th>
+                        <th class="px-3 py-2.5 text-left w-10">#</th>
+                        <th class="px-3 py-2.5 text-left w-28">Class & Year</th>
+                        <th class="px-3 py-2.5 text-left">Title (BN / EN)</th>
+                        <th class="px-3 py-2.5 text-left w-32">Subject</th>
+                        <th class="px-3 py-2.5 text-center w-20">PDF File</th>
+                        <th class="px-3 py-2.5 text-center w-20">Status</th>
+                        <th class="px-3 py-2.5 text-right w-20">Actions</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-gray-100 bg-white text-sm">
+                <tbody class="divide-y divide-gray-100 bg-white text-slate-700">
                     @forelse($syllabuses as $item)
                         <tr class="hover:bg-gray-50 transition">
-                            <td class="px-6 py-4 font-mono text-gray-500">{{ $loop->iteration }}</td>
-                            <td class="px-6 py-4">
+                            <td class="px-3 py-2.5 font-mono text-gray-400">{{ $loop->iteration }}</td>
+                            <td class="px-3 py-2.5 whitespace-nowrap">
                                 <span class="font-bold text-gray-900 block">{{ $item->class }}</span>
-                                <span class="text-xs text-gray-400">{{ $item->academic_year }}</span>
+                                <span class="text-[11px] text-gray-400">{{ $item->academic_year }}</span>
                             </td>
-                            <td class="px-6 py-4">
-                                <span class="font-semibold text-gray-900 block">{{ $item->title_bn }}</span>
-                                <span class="text-xs text-gray-500 block">{{ $item->title_en }}</span>
+                            <td class="px-3 py-2.5">
+                                <span class="font-bold text-gray-900 block line-clamp-1">{{ $item->title_bn }}</span>
+                                <span class="text-[11px] text-gray-500 block line-clamp-1">{{ $item->title_en }}</span>
                             </td>
-                            <td class="px-6 py-4 font-medium text-gray-700">
+                            <td class="px-3 py-2.5 font-medium text-gray-700">
                                 {{ $item->subject_name_bn ?? $item->subject_name_en ?? '-' }}
                             </td>
-                            <td class="px-6 py-4">
+                            <td class="px-3 py-2.5 text-center whitespace-nowrap">
                                 @if($item->file_path)
-                                    <a href="{{ asset($item->file_path) }}" target="_blank" class="text-indigo-600 hover:underline text-xs font-semibold">View PDF</a>
+                                    <a href="{{ asset($item->file_path) }}" target="_blank" class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-red-50 text-red-600 hover:bg-red-100 text-[11px] font-semibold">
+                                        📄 PDF
+                                    </a>
                                 @else
-                                    <span class="text-xs text-gray-400">No file</span>
+                                    <span class="text-[11px] text-gray-400">—</span>
                                 @endif
                             </td>
-                            <td class="px-6 py-4">
+                            <td class="px-3 py-2.5 text-center whitespace-nowrap">
                                 <form method="POST" action="{{ route('admin.syllabuses.toggle-status', $item->id) }}">
                                     @csrf
                                     @method('PATCH')
-                                    <button type="submit" class="px-2.5 py-1 text-xs font-bold rounded-full {{ $item->status ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700' }}">
+                                    <button type="submit" class="px-2 py-0.5 text-[11px] font-bold rounded-full {{ $item->status ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' : 'bg-slate-100 text-slate-600 border border-slate-200' }}">
                                         {{ $item->status ? 'Active' : 'Inactive' }}
                                     </button>
                                 </form>
                             </td>
-                            <td class="px-6 py-4 text-right space-x-2">
-                                <a href="{{ route('admin.syllabuses.edit', $item->id) }}" class="text-blue-600 hover:text-blue-800 font-semibold text-xs">Edit</a>
-                                <form method="POST" action="{{ route('admin.syllabuses.destroy', $item->id) }}" class="inline-block" onsubmit="return confirm('Are you sure you want to delete this syllabus?')">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="text-red-600 hover:text-red-800 font-semibold text-xs">Delete</button>
-                                </form>
+                            <td class="px-3 py-2.5 text-right whitespace-nowrap">
+                                <div class="flex items-center justify-end gap-1">
+                                    <a href="{{ route('admin.syllabuses.edit', $item->id) }}" class="p-1 rounded bg-indigo-50 text-indigo-600 hover:bg-indigo-600 hover:text-white transition" title="Edit">
+                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.5-8.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 7.5-7.5z"/></svg>
+                                    </a>
+                                    <form method="POST" action="{{ route('admin.syllabuses.destroy', $item->id) }}" class="inline-block" onsubmit="return confirm('Are you sure you want to delete this syllabus?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="p-1 rounded bg-rose-50 text-rose-600 hover:bg-rose-600 hover:text-white transition" title="Delete">
+                                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-8V4a1 1 0 00-1-1h-3a1 1 0 00-1 1v3m-4 0h14"/></svg>
+                                        </button>
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="7" class="px-6 py-8 text-center text-gray-400">No syllabuses found.</td>
+                            <td colspan="7" class="px-3 py-6 text-center text-gray-400">No syllabuses found.</td>
                         </tr>
                     @endforelse
                 </tbody>

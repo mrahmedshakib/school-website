@@ -31,20 +31,6 @@
         </div>
     </div>
 
-    {{-- Alerts --}}
-    @if(session('success'))
-        <div class="p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 flex items-center gap-3 shadow-sm">
-            <span class="text-2xl">✅</span>
-            <div class="font-medium">{{ session('success') }}</div>
-        </div>
-    @endif
-    @if(session('error'))
-        <div class="p-4 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 flex items-center gap-3 shadow-sm">
-            <span class="text-2xl">⚠️</span>
-            <div class="font-medium">{{ session('error') }}</div>
-        </div>
-    @endif
-
     {{-- Class & Year Filter --}}
     <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
         <form action="{{ route('admin.admission-lottery.index') }}" method="GET" class="grid grid-cols-1 sm:grid-cols-12 gap-4 items-end">
@@ -216,47 +202,47 @@
             </div>
 
             <div class="overflow-x-auto">
-                <table class="w-full text-left text-sm text-slate-600">
+                <table class="w-full text-left text-xs text-slate-600">
                     <thead class="bg-slate-50 text-[11px] font-bold uppercase tracking-wider text-slate-500 border-b border-slate-200">
                         <tr>
-                            <th class="px-4 py-3 text-center">র‍্যাংক</th>
-                            <th class="px-4 py-3">ছবি</th>
-                            <th class="px-4 py-3">আবেদন নম্বর</th>
-                            <th class="px-4 py-3">শিক্ষার্থীর নাম</th>
-                            <th class="px-4 py-3">অভিভাবকের মোবাইল</th>
-                            <th class="px-4 py-3">কোটা</th>
-                            <th class="px-4 py-3 text-center">ভর্তি স্ট্যাটাস</th>
-                            <th class="px-4 py-3 text-right">পদক্ষেপ</th>
+                            <th class="px-3 py-2.5 text-center w-14">র‍্যাংক</th>
+                            <th class="px-3 py-2.5 text-center w-12">ছবি</th>
+                            <th class="px-3 py-2.5 w-28">আবেদন নম্বর</th>
+                            <th class="px-3 py-2.5">শিক্ষার্থীর নাম</th>
+                            <th class="px-3 py-2.5 w-28">অভিভাবকের মোবাইল</th>
+                            <th class="px-3 py-2.5 w-20">কোটা</th>
+                            <th class="px-3 py-2.5 text-center w-24">ভর্তি স্ট্যাটাস</th>
+                            <th class="px-3 py-2.5 text-right w-28">পদক্ষেপ</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-slate-100">
                         @foreach($selectedCandidates as $student)
                             <tr class="hover:bg-slate-50/80 transition">
-                                <td class="px-4 py-3 text-center font-black text-indigo-700">
-                                    <span class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-indigo-100">
+                                <td class="px-3 py-2 text-center font-black text-indigo-700 whitespace-nowrap">
+                                    <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-indigo-100 text-[11px]">
                                         #{{ $student->lottery_rank }}
                                     </span>
                                 </td>
-                                <td class="px-4 py-3">
+                                <td class="px-3 py-2 text-center">
                                     @if($student->student_photo)
-                                        <img src="{{ asset($student->student_photo) }}" alt="" class="w-10 h-10 rounded-lg object-cover border border-slate-200">
+                                        <img src="{{ asset($student->student_photo) }}" alt="" class="w-8 h-8 rounded-lg object-cover border border-slate-200 mx-auto">
                                     @else
-                                        <div class="w-10 h-10 rounded-lg bg-slate-200 flex items-center justify-center text-xs font-bold text-slate-500">
+                                        <div class="w-8 h-8 rounded-lg bg-slate-200 flex items-center justify-center text-[10px] font-bold text-slate-500 mx-auto">
                                             N/A
                                         </div>
                                     @endif
                                 </td>
-                                <td class="px-4 py-3 font-mono font-bold text-slate-900">
+                                <td class="px-3 py-2 font-mono font-bold text-slate-900 whitespace-nowrap">
                                     {{ $student->application_no }}
                                 </td>
-                                <td class="px-4 py-3">
-                                    <div class="font-bold text-slate-900">{{ $student->student_name_bn ?? $student->student_name }}</div>
-                                    <div class="text-xs text-slate-500">{{ $student->student_name_en }}</div>
+                                <td class="px-3 py-2">
+                                    <div class="font-bold text-slate-900 line-clamp-1">{{ $student->student_name_bn ?? $student->student_name }}</div>
+                                    <div class="text-[11px] text-slate-500 line-clamp-1">{{ $student->student_name_en }}</div>
                                 </td>
-                                <td class="px-4 py-3 font-medium text-slate-700">
+                                <td class="px-3 py-2 font-medium text-slate-700 whitespace-nowrap text-[11px]">
                                     {{ $student->guardian_phone }}
                                 </td>
-                                <td class="px-4 py-3">
+                                <td class="px-3 py-2 whitespace-nowrap">
                                     @php
                                         $quotaLabels = [
                                             'general' => ['সাধারণ', 'bg-blue-50 text-blue-700 border-blue-200'],
@@ -266,28 +252,28 @@
                                         ];
                                         $qInfo = $quotaLabels[$student->lottery_quota] ?? ['সাধারণ', 'bg-slate-100 text-slate-700 border-slate-200'];
                                     @endphp
-                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold border {{ $qInfo[1] }}">
+                                    <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold border {{ $qInfo[1] }}">
                                         {{ $qInfo[0] }}
                                     </span>
                                 </td>
-                                <td class="px-4 py-3 text-center">
+                                <td class="px-3 py-2 text-center whitespace-nowrap">
                                     @if($student->is_confirmed)
-                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800">
-                                            ✓ ভর্তি নিশ্চিত
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800">
+                                            ✓ নিশ্চিত
                                         </span>
                                     @else
-                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-100 text-amber-800">
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-800">
                                             অপেক্ষমাণ
                                         </span>
                                     @endif
                                 </td>
-                                <td class="px-4 py-3 text-right">
-                                    <div class="inline-flex items-center gap-1.5">
+                                <td class="px-3 py-2 text-right whitespace-nowrap">
+                                    <div class="inline-flex items-center gap-1">
                                         @if(!$student->is_confirmed)
                                             <form action="{{ route('admin.admission-lottery.confirm', $student->id) }}" method="POST" onsubmit="return confirm('{{ $student->student_name }} শিক্ষার্থীর ভর্তি নিশ্চিত করতে চান?');">
                                                 @csrf
-                                                <button type="submit" class="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-sm transition">
-                                                    ভর্তি কনফার্ম
+                                                <button type="submit" class="px-2 py-1 rounded bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-[11px] shadow-sm transition">
+                                                    কনফার্ম
                                                 </button>
                                             </form>
                                         @endif
@@ -320,36 +306,36 @@
             </div>
 
             <div class="overflow-x-auto">
-                <table class="w-full text-left text-sm text-slate-600">
+                <table class="w-full text-left text-xs text-slate-600">
                     <thead class="bg-slate-50 text-[11px] font-bold uppercase tracking-wider text-slate-500 border-b border-slate-200">
                         <tr>
-                            <th class="px-4 py-3 text-center">অপেক্ষমাণ ক্র</th>
-                            <th class="px-4 py-3">আবেদন নম্বর</th>
-                            <th class="px-4 py-3">শিক্ষার্থীর নাম</th>
-                            <th class="px-4 py-3">মোবাইল</th>
-                            <th class="px-4 py-3 text-right">পদক্ষেপ</th>
+                            <th class="px-3 py-2.5 text-center w-20">অপেক্ষমাণ ক্র</th>
+                            <th class="px-3 py-2.5 w-28">আবেদন নম্বর</th>
+                            <th class="px-3 py-2.5">শিক্ষার্থীর নাম</th>
+                            <th class="px-3 py-2.5 w-28">মোবাইল</th>
+                            <th class="px-3 py-2.5 text-right w-28">পদক্ষেপ</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-slate-100">
                         @foreach($waitingCandidates as $wait)
                             <tr class="hover:bg-slate-50/80 transition">
-                                <td class="px-4 py-3 text-center font-bold text-amber-700">
+                                <td class="px-3 py-2 text-center font-bold text-amber-700 whitespace-nowrap">
                                     WL-{{ $loop->iteration }}
                                 </td>
-                                <td class="px-4 py-3 font-mono font-medium text-slate-900">
+                                <td class="px-3 py-2 font-mono font-medium text-slate-900 whitespace-nowrap">
                                     {{ $wait->application_no }}
                                 </td>
-                                <td class="px-4 py-3 font-medium text-slate-900">
-                                    {{ $wait->student_name_bn ?? $wait->student_name }}
+                                <td class="px-3 py-2 font-medium text-slate-900">
+                                    <span class="line-clamp-1">{{ $wait->student_name_bn ?? $wait->student_name }}</span>
                                 </td>
-                                <td class="px-4 py-3 text-slate-600">
+                                <td class="px-3 py-2 text-slate-600 whitespace-nowrap text-[11px]">
                                     {{ $wait->guardian_phone }}
                                 </td>
-                                <td class="px-4 py-3 text-right">
+                                <td class="px-3 py-2 text-right whitespace-nowrap">
                                     <form action="{{ route('admin.admission-lottery.confirm', $wait->id) }}" method="POST" class="inline-block" onsubmit="return confirm('অপেক্ষমাণ তালিকা থেকে এই শিক্ষার্থীর ভর্তি নিশ্চিত করবেন?');">
                                         @csrf
-                                        <button type="submit" class="px-3 py-1 rounded-lg bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs transition">
-                                            ভর্তি গ্রহণ করুন
+                                        <button type="submit" class="px-2 py-1 rounded bg-amber-600 hover:bg-amber-700 text-white font-bold text-[11px] transition">
+                                            ভর্তি গ্রহণ
                                         </button>
                                     </form>
                                     <a href="{{ route('admin.admission-applications.show', $wait->id) }}" class="inline-block ml-1 p-1 text-slate-500 hover:text-slate-800">

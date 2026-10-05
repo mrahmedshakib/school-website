@@ -58,6 +58,21 @@ class WebsiteSettingController extends Controller
             'meta_title' => ['nullable', 'string', 'max:255'],
             'meta_description' => ['nullable', 'string'],
             'meta_keywords' => ['nullable', 'string'],
+
+            'developer_name' => ['nullable', 'string', 'max:255'],
+            'developer_name_en' => ['nullable', 'string', 'max:255'],
+            'developer_username' => ['nullable', 'string', 'max:255'],
+            'developer_role' => ['nullable', 'string', 'max:255'],
+            'developer_organization' => ['nullable', 'string', 'max:255'],
+            'developer_email' => ['nullable', 'email', 'max:255'],
+            'developer_phone' => ['nullable', 'string', 'max:50'],
+            'developer_whatsapp' => ['nullable', 'string', 'max:50'],
+            'developer_photo' => ['nullable', 'string', 'max:500'],
+            'developer_portfolio' => ['nullable', 'url', 'max:255'],
+            'developer_github' => ['nullable', 'url', 'max:255'],
+            'developer_linkedin' => ['nullable', 'url', 'max:255'],
+            'developer_whatsapp_message' => ['nullable', 'string'],
+            'developer_contact_note' => ['nullable', 'string'],
         ]);
 
         /*
@@ -82,6 +97,28 @@ class WebsiteSettingController extends Controller
             'logo',
             'favicon',
         ]);
+
+        // Only Super Admin is permitted to modify developer profile and contact details
+        if (!auth()->user()->isSuperAdmin()) {
+            $developerFields = [
+                'developer_name',
+                'developer_name_en',
+                'developer_username',
+                'developer_role',
+                'developer_organization',
+                'developer_email',
+                'developer_whatsapp',
+                'developer_photo',
+                'developer_portfolio',
+                'developer_linkedin',
+                'developer_github',
+                'developer_whatsapp_message',
+                'developer_contact_note',
+            ];
+            foreach ($developerFields as $field) {
+                unset($data[$field]);
+            }
+        }
 
         /*
         |--------------------------------------------------------------------------

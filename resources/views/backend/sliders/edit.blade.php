@@ -300,8 +300,8 @@
                     class="w-5 h-5
                            rounded
                            border-gray-300
-                           text-indigo-600
-                           focus:ring-indigo-500"
+                           text-emerald-600
+                           focus:ring-emerald-500"
                 >
 
                 <span class="text-sm
@@ -326,12 +326,12 @@
             <button
                 type="submit"
                 class="px-6 py-3
-                       rounded-lg
-                       bg-indigo-600
+                       rounded-xl
+                       bg-emerald-600
                        text-white
                        font-semibold
-                       hover:bg-indigo-700
-                       transition"
+                       hover:bg-emerald-700
+                       transition shadow-sm"
             >
 
                 Update Slider

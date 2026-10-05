@@ -22,6 +22,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role_id',
+        'phone',
+        'status',
     ];
 
     /**
@@ -44,6 +47,64 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'status' => 'boolean',
         ];
+    }
+
+    /**
+     * The role assigned to the user.
+     */
+    public function role(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Role::class);
+    }
+
+    /**
+     * Check if user is Super Admin.
+     */
+    public function isSuperAdmin(): bool
+    {
+        return ($this->role && $this->role->isSuperAdmin()) || $this->id === 1;
+    }
+
+    /**
+     * Check if user has a specific role (by slug or name).
+     */
+    public function hasRole(string|array $roles): bool
+    {
+        if ($this->isSuperAdmin()) {
+            return true;
+        }
+
+        if (!$this->role) {
+            return false;
+        }
+
+        $roles = (array) $roles;
+        return in_array($this->role->slug, $roles, true) || in_array($this->role->name, $roles, true);
+    }
+
+    /**
+     * Check if user has a specific permission.
+     */
+    public function hasPermission(string $permissionSlug): bool
+    {
+        if ($this->isSuperAdmin()) {
+            return true;
+        }
+
+        if (!$this->status) {
+            return false;
+        }
+
+        return $this->role ? $this->role->hasPermission($permissionSlug) : false;
+    }
+
+    /**
+     * Get formatted role name.
+     */
+    public function roleName(): string
+    {
+        return $this->role?->name ?? 'User';
     }
 }

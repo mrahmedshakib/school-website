@@ -23,8 +23,8 @@
 
         <a href="{{ route('admin.admissions.create') }}"
            class="inline-flex items-center justify-center gap-2 px-5 py-2.5
-                  rounded-lg bg-indigo-600 text-white text-sm font-semibold
-                  hover:bg-indigo-700 transition shadow-sm">
+                  rounded-xl bg-emerald-600 text-white text-sm font-semibold
+                  hover:bg-emerald-700 transition shadow-sm">
 
             <span class="text-lg">＋</span>
             Add Admission
@@ -32,26 +32,6 @@
         </a>
 
     </div>
-
-
-    {{-- =========================================================
-        SUCCESS MESSAGE
-    ========================================================== --}}
-    @if(session('success'))
-
-        <div class="mb-6 flex items-start gap-3 rounded-lg
-                    border border-green-200 bg-green-50 px-4 py-3
-                    text-sm text-green-700">
-
-            <span class="text-lg">✓</span>
-
-            <div>
-                {{ session('success') }}
-            </div>
-
-        </div>
-
-    @endif
 
 
     {{-- =========================================================
@@ -85,40 +65,40 @@
 
         <div class="overflow-x-auto">
 
-            <table class="w-full text-sm">
+            <table class="w-full text-xs">
 
                 {{-- =================================================
                     TABLE HEADER
                 ================================================== --}}
-                <thead class="bg-gray-50 border-b border-gray-200">
+                <thead class="bg-gray-50 border-b border-gray-200 text-[11px] font-bold uppercase tracking-wider text-gray-500">
 
                     <tr>
 
-                        <th class="px-5 py-4 text-left font-semibold text-gray-700 whitespace-nowrap">
+                        <th class="px-3 py-2.5 text-left w-10">
                             #
                         </th>
 
-                        <th class="px-5 py-4 text-left font-semibold text-gray-700 whitespace-nowrap">
+                        <th class="px-3 py-2.5 text-left w-16">
                             Image
                         </th>
 
-                        <th class="px-5 py-4 text-left font-semibold text-gray-700 min-w-[260px]">
+                        <th class="px-3 py-2.5 text-left">
                             Admission
                         </th>
 
-                        <th class="px-5 py-4 text-left font-semibold text-gray-700 whitespace-nowrap">
+                        <th class="px-3 py-2.5 text-left w-36">
                             Application Period
                         </th>
 
-                        <th class="px-5 py-4 text-center font-semibold text-gray-700 whitespace-nowrap">
+                        <th class="px-3 py-2.5 text-center w-20">
                             Documents
                         </th>
 
-                        <th class="px-5 py-4 text-center font-semibold text-gray-700 whitespace-nowrap">
+                        <th class="px-3 py-2.5 text-center w-20">
                             Status
                         </th>
 
-                        <th class="px-5 py-4 text-right font-semibold text-gray-700 whitespace-nowrap">
+                        <th class="px-3 py-2.5 text-right w-20">
                             Action
                         </th>
 
@@ -130,7 +110,7 @@
                 {{-- =================================================
                     TABLE BODY
                 ================================================== --}}
-                <tbody class="divide-y divide-gray-100">
+                <tbody class="divide-y divide-gray-100 text-gray-700">
 
                     @forelse($admissions as $admission)
 
@@ -140,7 +120,7 @@
                             {{-- =====================================
                                 NUMBER
                             ====================================== --}}
-                            <td class="px-5 py-4 text-gray-500 align-top">
+                            <td class="px-3 py-2.5 font-mono text-gray-400">
 
                                 {{ $admissions->firstItem() + $loop->index }}
 
@@ -150,7 +130,7 @@
                             {{-- =====================================
                                 IMAGE
                             ====================================== --}}
-                            <td class="px-5 py-4 align-top">
+                            <td class="px-3 py-2.5">
 
                                 @if($admission->image)
 
@@ -161,7 +141,7 @@
                                         <img
                                             src="{{ asset($admission->image) }}"
                                             alt="{{ $admission->title }}"
-                                            class="w-20 h-14 object-cover rounded-lg
+                                            class="w-12 h-9 object-cover rounded-md
                                                    border border-gray-200
                                                    hover:opacity-80 transition"
                                         >
@@ -170,13 +150,13 @@
 
                                 @else
 
-                                    <div class="w-20 h-14 rounded-lg
+                                    <div class="w-12 h-9 rounded-md
                                                 bg-gray-100
                                                 border border-gray-200
                                                 flex items-center justify-center
-                                                text-gray-400">
+                                                text-gray-400 text-[10px]">
 
-                                        <span class="text-xl">🖼️</span>
+                                        🖼️
 
                                     </div>
 
@@ -188,17 +168,17 @@
                             {{-- =====================================
                                 TITLE + DESCRIPTION
                             ====================================== --}}
-                            <td class="px-5 py-4 align-top">
+                            <td class="px-3 py-2.5">
 
-                                <div class="font-semibold text-gray-900">
+                                <div class="font-bold text-gray-900 line-clamp-1">
                                     {{ $admission->title }}
                                 </div>
 
 
                                 @if($admission->description)
 
-                                    <div class="text-xs text-gray-500 mt-1
-                                                line-clamp-2 max-w-md">
+                                    <div class="text-[11px] text-gray-500 mt-0.5
+                                                line-clamp-1">
 
                                         {{ $admission->description }}
 
@@ -213,11 +193,11 @@
                                     <a href="{{ $admission->application_url }}"
                                        target="_blank"
                                        rel="noopener noreferrer"
-                                       class="inline-flex items-center gap-1 mt-2
-                                              text-xs font-medium text-indigo-600
-                                              hover:text-indigo-800">
+                                       class="inline-flex items-center gap-1 mt-0.5
+                                              text-[11px] font-medium text-emerald-600
+                                              hover:text-emerald-800">
 
-                                        🔗 Application Link
+                                        🔗 Link
 
                                     </a>
 
@@ -229,31 +209,25 @@
                             {{-- =====================================
                                 APPLICATION PERIOD
                             ====================================== --}}
-                            <td class="px-5 py-4 text-gray-600 align-top">
+                            <td class="px-3 py-2.5 text-gray-600 whitespace-nowrap">
 
                                 @if($admission->application_start || $admission->application_end)
 
-                                    <div class="flex items-center gap-2">
+                                    <div class="text-[11px]">
 
-                                        <span class="text-xs text-gray-400">
-                                            From
-                                        </span>
-
+                                        <span class="text-gray-400">From:</span>
                                         <span class="font-medium text-gray-700">
-                                            {{ $admission->application_start?->format('d M Y') ?? '—' }}
+                                            {{ $admission->application_start?->format('d M y') ?? '—' }}
                                         </span>
 
                                     </div>
 
 
-                                    <div class="flex items-center gap-2 mt-1">
+                                    <div class="text-[11px]">
 
-                                        <span class="text-xs text-gray-400">
-                                            To
-                                        </span>
-
+                                        <span class="text-gray-400">To:</span>
                                         <span class="font-medium text-gray-700">
-                                            {{ $admission->application_end?->format('d M Y') ?? '—' }}
+                                            {{ $admission->application_end?->format('d M y') ?? '—' }}
                                         </span>
 
                                     </div>
@@ -272,9 +246,9 @@
                             {{-- =====================================
                                 DOCUMENTS
                             ====================================== --}}
-                            <td class="px-5 py-4 align-top">
+                            <td class="px-3 py-2.5 whitespace-nowrap">
 
-                                <div class="flex justify-center items-center gap-2">
+                                <div class="flex justify-center items-center gap-1">
 
 
                                     {{-- PDF --}}
@@ -285,9 +259,9 @@
                                            rel="noopener noreferrer"
                                            title="View PDF"
                                            class="inline-flex items-center justify-center
-                                                  w-9 h-9 rounded-lg
+                                                  w-6 h-6 rounded
                                                   bg-red-50 text-red-600
-                                                  hover:bg-red-100 transition">
+                                                  hover:bg-red-100 transition text-xs">
 
                                             📄
 
@@ -298,8 +272,8 @@
                                         <span
                                             title="No PDF"
                                             class="inline-flex items-center justify-center
-                                                   w-9 h-9 rounded-lg
-                                                   bg-gray-50 text-gray-300">
+                                                   w-6 h-6 rounded
+                                                   bg-gray-50 text-gray-300 text-xs">
 
                                             📄
 
@@ -316,9 +290,9 @@
                                            rel="noopener noreferrer"
                                            title="View Image"
                                            class="inline-flex items-center justify-center
-                                                  w-9 h-9 rounded-lg
+                                                  w-6 h-6 rounded
                                                   bg-blue-50 text-blue-600
-                                                  hover:bg-blue-100 transition">
+                                                  hover:bg-blue-100 transition text-xs">
 
                                             🖼️
 
@@ -329,8 +303,8 @@
                                         <span
                                             title="No Image"
                                             class="inline-flex items-center justify-center
-                                                   w-9 h-9 rounded-lg
-                                                   bg-gray-50 text-gray-300">
+                                                   w-6 h-6 rounded
+                                                   bg-gray-50 text-gray-300 text-xs">
 
                                             🖼️
 
@@ -346,16 +320,16 @@
                             {{-- =====================================
                                 STATUS
                             ====================================== --}}
-                            <td class="px-5 py-4 text-center align-top">
+                            <td class="px-3 py-2.5 text-center whitespace-nowrap">
 
                                 @if($admission->status)
 
-                                    <span class="inline-flex items-center gap-1.5
-                                                 px-2.5 py-1 rounded-full
-                                                 bg-green-100 text-green-700
-                                                 text-xs font-semibold">
+                                    <span class="inline-flex items-center gap-1
+                                                 px-2 py-0.5 rounded-full
+                                                 bg-emerald-50 text-emerald-700 border border-emerald-200
+                                                 text-[11px] font-bold">
 
-                                        <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
 
                                         Active
 
@@ -363,10 +337,10 @@
 
                                 @else
 
-                                    <span class="inline-flex items-center gap-1.5
-                                                 px-2.5 py-1 rounded-full
-                                                 bg-gray-100 text-gray-600
-                                                 text-xs font-semibold">
+                                    <span class="inline-flex items-center gap-1
+                                                 px-2 py-0.5 rounded-full
+                                                 bg-gray-100 text-gray-600 border border-gray-200
+                                                 text-[11px] font-bold">
 
                                         <span class="w-1.5 h-1.5 rounded-full bg-gray-400"></span>
 
@@ -382,18 +356,18 @@
                             {{-- =====================================
                                 ACTIONS
                             ====================================== --}}
-                            <td class="px-5 py-4 align-top">
+                            <td class="px-3 py-2.5 whitespace-nowrap">
 
-                                <div class="flex justify-end items-center gap-2">
+                                <div class="flex justify-end items-center gap-1">
 
 
                                     {{-- EDIT --}}
                                     <a href="{{ route('admin.admissions.edit', $admission) }}"
                                        title="Edit Admission"
                                        class="inline-flex items-center justify-center
-                                              w-9 h-9 rounded-lg
-                                              bg-blue-50 text-blue-700
-                                              hover:bg-blue-100 transition">
+                                              w-7 h-7 rounded-lg
+                                              bg-indigo-50 text-indigo-700
+                                              hover:bg-indigo-100 transition">
 
                                         ✏️
 
@@ -414,7 +388,7 @@
                                             type="submit"
                                             title="Delete Admission"
                                             class="inline-flex items-center justify-center
-                                                   w-9 h-9 rounded-lg
+                                                   w-7 h-7 rounded-lg
                                                    bg-red-50 text-red-700
                                                    hover:bg-red-100 transition"
                                         >

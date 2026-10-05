@@ -22,7 +22,7 @@
 
         <div class="flex items-center gap-3">
             <a href="{{ route('admin.admission-lottery.index') }}"
-               class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm shadow-md transition">
+               class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-md transition">
                 <span>🎲</span> ডিজিটাল লটারি ড্র
             </a>
             <a href="{{ route('admin.admission-payments.index') }}"
@@ -31,14 +31,6 @@
             </a>
         </div>
     </div>
-
-    {{-- Success Message --}}
-    @if(session('success'))
-        <div class="p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 flex items-center gap-3 shadow-sm">
-            <span class="text-xl">✅</span>
-            <div class="font-medium text-sm">{{ session('success') }}</div>
-        </div>
-    @endif
 
     {{-- Statistics Overview --}}
     <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
@@ -124,124 +116,122 @@
     {{-- Applications Table --}}
     <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
         <div class="overflow-x-auto">
-            <table class="w-full text-left text-sm text-slate-600">
+            <table class="w-full text-left text-xs text-slate-600">
                 <thead class="bg-slate-50 border-b border-slate-200 text-[11px] font-bold uppercase tracking-wider text-slate-500">
                     <tr>
-                        <th class="px-5 py-4">#</th>
-                        <th class="px-5 py-4">ছবি</th>
-                        <th class="px-5 py-4">আবেদন নম্বর</th>
-                        <th class="px-5 py-4">শিক্ষার্থী ও অভিভাবক</th>
-                        <th class="px-5 py-4">শ্রেণি ও বছর</th>
-                        <th class="px-5 py-4 text-center">ফি স্ট্যাটাস</th>
-                        <th class="px-5 py-4 text-center">লটারি / ভর্তি</th>
-                        <th class="px-5 py-4 text-right">অ্যাকশন</th>
+                        <th class="px-2.5 py-2.5 w-10 text-center">#</th>
+                        <th class="px-2.5 py-2.5 w-12 text-center">ছবি</th>
+                        <th class="px-3 py-2.5 w-32">আবেদন নম্বর</th>
+                        <th class="px-3 py-2.5">শিক্ষার্থী ও অভিভাবক</th>
+                        <th class="px-3 py-2.5 w-24">শ্রেণি</th>
+                        <th class="px-3 py-2.5 w-24 text-center whitespace-nowrap">ফি স্ট্যাটাস</th>
+                        <th class="px-3 py-2.5 w-24 text-center whitespace-nowrap">লটারি/অবস্থা</th>
+                        <th class="px-3 py-2.5 w-28 text-right whitespace-nowrap">অ্যাকশন</th>
                     </tr>
                 </thead>
 
-                <tbody class="divide-y divide-slate-100">
+                <tbody class="divide-y divide-slate-100 text-xs">
                     @forelse($applications as $application)
                         @php
                             $approvedPayment = $application->payments->where('status', 'approved')->first();
                         @endphp
                         <tr class="hover:bg-slate-50/80 transition">
-                            <td class="px-5 py-4 text-slate-400 font-mono text-xs">
+                            <td class="px-2.5 py-2.5 text-center text-slate-400 font-mono text-[11px]">
                                 {{ $applications->firstItem() + $loop->index }}
                             </td>
 
-                            <td class="px-5 py-4">
+                            <td class="px-2.5 py-2.5 text-center">
                                 @if($application->student_photo)
                                     <img src="{{ asset($application->student_photo) }}" alt=""
-                                         class="w-11 h-11 rounded-xl object-cover border border-slate-200 shadow-sm">
+                                         class="w-9 h-9 rounded-xl object-cover border border-slate-200 mx-auto">
                                 @else
-                                    <div class="w-11 h-11 rounded-xl bg-slate-100 text-slate-400 flex items-center justify-center text-xs font-bold border border-slate-200">
+                                    <div class="w-9 h-9 rounded-xl bg-slate-100 text-slate-400 flex items-center justify-center text-[10px] font-bold border border-slate-200 mx-auto">
                                         N/A
                                     </div>
                                 @endif
                             </td>
 
-                            <td class="px-5 py-4">
-                                <a href="{{ route('admin.admission-applications.show', $application) }}" class="font-mono font-bold text-indigo-600 hover:text-indigo-800">
+                            <td class="px-3 py-2.5">
+                                <a href="{{ route('admin.admission-applications.show', $application) }}" class="font-mono font-bold text-emerald-700 hover:text-emerald-900">
                                     {{ $application->application_no }}
                                 </a>
-                                <p class="text-[11px] text-slate-400 mt-0.5">
+                                <p class="text-[10px] text-slate-400">
                                     {{ $application->created_at->format('d M, Y') }}
                                 </p>
                             </td>
 
-                            <td class="px-5 py-4">
-                                <p class="font-bold text-slate-900 leading-tight">
+                            <td class="px-3 py-2.5">
+                                <p class="font-bold text-slate-900 leading-tight line-clamp-1">
                                     {{ $application->student_name_bn ?? $application->student_name }}
                                 </p>
-                                <p class="text-xs text-slate-500 mt-0.5">
-                                    পিতা: {{ $application->father_name }}
-                                </p>
-                                <p class="text-xs text-slate-600 font-mono mt-0.5">
-                                    📞 {{ $application->guardian_phone }}
-                                </p>
+                                <div class="flex items-center gap-1.5 text-[11px] text-slate-500 mt-0.5">
+                                    <span class="truncate max-w-[130px]">পিতা: {{ $application->father_name }}</span>
+                                    <span>•</span>
+                                    <span class="font-mono">{{ $application->guardian_phone }}</span>
+                                </div>
                             </td>
 
-                            <td class="px-5 py-4">
-                                <span class="inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-100 text-slate-800">
+                            <td class="px-3 py-2.5">
+                                <span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-semibold bg-slate-100 text-slate-800">
                                     {{ $application->class }}
                                 </span>
                                 @if($application->group_name)
-                                    <span class="block text-[11px] text-slate-500 mt-1">বিভাগ: {{ $application->group_name }}</span>
+                                    <span class="block text-[10px] text-slate-500 mt-0.5">{{ $application->group_name }}</span>
                                 @endif
-                                <span class="block text-[11px] text-slate-400">শিক্ষাবর্ষ: {{ $application->academic_year ?? date('Y') }}</span>
                             </td>
 
-                            <td class="px-5 py-4 text-center">
+                            <td class="px-3 py-2.5 text-center whitespace-nowrap">
                                 @if($approvedPayment)
-                                    <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800">
+                                    <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800">
                                         <span>✓</span> পরিশোধিত
                                     </span>
                                 @elseif($application->payments->count() > 0)
-                                    <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-800">
+                                    <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-800">
                                         যাচাই চলছে
                                     </span>
                                 @else
-                                    <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-slate-100 text-slate-600">
+                                    <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-600">
                                         অপরিশোধিত
                                     </span>
                                 @endif
                             </td>
 
-                            <td class="px-5 py-4 text-center">
+                            <td class="px-3 py-2.5 text-center whitespace-nowrap">
                                 @if($application->is_confirmed)
-                                    <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-black bg-blue-100 text-blue-800">
+                                    <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-black bg-blue-100 text-blue-800">
                                         ভর্তি নিশ্চিত ✓
                                     </span>
                                 @elseif($application->status === 'selected_lottery')
-                                    <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-indigo-100 text-indigo-800">
+                                    <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-indigo-100 text-indigo-800">
                                         লটারি #{{ $application->lottery_rank }}
                                     </span>
                                 @elseif($application->status === 'approved')
-                                    <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-700">
+                                    <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-700">
                                         অনুমোদিত
                                     </span>
                                 @elseif($application->status === 'rejected')
-                                    <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-rose-100 text-rose-700">
+                                    <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-100 text-rose-700">
                                         বাতিল
                                     </span>
                                 @else
-                                    <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-700">
+                                    <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-700">
                                         পেন্ডিং
                                     </span>
                                 @endif
                             </td>
 
-                            <td class="px-5 py-4 text-right">
-                                <div class="inline-flex items-center gap-1.5">
+                            <td class="px-3 py-2.5 text-right whitespace-nowrap">
+                                <div class="inline-flex items-center gap-1">
                                     <a href="{{ route('admin.admission-applications.show', $application) }}"
-                                       class="px-3 py-1.5 rounded-lg bg-indigo-50 text-indigo-700 text-xs font-bold hover:bg-indigo-100 transition">
+                                       class="px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-700 text-xs font-bold hover:bg-emerald-100 transition">
                                         বিস্তারিত
                                     </a>
                                     <a href="{{ route('online-admission.pdf', $application->application_no) }}" target="_blank"
-                                       class="p-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition" title="আবেদন ফর্ম PDF">
+                                       class="p-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition text-xs" title="আবেদন ফর্ম PDF">
                                         📄
                                     </a>
                                     <a href="{{ route('online-admission.admit-card', $application->application_no) }}" target="_blank"
-                                       class="p-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition" title="প্রবেশপত্র PDF">
+                                       class="p-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition text-xs" title="প্রবেশপত্র PDF">
                                         🪪
                                     </a>
                                 </div>

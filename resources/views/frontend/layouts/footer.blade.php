@@ -239,23 +239,15 @@
             </p>
 
             {{-- Developer Credits --}}
-            <div class="flex flex-wrap items-center justify-center gap-2 text-xs sm:text-sm text-slate-400">
-                <span>Developed by</span>
-                <a href="https://mrahmedshakib.github.io/" target="_blank" rel="noopener noreferrer"
-                   class="font-bold text-accent-400 hover:text-accent-300 transition underline underline-offset-4 decoration-accent-500/40 hover:decoration-accent-400">
-                    Imtiaz Ahmed
-                </a>
-                <span class="text-slate-600">•</span>
-                <a href="https://mrahmedshakib.github.io/" target="_blank" rel="noopener noreferrer"
-                   class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white/5 border border-white/10 text-xs text-slate-300 hover:text-white hover:bg-white/10 transition">
-                    <svg class="w-3.5 h-3.5 text-accent-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
-                    <span>Portfolio</span>
-                </a>
-                <a href="https://www.linkedin.com/in/mrahmedshakib/" target="_blank" rel="noopener noreferrer"
-                   class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#0077b5]/15 border border-[#0077b5]/30 text-xs text-blue-200 hover:text-white hover:bg-[#0077b5]/30 transition">
-                    <svg class="w-3.5 h-3.5 fill-current text-[#0077b5]" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-                    <span>LinkedIn</span>
-                </a>
+            <div class="flex items-center justify-center">
+                <button type="button" onclick="openDeveloperContactModal()"
+                        title="Click to view developer profile & contact"
+                        class="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 text-xs text-slate-300 hover:text-white hover:bg-white/10 hover:border-emerald-500/40 transition cursor-pointer shadow-xs group">
+                    <svg class="w-3.5 h-3.5 text-emerald-400 group-hover:rotate-12 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+                    </svg>
+                    <span>Developed by <strong class="font-bold text-emerald-400 group-hover:text-emerald-300">{{ $websiteSetting->developer_name_en ?? $websiteSetting->developer_name ?? 'Imtiaz Ahmed' }}</strong></span>
+                </button>
             </div>
 
             {{-- Bottom Links --}}

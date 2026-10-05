@@ -38,6 +38,7 @@ use Illuminate\Support\Facades\DB;
 use App\Mail\AdmissionApplicationSubmittedMail;
 use App\Mail\AdmissionPaymentSubmittedMail;
 use App\Mail\AdmissionApprovedMail;
+use App\Models\ContactMessage;
 use App\Services\SslCommerzService;
 
 class FrontendController extends Controller
@@ -662,6 +663,27 @@ class FrontendController extends Controller
             'frontend.contact',
             compact('websiteSetting')
         );
+    }
+
+    public function contactStore(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:150',
+            'phone' => 'required|string|max:20',
+            'email' => 'nullable|email|max:150',
+            'subject' => 'nullable|string|max:200',
+            'message' => 'required|string|max:5000',
+        ], [
+            'name.required' => 'আপনার নাম প্রদান করুন।',
+            'phone.required' => 'আপনার ফোন নম্বর প্রদান করুন।',
+            'message.required' => 'বার্তাটি লিখুন।',
+        ]);
+
+        $validated['ip_address'] = $request->ip();
+
+        ContactMessage::create($validated);
+
+        return redirect()->back()->with('success', 'আপনার বার্তাটি সফলভাবে পাঠানো হয়েছে। অতিশীঘ্রই কর্তৃপক্ষ আপনার সাথে যোগাযোগ করবে।');
     }
 
     public function admission()
