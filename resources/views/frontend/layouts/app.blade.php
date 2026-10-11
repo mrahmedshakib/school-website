@@ -16,20 +16,37 @@
     >
 
     @php
-        $faviconUrl = asset('favicon.ico');
+        $faviconIco = asset('favicon.ico');
+        $faviconPng = asset('favicon-32x32.png');
+        $appleTouch = asset('apple-touch-icon.png');
+
         if (!empty($websiteSetting?->favicon)) {
             if (file_exists(public_path($websiteSetting->favicon))) {
-                $faviconUrl = asset($websiteSetting->favicon);
+                $customFav = asset($websiteSetting->favicon);
+                if (str_ends_with(strtolower($websiteSetting->favicon), '.ico')) {
+                    $faviconIco = $customFav;
+                } else {
+                    $faviconPng = $customFav;
+                }
             } elseif (file_exists(public_path('storage/' . $websiteSetting->favicon))) {
-                $faviconUrl = asset('storage/' . $websiteSetting->favicon);
+                $customFav = asset('storage/' . $websiteSetting->favicon);
+                if (str_ends_with(strtolower($websiteSetting->favicon), '.ico')) {
+                    $faviconIco = $customFav;
+                } else {
+                    $faviconPng = $customFav;
+                }
             }
         }
+        if (!empty($websiteSetting?->logo) && file_exists(public_path($websiteSetting->logo))) {
+            $appleTouch = asset($websiteSetting->logo);
+        }
     @endphp
-    <link rel="icon" type="image/x-icon" href="{{ $faviconUrl }}">
-    <link rel="shortcut icon" href="{{ $faviconUrl }}">
-    @if(!empty($websiteSetting?->logo) && file_exists(public_path($websiteSetting->logo)))
-        <link rel="apple-touch-icon" href="{{ asset($websiteSetting->logo) }}">
-    @endif
+    <link rel="icon" type="image/x-icon" href="{{ $faviconIco }}">
+    <link rel="shortcut icon" href="{{ $faviconIco }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ $faviconPng }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ $appleTouch }}">
+    <link rel="manifest" href="{{ asset('site.webmanifest') }}">
 
     {{-- ================= KALPURUSH BENGALI FONT ================= --}}
     <style>
@@ -83,8 +100,6 @@
 
 
     @include('frontend.layouts.footer')
-
-    @include('components.developer-contact-modal')
 
     @stack('scripts')
 

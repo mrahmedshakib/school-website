@@ -172,13 +172,15 @@
 
         .sig-table {
             width: 100%;
-            margin-top: 40px;
+            margin-top: 30px;
         }
 
         .sig-table td {
-            width: 50%;
+            width: 33.33%;
             border: 0;
-            vertical-align: bottom;
+            vertical-align: top;
+            text-align: center;
+            padding: 0 4px;
         }
     </style>
 </head>
@@ -284,14 +286,25 @@
     {{-- SIGNATURES --}}
     <table class="sig-table">
         <tr>
-            <td style="text-align: left;">
-                <div style="border-top: 1px solid #64748b; width: 140px; text-align: center; padding-top: 4px; font-size: 10px;">
-                    আহ্বায়ক / ভর্তি কমিটি
+            <td>
+                <div style="border-top: 1px solid #475569; width: 135px; margin: 0 auto; text-align: center; padding-top: 4px; font-size: 9.5px;">
+                    <strong>শিক্ষার্থী / অভিভাবকের স্বাক্ষর ও তারিখ</strong><br>
+                    <span>Applicant / Guardian Signature</span><br>
+                    <span style="font-size: 8px; color: #64748b; margin-top: 2px; display: block;">তারিখ / Date: ........................</span>
                 </div>
             </td>
-            <td style="text-align: right;">
-                <div style="border-top: 1px solid #64748b; width: 140px; margin-left: auto; text-align: center; padding-top: 4px; font-size: 10px; font-weight: bold; color: #1e3a8a;">
-                    অধ্যক্ষ / প্রধান শিক্ষক
+            <td>
+                <div style="border-top: 1px solid #475569; width: 135px; margin: 0 auto; text-align: center; padding-top: 4px; font-size: 9.5px;">
+                    <strong>ভর্তি কমিটির দায়িত্বপ্রাপ্ত সদস্যের স্বাক্ষর</strong><br>
+                    <span>Admission Verification Officer</span><br>
+                    <span style="font-size: 8px; color: #64748b; margin-top: 2px; display: block;">তারিখ / Date: ........................</span>
+                </div>
+            </td>
+            <td>
+                <div style="border-top: 1px solid #475569; width: 135px; margin: 0 auto; text-align: center; padding-top: 4px; font-size: 9.5px; color: #1e3a8a;">
+                    <strong>অধ্যক্ষ / প্রধান শিক্ষকের স্বাক্ষর ও সীলমোহর</strong><br>
+                    <span>Principal & Official Seal</span><br>
+                    <span style="font-size: 8px; color: #64748b; margin-top: 2px; display: block;">তারিখ / Date: ........................</span>
                 </div>
             </td>
         </tr>

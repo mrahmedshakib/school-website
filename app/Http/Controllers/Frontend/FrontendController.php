@@ -13,6 +13,8 @@ use Mpdf\Mpdf;
 use Mpdf\Config\ConfigVariables;
 use Mpdf\Config\FontVariables;
 use App\Services\SmsService;
+use App\Models\News;
+use App\Models\Event;
 use App\Models\Notice;
 use App\Models\Slider;
 use App\Models\WebsiteSetting;
@@ -1552,5 +1554,81 @@ class FrontendController extends Controller
             'totalSelected',
             'totalWaiting'
         ));
+    }
+
+    public function news(Request $request)
+    {
+        $websiteSetting = WebsiteSetting::first();
+        $newsList = News::where('status', 1)
+            ->where('is_delete', 0)
+            ->orderBy('sort_order')
+            ->latest('published_at')
+            ->paginate(12);
+
+        if (view()->exists('frontend.news')) {
+            return view('frontend.news', compact('websiteSetting', 'newsList'));
+        }
+        return redirect()->route('notice');
+    }
+
+    public function newsDetails($slug)
+    {
+        $websiteSetting = WebsiteSetting::first();
+        $news = News::where('slug', $slug)
+            ->where('status', 1)
+            ->where('is_delete', 0)
+            ->first();
+
+        if ($news && view()->exists('frontend.news-details')) {
+            return view('frontend.news-details', compact('websiteSetting', 'news'));
+        }
+        return redirect()->route('notice');
+    }
+
+    public function events(Request $request)
+    {
+        $websiteSetting = WebsiteSetting::first();
+        $events = Event::where('status', 1)
+            ->where('is_delete', 0)
+            ->orderBy('sort_order')
+            ->latest('event_date')
+            ->paginate(12);
+
+        if (view()->exists('frontend.events')) {
+            return view('frontend.events', compact('websiteSetting', 'events'));
+        }
+        return redirect()->route('notice');
+    }
+
+    public function eventDetails($slug)
+    {
+        $websiteSetting = WebsiteSetting::first();
+        $event = Event::where('slug', $slug)
+            ->where('status', 1)
+            ->where('is_delete', 0)
+            ->first();
+
+        if ($event && view()->exists('frontend.event-details')) {
+            return view('frontend.event-details', compact('websiteSetting', 'event'));
+        }
+        return redirect()->route('notice');
+    }
+
+    public function downloads()
+    {
+        $websiteSetting = WebsiteSetting::first();
+        if (view()->exists('frontend.downloads')) {
+            return view('frontend.downloads', compact('websiteSetting'));
+        }
+        return redirect()->route('notice');
+    }
+
+    public function importantLinks()
+    {
+        $websiteSetting = WebsiteSetting::first();
+        if (view()->exists('frontend.important-links')) {
+            return view('frontend.important-links', compact('websiteSetting'));
+        }
+        return redirect()->route('home');
     }
 }

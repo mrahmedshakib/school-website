@@ -14,9 +14,38 @@
 
     <title>প্রশাসন ও শিক্ষক লগইন | {{ $schoolNameBn }}</title>
 
-    @if($websiteSetting && $websiteSetting->favicon)
-        <link rel="icon" type="image/x-icon" href="{{ asset($websiteSetting->favicon) }}">
-    @endif
+    @php
+        $faviconIco = asset('favicon.ico');
+        $faviconPng = asset('favicon-32x32.png');
+        $appleTouch = asset('apple-touch-icon.png');
+
+        if (!empty($websiteSetting?->favicon)) {
+            if (file_exists(public_path($websiteSetting->favicon))) {
+                $customFav = asset($websiteSetting->favicon);
+                if (str_ends_with(strtolower($websiteSetting->favicon), '.ico')) {
+                    $faviconIco = $customFav;
+                } else {
+                    $faviconPng = $customFav;
+                }
+            } elseif (file_exists(public_path('storage/' . $websiteSetting->favicon))) {
+                $customFav = asset('storage/' . $websiteSetting->favicon);
+                if (str_ends_with(strtolower($websiteSetting->favicon), '.ico')) {
+                    $faviconIco = $customFav;
+                } else {
+                    $faviconPng = $customFav;
+                }
+            }
+        }
+        if (!empty($websiteSetting?->logo) && file_exists(public_path($websiteSetting->logo))) {
+            $appleTouch = asset($websiteSetting->logo);
+        }
+    @endphp
+    <link rel="icon" type="image/x-icon" href="{{ $faviconIco }}">
+    <link rel="shortcut icon" href="{{ $faviconIco }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ $faviconPng }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ $appleTouch }}">
+    <link rel="manifest" href="{{ asset('site.webmanifest') }}">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -556,8 +585,7 @@
             </div>
 
             <div class="brand-content brand-footer">
-                <span>© {{ date('Y') }} {{ $schoolNameBn }}</span>
-                <span>Developed by <a href="{{ $websiteSetting->developer_portfolio ?? 'https://mrahmedshakib.github.io/' }}" target="_blank" rel="noopener noreferrer" style="color: #6ee7b7; font-weight: 600; text-underline-offset: 3px; text-decoration: underline;">{{ $websiteSetting->developer_name_en ?? $websiteSetting->developer_name ?? 'Imtiaz Ahmed' }}</a></span>
+                <span>© {{ date('Y') }} {{ $schoolNameBn }}। সর্বস্বত্ব সংরক্ষিত।</span>
             </div>
         </section>
 

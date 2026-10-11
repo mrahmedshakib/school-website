@@ -1,9 +1,3 @@
-
-ইমেইল: superadmin@gmail.com
-পাসওয়ার্ড: password
-রোল: Super Admin
-
-
-ইমেইল: management@gmail.com
+ইমেইল: admin@gmail.com
 পাসওয়ার্ড: password
 রোল: Admin

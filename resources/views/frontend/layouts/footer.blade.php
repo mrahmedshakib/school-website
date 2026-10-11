@@ -238,18 +238,6 @@
                 © {{ date('Y') }} {{ $websiteSetting->school_name_bn ?? $websiteSetting->school_name ?? 'আমাদের বিদ্যালয়' }}। সর্বস্বত্ব সংরক্ষিত।
             </p>
 
-            {{-- Developer Credits --}}
-            <div class="flex items-center justify-center">
-                <button type="button" onclick="openDeveloperContactModal()"
-                        title="Click to view developer profile & contact"
-                        class="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 text-xs text-slate-300 hover:text-white hover:bg-white/10 hover:border-emerald-500/40 transition cursor-pointer shadow-xs group">
-                    <svg class="w-3.5 h-3.5 text-emerald-400 group-hover:rotate-12 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
-                    </svg>
-                    <span>Developed by <strong class="font-bold text-emerald-400 group-hover:text-emerald-300">{{ $websiteSetting->developer_name_en ?? $websiteSetting->developer_name ?? 'Imtiaz Ahmed' }}</strong></span>
-                </button>
-            </div>
-
             {{-- Bottom Links --}}
             <div class="flex items-center gap-5">
 

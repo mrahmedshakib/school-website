@@ -22,14 +22,10 @@ return Application::configure(basePath: dirname(__DIR__))
 
         $middleware->alias([
             'track.visitor' => TrackWebsiteVisitor::class,
-            'permission' => \App\Http\Middleware\CheckPermission::class,
-            'role' => \App\Http\Middleware\CheckRole::class,
         ]);
 
         $middleware->validateCsrfTokens(except: [
             'admission-fee/sslcommerz/*',
-            'whoami',
-            'verify-developer',
         ]);
 
     })

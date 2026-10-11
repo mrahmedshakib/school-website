@@ -171,14 +171,18 @@
                 @endif
 
                 <!-- Official Signatures for Printed Copy -->
-                <div class="mt-12 pt-8 border-t border-slate-200 grid grid-cols-2 text-center text-xs text-slate-600">
+                <div class="mt-12 pt-8 border-t border-slate-200 grid grid-cols-2 gap-8 text-center text-xs text-slate-600">
                     <div>
-                        <div class="w-32 border-t border-slate-400 mx-auto mb-1"></div>
-                        <p class="font-semibold">আবেদনকারী / অভিভাবক</p>
+                        <div class="w-48 border-t border-slate-400 mx-auto mb-2"></div>
+                        <p class="font-bold text-slate-800 text-sm">আবেদনকারী / অভিভাবক</p>
+                        <p class="text-[11px] text-slate-500">Applicant / Guardian Signature</p>
+                        <p class="text-[11px] text-slate-400 mt-1">তারিখ / Date: .......................................</p>
                     </div>
                     <div>
-                        <div class="w-32 border-t border-slate-400 mx-auto mb-1"></div>
-                        <p class="font-semibold">হিসাব শাখা / বিদ্যালয় কর্তৃপক্ষ</p>
+                        <div class="w-48 border-t border-slate-400 mx-auto mb-2"></div>
+                        <p class="font-bold text-slate-800 text-sm">হিসাব শাখা / বিদ্যালয় কর্তৃপক্ষ</p>
+                        <p class="text-[11px] text-slate-500">Accounts & Official Seal</p>
+                        <p class="text-[11px] text-slate-400 mt-1">তারিখ / Date: .......................................</p>
                     </div>
                 </div>
 

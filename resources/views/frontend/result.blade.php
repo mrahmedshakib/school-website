@@ -238,17 +238,25 @@
                         @endif
 
                         {{-- Remarks and Signature Placeholder --}}
-                        <div class="mt-8 pt-8 border-t border-slate-200 flex flex-col sm:flex-row justify-between items-end gap-6 text-center text-xs text-slate-500">
-                            <div>
+                        <div class="mt-8 pt-8 border-t border-slate-200 grid grid-cols-1 sm:grid-cols-3 gap-6 items-end text-center text-xs text-slate-600">
+                            <div class="text-left">
                                 <p class="italic text-slate-600 mb-1">
                                     {{ app()->getLocale() === 'en' ? 'Remarks: ' : 'মূল্যায়ন মন্তব্য: ' }}
                                     <span class="font-bold text-slate-800">{{ $studentMark->remarks ?? ($studentMark->gpa >= 4.0 ? 'Excellent performance' : 'Satisfactory') }}</span>
                                 </p>
                                 <p class="text-[11px] text-slate-400">{{ app()->getLocale() === 'en' ? 'System generated transcript' : 'সফটওয়্যার দ্বারা স্বয়ংক্রিয় মুদ্রিত ফলাফল' }}</p>
                             </div>
-                            <div class="border-t border-slate-400 pt-2 px-6">
+                            <div>
+                                <div class="w-40 border-t border-slate-400 mx-auto mb-1.5"></div>
+                                <p class="font-bold text-slate-800">{{ app()->getLocale() === 'en' ? 'Class Teacher' : 'শ্রেণি শিক্ষক' }}</p>
+                                <p class="text-[11px] text-slate-500">{{ app()->getLocale() === 'en' ? 'Signature & Date' : 'স্বাক্ষর ও তারিখ' }}</p>
+                                <p class="text-[10px] text-slate-400 mt-0.5">তারিখ: ........................</p>
+                            </div>
+                            <div>
+                                <div class="w-40 border-t border-slate-400 mx-auto mb-1.5"></div>
                                 <p class="font-bold text-slate-800">{{ app()->getLocale() === 'en' ? 'Principal / Head of Institution' : 'অধ্যক্ষ / প্রতিষ্ঠান প্রধান' }}</p>
-                                <p class="text-[11px]">{{ $websiteSetting->school_name_bn ?? $websiteSetting->school_name ?? 'School Authority' }}</p>
+                                <p class="text-[11px] text-slate-500">{{ app()->getLocale() === 'en' ? 'Official Seal & Date' : 'স্বাক্ষর, সীলমোহর ও তারিখ' }}</p>
+                                <p class="text-[10px] text-slate-400 mt-0.5">তারিখ: ........................</p>
                             </div>
                         </div>
 

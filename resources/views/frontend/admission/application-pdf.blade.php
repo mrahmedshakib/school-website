@@ -474,22 +474,25 @@
     </div>
 
     {{-- Signatures --}}
-    <table class="signature-table">
+    <table class="signature-table" style="margin-top: 24px;">
         <tr>
             <td>
                 <div class="sig-line"></div>
-                শিক্ষার্থী / অভিভাবকের স্বাক্ষর ও তারিখ<br>
-                Applicant / Guardian Signature
+                <strong>শিক্ষার্থী / অভিভাবকের স্বাক্ষর ও তারিখ</strong><br>
+                <span>Applicant / Guardian Signature</span><br>
+                <div style="font-size: 8.5px; color: #475569; margin-top: 3px;">তারিখ / Date: ................................</div>
             </td>
             <td>
                 <div class="sig-line"></div>
-                ভর্তি কমিটির দায়িত্বপ্রাপ্ত সদস্যের স্বাক্ষর<br>
-                Admission Verification Officer
+                <strong>ভর্তি কমিটির দায়িত্বপ্রাপ্ত সদস্যের স্বাক্ষর</strong><br>
+                <span>Admission Verification Officer</span><br>
+                <div style="font-size: 8.5px; color: #475569; margin-top: 3px;">তারিখ / Date: ................................</div>
             </td>
             <td>
                 <div class="sig-line"></div>
-                অধ্যক্ষ / প্রধান শিক্ষকের স্বাক্ষর ও সিলমোহর<br>
-                Principal & Official Seal
+                <strong>অধ্যক্ষ / প্রধান শিক্ষকের স্বাক্ষর ও সীলমোহর</strong><br>
+                <span>Principal & Official Seal</span><br>
+                <div style="font-size: 8.5px; color: #475569; margin-top: 3px;">তারিখ / Date: ................................</div>
             </td>
         </tr>
     </table>
@@ -639,22 +642,25 @@
     </div>
 
     {{-- Signatures on Admit Card --}}
-    <table class="signature-table" style="margin-top: 32px;">
+    <table class="signature-table" style="margin-top: 24px;">
         <tr>
             <td>
                 <div class="sig-line"></div>
-                শিক্ষার্থী / অভিভাবকের স্বাক্ষর<br>
-                Applicant Signature
+                <strong>শিক্ষার্থী / অভিভাবকের স্বাক্ষর ও তারিখ</strong><br>
+                <span>Applicant / Guardian Signature</span><br>
+                <div style="font-size: 8.5px; color: #475569; margin-top: 3px;">তারিখ / Date: ................................</div>
             </td>
             <td>
                 <div class="sig-line"></div>
-                আদায়কারী / অফিসের দায়িত্বপ্রাপ্ত কর্মকর্তা<br>
-                Accounts / Office In-Charge
+                <strong>হিসাব শাখা / বিদ্যালয় কর্তৃপক্ষ</strong><br>
+                <span>Accounts / School Authority</span><br>
+                <div style="font-size: 8.5px; color: #475569; margin-top: 3px;">তারিখ / Date: ................................</div>
             </td>
             <td>
                 <div class="sig-line"></div>
-                অধ্যক্ষ / পরীক্ষা কমিটির আহ্বায়ক<br>
-                Principal & Controller
+                <strong>অধ্যক্ষ / প্রধান শিক্ষকের স্বাক্ষর ও সীলমোহর</strong><br>
+                <span>Principal & Official Seal</span><br>
+                <div style="font-size: 8.5px; color: #475569; margin-top: 3px;">তারিখ / Date: ................................</div>
             </td>
         </tr>
     </table>
